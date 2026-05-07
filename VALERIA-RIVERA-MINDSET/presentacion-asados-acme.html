@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Web — Asados Acme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F0F10;
+      --surface: #18181B;
+      --surface2: #27272A;
+      --border: rgba(255,255,255,0.08);
+      --primary: #E11D48; /* Rojo Brasa */
+      --primary-l: #FB7185;
+      --accent: #F59E0B; /* Naranja Fuego */
+      --green: #10B981;
+      --text: #FAFAFA;
+      --muted: #A1A1AA;
+      --sec: #D4D4D8;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden;height:100vh}
+
+    .slides{width:100%;height:100vh;position:relative}
+    .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:3rem;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s ease;transform:translateX(60px)}
+    .slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+    .slide.prev{opacity:0;transform:translateX(-60px)}
+
+    .slide-1{background:radial-gradient(circle at 20% 50%,rgba(225,29,72,.15) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(245,158,11,.1) 0%,transparent 40%),var(--bg)}
+    .slide-2{background:radial-gradient(circle at 50% 50%,rgba(225,29,72,.05) 0%,transparent 60%),var(--bg)}
+
+    .slide::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.01) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+
+    .nav{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1rem;z-index:100;background:rgba(24,24,27,.8);border:1px solid var(--border);padding:.6rem 1.25rem;border-radius:3rem;backdrop-filter:blur(12px)}
+    .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);cursor:pointer;transition:all .2s}
+    .nav-dot.on{background:var(--primary);transform:scale(1.3)}
+    .nav-btn{background:none;border:1px solid var(--border);color:var(--sec);padding:.35rem .9rem;border-radius:2rem;cursor:pointer;font-size:.82rem;font-weight:500;transition:all .2s}
+    .nav-btn:hover{border-color:var(--primary);color:var(--primary)}
+
+    .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .4s ease;z-index:200}
+    .slide-num{position:fixed;top:1.5rem;right:2rem;font-size:.75rem;color:var(--muted);z-index:100}
+
+    .tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(225,29,72,.1);border:1px solid rgba(225,29,72,.3);color:var(--primary-l);padding:.3rem .9rem;border-radius:2rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:1rem;text-align:center}
+    h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;line-height:1.2;margin-bottom:.75rem}
+    .grad{background:linear-gradient(135deg,var(--primary-l),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    p.sub{font-size:1.1rem;color:var(--sec);line-height:1.6;max-width:640px;text-align:center}
+    .inner{max-width:1000px;width:100%;position:relative;z-index:1}
+
+    .stat-row{display:flex;gap:3rem;margin-top:2.5rem;justify-content:center}
+    .stat{text-align:center}
+    .stat-n{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--primary-l)}
+    .stat-l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;width:100%}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.75rem;transition:transform .3s}
+    .card:hover{transform:translateY(-5px);border-color:rgba(225,29,72,.3)}
+    .card-icon{font-size:2rem;margin-bottom:1rem}
+    .card-title{font-weight:700;margin-bottom:.5rem;color:var(--text)}
+    .card-desc{font-size:.87rem;color:var(--sec);line-height:1.6}
+
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;width:100%}
+    .comp-box{padding:2rem;border-radius:24px;border:1px solid var(--border);background:var(--surface)}
+    .comp-box.plus{border-color:rgba(16,185,129,.3);background:linear-gradient(135deg,rgba(16,185,129,.05),var(--surface))}
+    .comp-item{display:flex;gap:.75rem;margin-bottom:.8rem;font-size:.9rem;color:var(--sec)}
+
+    .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;width:100%;max-width:900px}
+    .plan-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:2.5rem;position:relative;display:flex;flex-direction:column}
+    .plan-card.pro{border-color:var(--primary);background:linear-gradient(135deg,rgba(225,29,72,.05),var(--surface))}
+    .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:white;padding:.3rem 1rem;border-radius:1rem;font-size:.7rem;font-weight:700}
+    .price{font-size:2.5rem;font-weight:700;margin:1.5rem 0}
+    .price span{font-size:1rem;color:var(--muted);font-weight:400}
+    .btn{display:block;text-align:center;padding:1rem;border-radius:12px;text-decoration:none;font-weight:700;margin-top:auto;transition:all .2s}
+    .btn-p{background:var(--primary);color:white}
+    .btn-p:hover{background:var(--primary-l);transform:scale(1.02)}
+  </style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="slide-num" id="slideNum">1 / 6</div>
+
+<div class="slides">
+  <!-- SLIDE 1: EL GANCHO -->
+  <div class="slide slide-1 active" data-slide="1">
+    <div class="inner" style="text-align:center">
+      <div class="tag">🍔 Propuesta Digital 2024</div>
+      <h1>Asados Acme: De ser un lugar en el mapa a una <span class="grad">Marca Imbatible</span>.</h1>
+      <p class="sub">Tienen el sabor y tienen la ubicación. Ahora necesitan el control total de sus pedidos y su imagen en internet.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-n">4.4 ⭐</div><div class="stat-l">En Google Maps</div></div>
+        <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Potencial de Venta Directa</div></div>
+        <div class="stat"><div class="stat-n">0</div><div class="stat-l">Comisiones a terceros</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: EL PROBLEMA -->
+  <div class="slide slide-2" data-slide="2">
+    <div class="inner">
+      <div class="tag" style="color:var(--accent);border-color:var(--accent)">¿Por qué una web ahora?</div>
+      <h2>El cliente tiene hambre y <span class="grad">busca en Google</span></h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <div class="card-title">SEO Local</div>
+          <div class="card-desc">Si alguien busca "Asados en El Guabal", una web propia asegura que Acme aparezca por encima de la competencia.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Menú Digital</div>
+          <div class="card-desc">Basta de enviar PDFs pesados por WhatsApp. Un menú interactivo carga al instante y es fácil de leer.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💰</div>
+          <div class="card-title">Cero Comisiones</div>
+          <div class="card-desc">La web canaliza los pedidos directamente a su WhatsApp, sin que Rappi o iFood se queden con su margen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: LA SOLUCIÓN -->
+  <div class="slide" data-slide="3">
+    <div class="inner" style="text-align:center">
+      <div class="tag">La Solución</div>
+      <h2>Todo su ecosistema en <span class="grad">un solo lugar</span></h2>
+      <p class="sub" style="margin: 0 auto 2rem">Creamos una "Landing Page" de alto rendimiento que conecta todo:</p>
+      <div style="background:var(--surface);padding:2rem;border-radius:30px;border:1px solid var(--border);max-width:700px;margin:0 auto">
+        <ul style="list-style:none;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <li style="color:var(--sec)">✅ Menú digital actualizado</li>
+          <li style="color:var(--sec)">✅ Botón directo a WhatsApp</li>
+          <li style="color:var(--sec)">✅ Enlace a Instagram Feed</li>
+          <li style="color:var(--sec)">✅ Mapa e indicaciones GPS</li>
+          <li style="color:var(--sec)">✅ Horarios en tiempo real</li>
+          <li style="color:var(--sec)">✅ Galería de fotos reales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: COMPARACIÓN -->
+  <div class="slide" data-slide="4">
+    <div class="inner">
+      <h2 style="text-align:center">Transformación Digital</h2>
+      <div class="compare">
+        <div class="comp-box">
+          <div style="font-weight:700;margin-bottom:1rem;color:var(--primary-l)">Hoy: Redes Dispersas</div>
+          <div class="comp-item">❌ El cliente se pierde buscando el menú</div>
+          <div class="comp-item">❌ No aparecen en búsquedas web</div>
+          <div class="comp-item">❌ Dependen de que Instagram funcione</div>
+          <div class="comp-item">❌ Imagen de negocio local pequeño</div>
+        </div>
+        <div class="comp-box plus">
+          <div style="font-weight:700;margin-bottom:1rem;color:var(--green)">Mañana: Centro Acme</div>
+          <div class="comp-item">✅ Menú a un solo clic</div>
+          <div class="comp-item">✅ Posicionamiento en Google Search</div>
+          <div class="comp-item">✅ Dueños de su propia plataforma</div>
+          <div class="comp-item">✅ Imagen de marca profesional y moderna</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: PRECIOS -->
+  <div class="slide" data-slide="5">
+    <div class="inner" style="display:flex;flex-direction:column;align-items:center">
+      <div class="tag">Inversión</div>
+      <h2>Planes a tu medida</h2>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <div style="font-weight:700;font-size:1.2rem">Plan Esencial</div>
+          <div class="price">$450.000 <span>COP</span></div>
+          <ul style="list-style:none;font-size:.85rem;color:var(--sec);margin-bottom:1.5rem">
+            <li>• Web de una página (One Page)</li>
+            <li>• Menú digital (Texto e Imágenes)</li>
+            <li>• Integración WhatsApp e IG</li>
+            <li>• Optimización para Google Maps</li>
+            <li>• Entrega en 5 días</li>
+          </ul>
+          <a href="#" class="btn" style="border:1px solid var(--border);color:var(--text)">Elegir básico</a>
+        </div>
+        <div class="plan-card pro">
+          <div class="plan-badge">RECOMENDADO</div>
+          <div style="font-weight:700;font-size:1.2rem">Plan Crecimiento</div>
+          <div class="price">$1.200.000 <span>COP</span></div>
+          <ul style="list-style:none;font-size:.85rem;color:var(--sec);margin-bottom:1.5rem">
+            <li>• Todo el Plan Esencial</li>
+            <li>• **Dominio propio (.com o .co)**</li>
+            <li>• SEO avanzado para aparecer en Google</li>
+            <li>• Sesión fotográfica básica (Cali)</li>
+            <li>• Soporte y cambios por 6 meses</li>
+          </ul>
+          <a href="#" class="btn btn-p">¡Empezar ahora!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: CIERRE -->
+  <div class="slide" data-slide="6">
+    <div class="inner" style="text-align:center">
+      <div class="tag">Contacto</div>
+      <h2 style="font-size:3.5rem">¿Prendemos <br><span class="grad">los fogones?</span></h2>
+      <p class="sub" style="margin:1.5rem auto">Esta oferta es válida por 7 días. Incluye la configuración inicial sin costo adicional.</p>
+      <div style="margin-top:2rem">
+        <a href="https://wa.me/TU_NUMERO" class="btn btn-p" style="display:inline-block;padding:1.2rem 3rem;font-size:1.1rem">Chatear con el Desarrollador</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn" onclick="changeSlide(-1)">←</button>
+  <div id="dots" style="display:flex;gap:.5rem"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">→</button>
+</div>
+
+<script>
+  const total = 6;
+  let current = 1;
+
+  function buildDots() {
+    const c = document.getElementById('dots');
+    for (let i = 1; i <= total; i++) {
+      const d = document.createElement('div');
+      d.className = 'nav-dot' + (i === 1 ? ' on' : '');
+      d.onclick = () => goTo(i);
+      c.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(s => {
+      s.classList.remove('active', 'prev');
+      if (parseInt(s.dataset.slide) < n) s.classList.add('prev');
+    });
+    current = n;
+    const next = document.querySelector(`[data-slide="${n}"]`);
+    next.classList.add('active');
+    
+    document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('on', i + 1 === current));
+    document.getElementById('progress').style.width = ((current / total) * 100) + '%';
+    document.getElementById('slideNum').textContent = current + ' / ' + total;
+  }
+
+  function changeSlide(dir) {
+    const n = current + dir;
+    if (n >= 1 && n <= total) goTo(n);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+  });
+
+  buildDots();
+  document.getElementById('progress').style.width = ((1 / total) * 100) + '%';
+</script>
+</body>
+</html>

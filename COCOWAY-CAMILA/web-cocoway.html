@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cocoway — Crochet Artesanal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #FEFAF7;
+      --bg-2:    #FDF3EC;
+      --bg-3:    #F8EBE0;
+      --bg-4:    #F2DDD0;
+      --rose:    #C97070;
+      --rose-l:  #E8A898;
+      --coral:   #D4856A;
+      --sand:    #C9A882;
+      --cream:   #FFF8F2;
+      --text:    #2E1A0E;
+      --text-2:  #6B3D2A;
+      --muted:   #A07060;
+      --border:  rgba(196,135,100,0.18);
+      --green:   #25D366;
+      --max-w:   1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--rose-l) var(--bg-2);
+    }
+    html::-webkit-scrollbar { width: 4px; }
+    html::-webkit-scrollbar-track { background: var(--bg-2); }
+    html::-webkit-scrollbar-thumb { background: var(--rose-l); border-radius: 2px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 22px 52px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.45s ease;
+    }
+    nav.scrolled {
+      background: rgba(254,250,247,0.94);
+      backdrop-filter: blur(20px);
+      padding: 14px 52px;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 24px rgba(196,135,100,0.08);
+    }
+    .nav-logo { font-family: 'Dancing Script', cursive; font-size: 1.9rem; color: var(--rose); letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1.5px; background:var(--rose); transition:width 0.3s; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { color:#fff !important; background:var(--rose); padding:9px 22px !important; border-radius:50px; letter-spacing:1.5px !important; font-weight:700 !important; transition:all 0.3s !important; }
+    .nav-cta::after { display:none !important; }
+    .nav-cta:hover { background:var(--coral) !important; transform:translateY(-1px); box-shadow:0 8px 24px rgba(201,112,112,0.3) !important; }
+
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--rose); transition:all 0.3s; border-radius:2px; }
+    .mobile-nav { display:none; position:fixed; inset:0; background:rgba(254,250,247,0.98); z-index:999; flex-direction:column; align-items:center; justify-content:center; gap:28px; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:600; color:var(--text); transition:color 0.2s; }
+    .mobile-nav a:hover { color:var(--rose); }
+    .mobile-close { position:absolute; top:24px; right:48px; font-size:1.6rem; color:var(--muted); cursor:pointer; background:none; border:none; }
+
+    /* ─── HERO ─── */
+    #inicio { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:linear-gradient(135deg,#FFF2EA 0%,#FDDDD0 30%,#F8C9BA 60%,#FDEEE8 100%); }
+    .orb { position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none; }
+    .orb-1 { width:700px; height:700px; background:radial-gradient(circle,#E8A89860,transparent 70%); top:-180px; right:-100px; animation:fl1 10s ease-in-out infinite; }
+    .orb-2 { width:450px; height:450px; background:radial-gradient(circle,#C9A88240,transparent 70%); bottom:-100px; left:-80px; animation:fl2 13s ease-in-out infinite; }
+    .orb-3 { width:300px; height:300px; background:radial-gradient(circle,#D4856A30,transparent 70%); top:40%; left:35%; animation:fl3 16s ease-in-out infinite; }
+    @keyframes fl1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-30px,40px) scale(1.05)} }
+    @keyframes fl2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(25px,-35px) scale(1.07)} }
+    @keyframes fl3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-20px,20px) scale(1.1)} }
+    .deco-flower { position:absolute; pointer-events:none; opacity:0.11; }
+    .df-1 { top:8%; left:6%; font-size:9rem; animation:sw 6s ease-in-out infinite; }
+    .df-2 { bottom:12%; right:8%; font-size:7rem; animation:sw 8s ease-in-out infinite reverse; }
+    .df-3 { top:60%; left:3%; font-size:5rem; animation:sw 7s ease-in-out infinite 1s; }
+    .df-4 { top:15%; right:18%; font-size:4rem; opacity:0.07; animation:sw 9s ease-in-out infinite 2s; }
+    @keyframes sw { 0%,100%{transform:rotate(-15deg) scale(1)} 50%{transform:rotate(-8deg) scale(1.05)} }
+
+    /* Hero floating product image */
+    .hero-float-img {
+      position:absolute; right:6%; top:50%; transform:translateY(-50%);
+      width:280px; height:340px; border-radius:20px; overflow:hidden;
+      box-shadow:0 32px 80px rgba(196,135,100,0.22);
+      opacity:0; animation:fu 1s ease forwards 0.8s;
+      z-index:3;
+    }
+    .hero-float-img img { width:100%; height:100%; object-fit:cover; }
+    .hero-float-img::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top,rgba(201,112,112,0.15),transparent);
+      border-radius:20px;
+    }
+
+    .hero-content { position:relative; z-index:2; text-align:center; padding:120px 24px 80px; max-width:700px; }
+    .hero-tag { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--rose); margin-bottom:20px; opacity:0; transform:translateY(14px); animation:fu 0.8s ease forwards 0.3s; }
+    .hero-h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(4rem,13vw,8.5rem); font-weight:700; line-height:0.9; letter-spacing:-2px; color:var(--text); opacity:0; transform:translateY(28px); animation:fu 1s ease forwards 0.55s; }
+    .hero-h1 em { color:var(--rose); font-style:italic; }
+    .hero-sub { font-size:clamp(0.95rem,2.2vw,1.2rem); font-weight:300; color:var(--text-2); letter-spacing:0.5px; margin-top:20px; opacity:0; transform:translateY(14px); animation:fu 0.8s ease forwards 0.95s; }
+    .hero-rule { width:0; height:1px; background:linear-gradient(90deg,transparent,var(--rose-l),transparent); margin:28px auto; animation:rw 1s ease forwards 1.15s; }
+    @keyframes rw { to{width:160px} }
+    .hero-ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:36px; opacity:0; transform:translateY(14px); animation:fu 0.8s ease forwards 1.3s; }
+    .btn-primary { background:var(--rose); color:#fff; padding:14px 36px; border-radius:50px; font-size:0.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:all 0.3s; }
+    .btn-primary:hover { background:var(--coral); transform:translateY(-3px); box-shadow:0 14px 36px rgba(201,112,112,0.3); }
+    .btn-outline-r { border:2px solid var(--rose); color:var(--rose); padding:14px 36px; border-radius:50px; font-size:0.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:all 0.3s; }
+    .btn-outline-r:hover { background:var(--rose); color:#fff; transform:translateY(-3px); }
+    .btn-wa-hero { display:inline-flex; align-items:center; gap:9px; background:var(--green); color:#fff; padding:14px 28px; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.3s; }
+    .btn-wa-hero:hover { background:#1ebe5a; transform:translateY(-3px); box-shadow:0 14px 36px rgba(37,211,102,0.28); }
+    .hero-scroll { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fu 0.8s ease forwards 1.8s; }
+    .scroll-lbl { font-size:0.58rem; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+    .scroll-ln { width:1px; height:44px; overflow:hidden; background:rgba(201,112,112,0.15); position:relative; }
+    .scroll-ln::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--rose); animation:sd 1.7s ease-in-out infinite; }
+    @keyframes sd { 0%{top:-100%} 100%{top:100%} }
+    @keyframes fu { to{opacity:1;transform:translateY(0)} }
+
+    /* ─── SECCIONES ─── */
+    section { padding:110px 48px; }
+    .max { max-width:var(--max-w); margin:0 auto; }
+    .s-tag { font-size:0.68rem; font-weight:700; letter-spacing:6px; text-transform:uppercase; color:var(--rose); margin-bottom:14px; }
+    .s-h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3.4rem); font-weight:700; line-height:1.15; margin-bottom:22px; }
+    .s-h2 em { color:var(--rose); font-style:italic; }
+    .s-center { text-align:center; margin-bottom:64px; }
+    .s-center .s-h2 { margin-bottom:0; }
+    .s-body { font-size:0.97rem; font-weight:400; line-height:1.85; color:var(--muted); margin-bottom:14px; }
+
+    /* ─── NOSOTRAS ─── */
+    #nosotras { background:var(--bg-2); position:relative; overflow:hidden; }
+    #nosotras::before { content:'cocoway'; position:absolute; font-family:'Dancing Script',cursive; font-size:22vw; color:rgba(196,135,100,0.05); right:-2vw; bottom:-4vw; pointer-events:none; white-space:nowrap; }
+    .about-wrap { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .about-deco { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+    .deco-cell { background:var(--bg-3); padding:40px 28px; text-align:center; transition:background 0.3s; }
+    .deco-cell:hover { background:var(--bg-4); }
+    .deco-cell:first-child { background:var(--rose); color:#fff; }
+    .deco-cell:first-child .dc-val { color:#fff; }
+    .deco-cell:first-child .dc-label { color:rgba(255,255,255,0.75); }
+    .dc-val { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:700; color:var(--rose); line-height:1; }
+    .dc-label { font-size:0.65rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-top:8px; }
+    .about-badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+    .badge { display:inline-flex; align-items:center; gap:7px; background:var(--bg-3); border:1px solid var(--border); padding:7px 16px; border-radius:50px; font-size:0.75rem; font-weight:600; color:var(--text-2); letter-spacing:0.5px; }
+
+    /* ─── TIENDA ─── */
+    #tienda { background:var(--bg); }
+    .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .product-card { background:var(--cream); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.4s ease; display:flex; flex-direction:column; }
+    .product-card:hover { transform:translateY(-8px); box-shadow:0 24px 64px rgba(196,135,100,0.18); border-color:var(--rose-l); }
+    .product-img { aspect-ratio:4/5; position:relative; overflow:hidden; }
+    .product-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
+    .product-card:hover .product-img img { transform:scale(1.06); }
+    .product-badge-new { position:absolute; top:14px; left:14px; background:var(--rose); color:#fff; font-size:0.58rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:50px; z-index:2; }
+    .product-badge-hot { position:absolute; top:14px; left:14px; background:var(--coral); color:#fff; font-size:0.58rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:50px; z-index:2; }
+    .product-body { padding:22px 22px 24px; display:flex; flex-direction:column; flex:1; }
+    .product-cat { font-size:0.62rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--rose); margin-bottom:8px; }
+    .product-name { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:700; color:var(--text); margin-bottom:8px; line-height:1.2; }
+    .product-desc { font-size:0.82rem; color:var(--muted); line-height:1.75; margin-bottom:18px; flex:1; }
+    .product-footer { display:flex; align-items:center; justify-content:space-between; }
+    .product-price { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:700; color:var(--rose); }
+    .product-price span { font-size:0.72rem; font-weight:400; color:var(--muted); font-family:'Nunito',sans-serif; letter-spacing:1px; }
+    .btn-wa-small { display:inline-flex; align-items:center; gap:7px; background:var(--green); color:#fff; padding:10px 18px; border-radius:50px; font-size:0.7rem; font-weight:700; letter-spacing:1px; transition:all 0.3s; }
+    .btn-wa-small:hover { background:#1ebe5a; transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,211,102,0.28); }
+
+    /* ─── BANNER CTA ─── */
+    .cta-banner { background:linear-gradient(135deg,var(--rose) 0%,var(--coral) 100%); padding:70px 48px; text-align:center; position:relative; overflow:hidden; }
+    .cta-banner::before { content:'🌺'; position:absolute; font-size:18rem; opacity:0.06; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+    .cta-banner h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:700; color:#fff; margin-bottom:16px; position:relative; }
+    .cta-banner p { color:rgba(255,255,255,0.82); font-size:1rem; margin-bottom:32px; max-width:520px; margin-left:auto; margin-right:auto; position:relative; }
+    .btn-banner { display:inline-flex; align-items:center; gap:10px; background:#fff; color:var(--rose); padding:16px 40px; border-radius:50px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:all 0.3s; position:relative; }
+    .btn-banner:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,0.18); }
+
+    /* ─── GALERÍA ─── */
+    #galeria { background:var(--bg-2); }
+    .ig-note { text-align:center; margin-bottom:48px; font-size:0.88rem; color:var(--muted); }
+    .ig-note a { color:var(--rose); font-weight:700; border-bottom:1px solid rgba(201,112,112,0.3); transition:border-color 0.3s; }
+    .ig-note a:hover { border-color:var(--rose); }
+    .gal-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:280px 280px; gap:3px; border-radius:16px; overflow:hidden; }
+    .gal-item { position:relative; overflow:hidden; cursor:pointer; }
+    .gal-item:nth-child(1) { grid-row:span 2; }
+    .gal-item img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
+    .gal-item:hover img { transform:scale(1.07); }
+    .gal-overlay { position:absolute; inset:0; background:rgba(201,112,112,0.0); display:flex; align-items:center; justify-content:center; transition:background 0.3s; z-index:2; }
+    .gal-item:hover .gal-overlay { background:rgba(201,112,112,0.18); }
+    .gal-plus { font-size:2rem; color:rgba(255,255,255,0.8); transform:scale(0.6); transition:transform 0.3s,opacity 0.3s; opacity:0; }
+    .gal-item:hover .gal-plus { transform:scale(1); opacity:1; }
+    .gal-tag { position:absolute; top:12px; left:12px; background:rgba(255,255,255,0.75); backdrop-filter:blur(6px); color:var(--text-2); font-size:0.55rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; border-radius:50px; z-index:3; }
+
+    /* ─── CONTACTO ─── */
+    #contacto { background:var(--bg); position:relative; overflow:hidden; }
+    #contacto::before { content:'🌺'; position:absolute; font-size:32vw; opacity:0.04; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+    .contact-wrap { max-width:900px; margin:0 auto; position:relative; z-index:1; }
+    .contact-cards { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:48px; }
+    .cc { background:var(--bg-2); border:1px solid var(--border); border-radius:20px; padding:40px 36px; text-align:center; transition:all 0.35s; position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .cc::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+    .cc-wa::before { background:linear-gradient(90deg,transparent,var(--green),transparent); }
+    .cc-ig::before { background:linear-gradient(90deg,transparent,#E1306C,transparent); }
+    .cc:hover { border-color:rgba(201,112,112,0.35); transform:translateY(-4px); box-shadow:0 16px 48px rgba(196,135,100,0.12); }
+    .cc-icon { font-size:2.8rem; }
+    .cc-label { font-size:0.62rem; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--rose); }
+    .cc-handle { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:700; color:var(--text); }
+    .cc-desc { font-size:0.85rem; color:var(--muted); line-height:1.7; max-width:280px; }
+    .btn-wa-main { display:inline-flex; align-items:center; gap:9px; background:var(--green); color:#fff; padding:13px 32px; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.3s; }
+    .btn-wa-main:hover { background:#1ebe5a; transform:translateY(-2px); box-shadow:0 10px 28px rgba(37,211,102,0.28); }
+    .btn-ig-main { display:inline-flex; align-items:center; gap:9px; background:linear-gradient(135deg,#833ab4,#E1306C,#FCAF45); color:#fff; padding:13px 32px; border-radius:50px; font-size:0.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:all 0.3s; }
+    .btn-ig-main:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(200,50,50,0.28); }
+
+    /* ─── FOOTER ─── */
+    footer { background:var(--bg-3); border-top:1px solid var(--border); padding:36px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+    .f-logo { font-family:'Dancing Script',cursive; font-size:1.7rem; color:var(--rose); }
+    .f-tagline { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--muted); }
+    .f-copy { font-size:0.68rem; color:var(--muted); letter-spacing:1px; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .rv   { opacity:0; transform:translateY(40px); transition:opacity 0.85s ease,transform 0.85s ease; }
+    .rv-l { opacity:0; transform:translateX(-40px); transition:opacity 0.85s ease,transform 0.85s ease; }
+    .rv-r { opacity:0; transform:translateX(40px); transition:opacity 0.85s ease,transform 0.85s ease; }
+    .vis  { opacity:1 !important; transform:none !important; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+    .d4{transition-delay:.4s} .d5{transition-delay:.5s}
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:960px){
+      nav { padding:16px 24px; }
+      nav.scrolled { padding:12px 24px; }
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .about-wrap { grid-template-columns:1fr; gap:48px; }
+      .products-grid { grid-template-columns:repeat(2,1fr); }
+      .gal-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
+      .gal-item:nth-child(1) { grid-row:span 1; }
+      .gal-grid .gal-item { height:220px; }
+      .contact-cards { grid-template-columns:1fr; }
+      .hero-float-img { display:none; }
+    }
+    @media(max-width:640px){
+      section { padding:80px 20px; }
+      .products-grid { grid-template-columns:1fr; }
+      footer { flex-direction:column; text-align:center; padding:28px 20px; }
+      .hero-ctas { flex-direction:column; align-items:center; }
+      .gal-grid { grid-template-columns:1fr; }
+      .gal-grid .gal-item { height:260px; }
+      .cta-banner { padding:52px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+  <div class="nav-logo">cocoway</div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#nosotras">Nosotras</a></li>
+    <li><a href="#tienda">Tienda</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#inicio">Inicio</a>
+  <a href="#nosotras">Nosotras</a>
+  <a href="#tienda">Tienda</a>
+  <a href="#galeria">Galería</a>
+  <a href="#contacto">Contacto</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="inicio" style="padding:0">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="deco-flower df-1">🌺</div>
+  <div class="deco-flower df-2">🌸</div>
+  <div class="deco-flower df-3">🌼</div>
+  <div class="deco-flower df-4">🌺</div>
+
+  <!-- Imagen flotante del producto estrella -->
+  <div class="hero-float-img">
+    <img src="assets/1.png" alt="Regalo especial Cocoway">
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-tag">Crochet artesanal &nbsp;·&nbsp; Hecho con amor</span>
+    <h1 class="hero-h1">
+      Tejido<br>para <em>ti</em>
+    </h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Ropa · Bikinis · Amigurumis · Flores tejidas<br>Todo hecho a mano con amor 🌺</p>
+    <div class="hero-ctas">
+      <a href="#tienda" class="btn-primary">Ver Tienda</a>
+      <a href="#nosotras" class="btn-outline-r">Conoce Cocoway</a>
+      <a href="https://wa.me/[NÚMERO-WHATSAPP]" target="_blank" rel="noopener" class="btn-wa-hero">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-lbl">Scroll</span>
+    <div class="scroll-ln"></div>
+  </div>
+</section>
+
+<!-- ══════════ NOSOTRAS ══════════ -->
+<section id="nosotras">
+  <div class="max about-wrap">
+    <div>
+      <p class="s-tag rv">Nuestra historia</p>
+      <h2 class="s-h2 rv d1">Cada pieza,<br>un <em>tejido de amor</em></h2>
+      <p class="s-body rv d2">Cocoway nació de la pasión por el crochet artesanal. Cada prenda es tejida a mano, con dedicación y cariño, para que quien la lleve sienta lo especial que es.</p>
+      <p class="s-body rv d3">Ropa boho, bikinis únicos, amigurumis tiernos y ramos de flores eternos — todo lo que encontrarás aquí es irrepetible, porque lo hacemos con nuestras manos para ti.</p>
+      <div class="about-badges rv d4">
+        <span class="badge">🌺 Hecho a mano</span>
+        <span class="badge">✂️ Piezas únicas</span>
+        <span class="badge">🌊 Estilo boho</span>
+        <span class="badge">🧶 Crochet artesanal</span>
+        <span class="badge">💛 Con amor</span>
+      </div>
+    </div>
+    <div class="about-deco rv-r">
+      <div class="deco-cell">
+        <div class="dc-val">100%</div>
+        <div class="dc-label">Artesanal</div>
+      </div>
+      <div class="deco-cell">
+        <div class="dc-val">🌺</div>
+        <div class="dc-label">Diseños únicos</div>
+      </div>
+      <div class="deco-cell">
+        <div class="dc-val" style="font-size:1.4rem;line-height:1.3">Hecho<br>a mano</div>
+        <div class="dc-label">Cada pieza</div>
+      </div>
+      <div class="deco-cell">
+        <div class="dc-val">❤️</div>
+        <div class="dc-label">Con amor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TIENDA ══════════ -->
+<section id="tienda">
+  <div class="max">
+    <div class="s-center">
+      <p class="s-tag rv">Colección</p>
+      <h2 class="s-h2 rv d1">Nuestra <em>tienda</em></h2>
+      <p class="s-body rv d2" style="max-width:540px;margin:16px auto 0">Piezas de crochet hechas con amor, diseñadas para que te sientas única y especial.</p>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- 1 · Set Boho Crochet -->
+      <div class="product-card rv d1">
+        <div class="product-img">
+          <img src="assets/2.png" alt="Set de Crochet Boho">
+          <div class="product-badge-hot">Más vendido</div>
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Ropa</p>
+          <h3 class="product-name">Set Boho Crochet</h3>
+          <p class="product-desc">Top y falda tejida a mano. Fresco, elegante y único — perfecto para la playa o una salida especial.</p>
+          <div class="product-footer">
+            <div class="product-price">[PRECIO] <span>COP</span></div>
+            <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Me%20interesa%20el%20Set%20Boho%20Crochet%20🧶" target="_blank" rel="noopener" class="btn-wa-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · Bikini Artesanal -->
+      <div class="product-card rv d2">
+        <div class="product-img">
+          <img src="assets/3.png" alt="Bikini Artesanal Crochet">
+          <div class="product-badge-new">Favorita</div>
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Traje de baño</p>
+          <h3 class="product-name">Bikini Artesanal</h3>
+          <p class="product-desc">Bikini de crochet tejido a mano con detalles de conchas. Irrepetible. Luce diferente en la playa o la piscina.</p>
+          <div class="product-footer">
+            <div class="product-price">[PRECIO] <span>COP</span></div>
+            <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Me%20interesa%20el%20Bikini%20Artesanal%20👙" target="_blank" rel="noopener" class="btn-wa-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Amigurumis -->
+      <div class="product-card rv d3">
+        <div class="product-img">
+          <img src="assets/4.png" alt="Amigurumi tejido a mano">
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Figuras</p>
+          <h3 class="product-name">Amigurumis Tejidos</h3>
+          <p class="product-desc">Figuras de crochet únicas: gatitos, personajes y más. El regalo perfecto para alguien especial.</p>
+          <div class="product-footer">
+            <div class="product-price">[PRECIO] <span>COP</span></div>
+            <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Me%20interesan%20los%20Amigurumis%20🐱" target="_blank" rel="noopener" class="btn-wa-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Ramo Girasoles -->
+      <div class="product-card rv d1">
+        <div class="product-img">
+          <img src="assets/5.png" alt="Ramo de girasoles y abejas tejidas">
+          <div class="product-badge-hot">Popular</div>
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Flores</p>
+          <h3 class="product-name">Ramo Girasoles & Abejas</h3>
+          <p class="product-desc">Ramo artesanal de girasoles y abejitas tejidas a crochet. Eternas, sin marchitarse. El regalo que dura para siempre.</p>
+          <div class="product-footer">
+            <div class="product-price">[PRECIO] <span>COP</span></div>
+            <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Me%20interesa%20el%20Ramo%20de%20Girasoles%20🌻" target="_blank" rel="noopener" class="btn-wa-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 · Bouquet Tulipanes -->
+      <div class="product-card rv d2">
+        <div class="product-img">
+          <img src="assets/6.png" alt="Bouquet de tulipanes tejidos">
+          <div class="product-badge-new">Nuevo</div>
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Flores</p>
+          <h3 class="product-name">Bouquet Tulipanes</h3>
+          <p class="product-desc">Bouquet de tulipanes y margaritas tejidos a crochet, empacado con detalle. Flores eternas para regalar con amor.</p>
+          <div class="product-footer">
+            <div class="product-price">[PRECIO] <span>COP</span></div>
+            <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Me%20interesa%20el%20Bouquet%20de%20Tulipanes%20🌷" target="_blank" rel="noopener" class="btn-wa-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 · Regalo Especial Mamá -->
+      <div class="product-card rv d3">
+        <div class="product-img">
+          <img src="assets/1.png" alt="Regalo especial para mamá - Amigurumi">
+        </div>
+        <div class="product-body">
+          <p class="product-cat">Regalos</p>
+          <h3 class="product-name">Regalo Especial Mamá</h3>
+          <p class="product-desc">Amigurumi especial con mensaje de amor. El regalo más único y significativo para el Día de la Madre o cualquier ocasión.</p>
+          <div class="product-footer">
+            <div class="product-price">[PRECIO] <span>COP</span></div>
+            <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Me%20interesa%20el%20Regalo%20Especial%20para%20Mamá%20💝" target="_blank" rel="noopener" class="btn-wa-small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Pedir
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BANNER CTA ══════════ -->
+<div class="cta-banner">
+  <h2 class="rv">¿Tienes una idea especial?</h2>
+  <p class="rv d1">Hacemos prendas, amigurumis y regalos a medida. Cuéntanos tu idea y la tejemos con amor.</p>
+  <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Quiero%20pedir%20algo%20personalizado%20🌺" target="_blank" rel="noopener" class="btn-banner rv d2">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Escríbenos por WhatsApp
+  </a>
+</div>
+
+<!-- ══════════ GALERÍA ══════════ -->
+<section id="galeria">
+  <div class="max">
+    <div class="s-center">
+      <p class="s-tag rv">Inspiración</p>
+      <h2 class="s-h2 rv d1">Nuestra <em>galería</em></h2>
+    </div>
+    <p class="ig-note rv d2">
+      📸 Síguenos en <a href="https://www.instagram.com/cocoway" target="_blank" rel="noopener">@cocoway</a> para ver todos nuestros diseños y novedades
+    </p>
+    <div class="gal-grid rv d3">
+      <div class="gal-item">
+        <img src="assets/1.png" alt="Regalo especial Cocoway">
+        <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        <div class="gal-tag">Regalos</div>
+      </div>
+      <div class="gal-item">
+        <img src="assets/2.png" alt="Set boho crochet">
+        <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        <div class="gal-tag">Ropa</div>
+      </div>
+      <div class="gal-item">
+        <img src="assets/3.png" alt="Bikini artesanal">
+        <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        <div class="gal-tag">Baño</div>
+      </div>
+      <div class="gal-item">
+        <img src="assets/4.png" alt="Amigurumi gato">
+        <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        <div class="gal-tag">Amigurumis</div>
+      </div>
+      <div class="gal-item">
+        <img src="assets/5.png" alt="Ramo girasoles tejidos">
+        <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        <div class="gal-tag">Flores</div>
+      </div>
+      <div class="gal-item">
+        <img src="assets/6.png" alt="Bouquet tulipanes">
+        <div class="gal-overlay"><div class="gal-plus">+</div></div>
+        <div class="gal-tag">Bouquet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACTO ══════════ -->
+<section id="contacto">
+  <div class="contact-wrap">
+    <div class="s-center">
+      <p class="s-tag rv">Estamos aquí</p>
+      <h2 class="s-h2 rv d1">Hablemos <em>hoy</em></h2>
+      <p class="s-body rv d2" style="max-width:480px;margin:16px auto 0">¿Quieres hacer un pedido, tienes preguntas o quieres algo personalizado? ¡Escríbenos!</p>
+    </div>
+    <div class="contact-cards">
+      <div class="cc cc-wa rv d1">
+        <div class="cc-icon">💬</div>
+        <div class="cc-label">Escríbenos por</div>
+        <div class="cc-handle">WhatsApp</div>
+        <div class="cc-desc">Pedidos, consultas de tallas, colores y diseños personalizados. ¡Respondemos rápido!</div>
+        <a href="https://wa.me/[NÚMERO-WHATSAPP]?text=Hola%20Cocoway!%20Quiero%20hacer%20un%20pedido%20🌺" target="_blank" rel="noopener" class="btn-wa-main">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Escribir ahora
+        </a>
+      </div>
+      <div class="cc cc-ig rv d2">
+        <div class="cc-icon">🌺</div>
+        <div class="cc-label">Síguenos en</div>
+        <div class="cc-handle">@cocoway</div>
+        <div class="cc-desc">Todos nuestros diseños, novedades y procesos de tejido están en nuestro Instagram.</div>
+        <a href="https://www.instagram.com/cocoway" target="_blank" rel="noopener" class="btn-ig-main">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Ver Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="f-logo">cocoway</div>
+  <div class="f-tagline">"Tejido para ti, con amor" 🌺</div>
+  <div class="f-copy">© 2026 Cocoway · @cocoway · Todos los derechos reservados</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+  const ham = document.getElementById('ham');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  ham.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => revObs.observe(el));
+
+  const hc = document.querySelector('.hero-content');
+  const hs = document.querySelector('.hero-scroll');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY, vh = window.innerHeight;
+    if (s < vh && hc) {
+      hc.style.transform = `translateY(${s * 0.2}px)`;
+      hc.style.opacity = String(Math.max(0, 1 - s / (vh * 0.65)));
+    }
+    if (s < 240 && hs) hs.style.opacity = String(Math.max(0, 1 - s / 180));
+  }, { passive: true });
+
+  const secs = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  const acObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) navAs.forEach(a => {
+        a.style.color = '';
+        if (a.getAttribute('href') === '#' + e.target.id) a.style.color = 'var(--rose)';
+      });
+    });
+  }, { threshold: 0.4 });
+  secs.forEach(s => acObs.observe(s));
+
+  const dfs = document.querySelectorAll('.deco-flower');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY;
+    dfs.forEach((df, i) => {
+      const speed = [0.08, -0.06, 0.05, -0.04][i] || 0.05;
+      df.style.transform = `translateY(${s * speed}px)`;
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>

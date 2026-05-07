@@ -1,0 +1,570 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Sparkles, ShieldCheck, Droplets, Zap } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espuma de Lujo | Detailing Premium Cali</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --accent: #2563eb;
+            --text: #ffffff;
+            --text-dim: #94a3b8;
+            --card-bg: rgba(23, 23, 23, 0.6);
+        }
+
+export default function LuxuryLanding() {
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+  return (
+    <div className="bg-[#050505] text-white min-h-screen selection:bg-blue-500/50">
+      {/* Hero Section Cinematográfico */}
+      <section className="relative h-screen flex items-center justify-center px-6 overflow-hidden">
+        <motion.div style={{ opacity }} className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.1),transparent)]" />
+          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
+        </motion.div>
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        <div className="relative z-10 max-w-5xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-8 italic">
+              ESPUMA <span className="text-blue-600">DE LUJO</span>
+            </h1>
+            <p className="text-xl md:text-2xl font-light text-slate-400 max-w-3xl mx-auto leading-relaxed uppercase tracking-[0.2em]">
+              El arte de la perfección automotriz en Cali.
+            </p>
+          </motion.div>
+        h1, h2, h3, .premium-font {
+            font-family: 'Syne', sans-serif;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-12 flex flex-wrap justify-center gap-6"
+          >
+            <a href="#contacto" className="group relative px-10 py-5 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105">
+              <span className="relative z-10">RESERVAR CUPO VIP</span>
+              <div className="absolute inset-0 bg-blue-500 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300" />
+            </a>
+          </motion.div>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(0px);
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text);
+            text-decoration: none;
+            font-style: italic;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 0.9;
+            font-style: italic;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: reveal 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .hero p {
+            color: var(--text-dim);
+            letter-spacing: 0.3em;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: reveal 1s 0.3s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--text);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 100px;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: reveal 1s 0.6s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: var(--accent);
+            color: white;
+        }
+
+        /* --- STATS --- */
+        .stats {
+            padding: 100px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        /* --- SERVICIOS --- */
+        .section-header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-header h2 { font-size: 3rem; font-style: italic; }
+        .section-header p { color: var(--accent); font-weight: 700; letter-spacing: 0.2em; font-size: 0.8rem; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 100px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(37, 99, 235, 0.05);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--accent);
+        }
+
+        .service-card h3 { margin-bottom: 16px; font-size: 1.25rem; font-style: italic; }
+        .service-card p { color: var(--text-dim); font-size: 0.9rem; }
+
+        /* --- BEFORE AFTER --- */
+        .showcase {
+            padding: 100px 0;
+            background: #0a0a0a;
+        }
+
+        .slider-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .img-before {
+            background-image: url('https://images.unsplash.com/photo-1507136566466-4985d5f8a90c?auto=format&fit=crop&q=80&w=800');
+            z-index: 1;
+        }
+
+        .img-after {
+            background-image: url('https://images.unsplash.com/photo-1603584173870-7f3ca99a9301?auto=format&fit=crop&q=80&w=800');
+            width: 50%;
+            z-index: 2;
+            border-right: 3px solid white;
+        }
+
+        .slider-input {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            opacity: 0;
+            cursor: ew-resize;
+            width: 100%;
+        }
+
+        /* --- CONTACTO --- */
+        .contact {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .contact h2 { font-size: 4rem; margin-bottom: 40px; }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .info-item p:first-child {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .info-item p:last-child { font-size: 1.2rem; font-weight: 600; }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .contact h2 { font-size: 2.5rem; }
+            .stat-item h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">ESPUMA<span>DELUJO</span></a>
+            <div class="nav-links">
+                <a href="#servicios">SERVICIOS</a>
+                <a href="#proyectos">RESULTADOS</a>
+                <a href="#contacto">CONTACTO</a>
+            </div>
+            <a href="#contacto" class="logo" style="font-size: 0.8rem;">CALI, CO</a>
+        </div>
+      </section>
+    </nav>
+
+      {/* Grid de Servicios con Glassmorphism Real */}
+      <section className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { icon: <Sparkles />, title: "Ceramic Coating", desc: "Protección nanotecnológica por años." },
+            { icon: <Droplets />, title: "Deep Cleaning", desc: "Extracción profunda de impurezas." },
+            { icon: <ShieldCheck />, title: "Paint Correction", desc: "Eliminación de micro-rayas y hologramas." },
+            { icon: <Zap />, title: "Express Detail", desc: "Mantenimiento premium en tiempo récord." },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{ y: -10 }}
+              className="p-8 bg-neutral-900/50 backdrop-blur-xl border border-white/5 rounded-[2rem] hover:bg-neutral-800/50 transition-all shadow-2xl"
+            >
+              <div className="text-blue-500 mb-6 w-12 h-12 flex items-center justify-center bg-blue-500/10 rounded-2xl">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-4 italic tracking-tight">{item.title}</h3>
+              <p className="text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+            </motion.div>
+          ))}
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="container">
+            <h1>ESPUMA <span style="color: var(--accent)">DE LUJO</span></h1>
+            <p>EL ARTE DE LA PERFECCIÓN AUTOMOTRIZ EN CALI</p>
+            <a href="https://wa.me/[TU_NUMERO]" class="btn">RESERVAR CUPO VIP</a>
+        </div>
+      </section>
+    </section>
+
+      {/* Showcase Interactivo */}
+      <section className="py-24 flex flex-col items-center gap-12 px-6">
+        <div className="text-center">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 italic">RESULTADOS REALES</h2>
+          <p className="text-blue-500 tracking-[0.3em] font-bold">DESLIZA PARA VER LA MAGIA</p>
+    <div class="container">
+        <section class="stats reveal">
+            <div class="stat-item">
+                <h2 class="counter" data-target="1000">0</h2>
+                <p>AUTOS TRATADOS</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter" data-target="100">0</h2>
+                <p>% SATISFACCIÓN</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter" data-target="5">0</h2>
+                <p>AÑOS DE EXPERIENCIA</p>
+            </div>
+        </section>
+    </div>
+
+    <section id="servicios" class="container reveal">
+        <div class="section-header">
+            <p>ESTÁNDARES SUPERIORES</p>
+            <h2>NUESTROS SERVICIOS</h2>
+        </div>
+        <BeforeAfterSlider />
+      </section>
+    </div>
+  );
+}
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">✨</div>
+                <h3>CERAMIC COATING</h3>
+                <p>Protección nanotecnológica avanzada que preserva el brillo y la pintura de tu vehículo por años.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">💧</div>
+                <h3>DEEP CLEANING</h3>
+                <p>Extracción profunda de impurezas en interiores y exteriores utilizando técnicas de vapor y succión.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🛡️</div>
+                <h3>PAINT CORRECTION</h3>
+                <p>Eliminación experta de micro-rayas, hologramas y defectos para recuperar el acabado espejo original.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">⚡</div>
+                <h3>EXPRESS DETAIL</h3>
+                <p>Mantenimiento premium para aquellos que exigen perfección en tiempo récord sin comprometer la calidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos" class="showcase">
+        <div class="container reveal">
+            <div class="section-header">
+                <p>RESULTADOS REALES</p>
+                <h2>DESLIZA PARA VER LA MAGIA</h2>
+            </div>
+            <div class="slider-container">
+                <div class="slider-img img-before"></div>
+                <div id="after-img" class="slider-img img-after"></div>
+                <input type="range" min="0" max="100" value="50" class="slider-input" id="slider">
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact container reveal">
+        <h2>¿LISTO PARA EL SIGUIENTE NIVEL?</h2>
+        <a href="https://wa.me/[TU_NUMERO]" class="btn">SOLICITAR COTIZACIÓN</a>
+        
+        <div class="contact-info">
+            <div class="info-item">
+                <p>UBICACIÓN</p>
+                <p>Cali, Valle del Cauca</p>
+            </div>
+            <div class="info-item">
+                <p>WHATSAPP</p>
+                <p>[TU TELÉFONO AQUÍ]</p>
+            </div>
+            <div class="info-item">
+                <p>HORARIOS</p>
+                <p>Lun - Sáb: 8am - 6pm</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ESPUMA DE LUJO CALI. DISEÑO PREMIUM.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Reveal animations on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Trigger counters if they exist in this section
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        const update = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current) + (target === 100 ? '%' : '+');
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.innerText = target + (target === 100 ? '%' : '+');
+                            }
+                        };
+                        update();
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Before After Slider
+        const slider = document.getElementById('slider');
+        const afterImg = document.getElementById('after-img');
+        slider.addEventListener('input', (e) => {
+            afterImg.style.width = e.target.value + '%';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
