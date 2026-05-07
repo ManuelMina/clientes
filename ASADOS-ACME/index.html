@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asados Acme | Arepas y Asados en Cali - ¡Pide por WhatsApp!</title>
+  <meta name="description" content="Disfruta los mejores asados y arepas en Asados Acme en Cali. Sabor auténtico, ingredientes frescos y pedidos fáciles por WhatsApp. ¡Visítanos o pide a domicilio!">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F0F10;
+      --surface: #18181B;
+      --surface2: #27272A;
+      --border: rgba(255,255,255,0.08);
+      --primary: #E11D48; /* Rojo Brasa */
+      --primary-l: #FB7185;
+      --accent: #F59E0B; /* Naranja Fuego */
+      --green: #10B981;
+      --text: #FAFAFA;
+      --muted: #A1A1AA;
+      --sec: #D4D4D8;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6}
+    a{color:var(--primary-l);text-decoration:none;transition:color .2s}
+    a:hover{color:var(--accent)}
+    img{max-width:100%;height:auto;display:block}
+
+    .container{max-width:1200px;margin:0 auto;padding:2rem}
+    .text-center{text-align:center}
+
+    /* Header */
+    .header{background:var(--surface);padding:1rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+    .logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--primary)}
+    .nav-menu a{margin-left:1.5rem;color:var(--text);font-weight:500}
+    .nav-menu a:hover{color:var(--primary-l)}
+
+    /* Hero Section */
+    .hero{background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1920x1080/E11D48/FFFFFF?text=Asados+Acme+Hero') center/cover no-repeat;min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem, 6vw, 4.5rem);color:white;margin-bottom:1rem;line-height:1.1}
+    .hero p{font-size:clamp(1.1rem, 2vw, 1.5rem);color:var(--sec);max-width:800px;margin-bottom:2rem}
+    .btn-primary{background:var(--primary);color:white;padding:1rem 2.5rem;border-radius:8px;font-weight:700;font-size:1.1rem;transition:background .2s, transform .2s}
+    .btn-primary:hover{background:var(--primary-l);transform:translateY(-2px)}
+
+    /* Section Styling */
+    section{padding:4rem 0;border-bottom:1px solid var(--border)}
+    section:last-of-type{border-bottom:none}
+    section h2{font-family:'Playfair Display',serif;font-size:clamp(2rem, 4vw, 3rem);text-align:center;margin-bottom:2.5rem;color:var(--primary-l)}
+    section p{max-width:800px;margin:0 auto 1.5rem;text-align:center;color:var(--sec)}
+
+    /* About Section */
+    .about-content{display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:center}
+    .about-text{flex:1 1 400px;max-width:600px}
+    .about-text h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--text);margin-bottom:1rem}
+    .about-text p{text-align:left;margin:0 0 1rem 0}
+    .about-image{flex:1 1 300px;max-width:400px;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+
+    /* Menu Section */
+    .menu-categories{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
+    .menu-category-btn{background:var(--surface2);color:var(--sec);padding:.7rem 1.5rem;border-radius:25px;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid var(--border)}
+    .menu-category-btn.active, .menu-category-btn:hover{background:var(--primary);color:white;border-color:var(--primary)}
+
+    .menu-items{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:2rem}
+    .menu-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;transition:transform .2s}
+    .menu-item:hover{transform:translateY(-5px);border-color:var(--primary-l)}
+    .menu-item-img{width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:1rem}
+    .menu-item h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--text);margin-bottom:.5rem}
+    .menu-item p{font-size:.9rem;color:var(--muted);flex-grow:1;text-align:left}
+    .menu-item-price{font-size:1.2rem;font-weight:700;color:var(--accent);margin-top:1rem}
+
+    /* Gallery Section */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:1rem}
+    .gallery-item{border-radius:8px;overflow:hidden;position:relative;transition:transform .2s}
+    .gallery-item:hover{transform:scale(1.03)}
+    .gallery-item img{width:100%;height:250px;object-fit:cover}
+    .gallery-link{display:block;text-align:center;margin-top:2rem;font-size:1.1rem;font-weight:600}
+
+    /* Contact Section */
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;margin-top:2rem}
+    .contact-info, .map-container{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem}
+    .contact-info h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--text);margin-bottom:1rem}
+    .contact-info p{font-size:1rem;color:var(--sec);margin-bottom:.8rem;text-align:left}
+    .contact-info a{display:block;margin-bottom:.5rem}
+    .social-links{margin-top:1.5rem;display:flex;gap:1rem}
+    .social-links a{font-size:1.5rem;color:var(--muted)}
+    .social-links a:hover{color:var(--primary-l)}
+    .map-container iframe{width:100%;height:300px;border:0;border-radius:8px}
+
+    /* Footer */
+    .footer{background:var(--surface2);padding:2rem;text-align:center;font-size:.9rem;color:var(--muted);border-top:1px solid var(--border)}
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header{flex-direction:column;gap:1rem}
+      .nav-menu{margin-top:1rem}
+      .nav-menu a{margin:0 .5rem}
+      .hero h1{font-size:2.5rem}
+      .hero p{font-size:1rem}
+      .about-content{flex-direction:column}
+      .about-text, .about-image{max-width:100%}
+      .menu-categories{flex-direction:column;align-items:center}
+      .contact-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">Asados Acme</div>
+    <nav class="nav-menu">
+      <a href="#hero">Inicio</a>
+      <a href="#about">Nosotros</a>
+      <a href="#menu">Menú</a>
+      <a href="#gallery">Galería</a>
+      <a href="#contact">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <h1>Asados Acme: El Sabor Auténtico de Cali a tu Mesa.</h1>
+      <p>Arepas y Asados con la tradición que amas. ¡Pide fácil y sin comisiones por WhatsApp!</p>
+      <a href="https://wa.me/TU_NUMERO_WHATSAPP?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20Asados%20Acme." target="_blank" class="btn-primary">
+        Ver Menú y Pedir por WhatsApp
+      </a>
+    </section>
+
+    <section id="about" class="container">
+      <h2>Nuestra Historia y Pasión</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Tradición y Sabor en Cada Bocado</h3>
+          <p>En Asados Acme, llevamos años deleitando a nuestros clientes con los sabores más auténticos de la cocina colombiana. Nos especializamos en asados jugosos y arepas irresistibles, preparados con ingredientes frescos y el toque casero que nos distingue.</p>
+          <p>Nuestra misión es ofrecerte una experiencia culinaria memorable, ya sea que nos visites en nuestro local en El Guabal o disfrutes de nuestros platos en la comodidad de tu hogar. ¡Ven y descubre por qué somos los favoritos del barrio!</p>
+        </div>
+        <div class="about-image">
+          <img src="https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Nuestra+Cocina" alt="Cocina de Asados Acme">
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="container">
+      <h2>Nuestro Delicioso Menú</h2>
+      <p>Explora nuestra variedad de asados, arepas y acompañamientos. ¡Todo preparado al instante para ti!</p>
+
+      <div class="menu-categories">
+        <button class="menu-category-btn active" data-category="all">Todo</button>
+        <button class="menu-category-btn" data-category="asados">Asados</button>
+        <button class="menu-category-btn" data-category="arepas">Arepas</button>
+        <button class="menu-category-btn" data-category="acompanamientos">Acompañamientos</button>
+        <button class="menu-category-btn" data-category="bebidas">Bebidas</button>
+      </div>
+
+      <div class="menu-items" id="menu-items-container">
+        <!-- Asados -->
+        <div class="menu-item" data-category="asados">
+          <img src="https://via.placeholder.com/300x180/E11D48/FFFFFF?text=Asado+Mixto" alt="Asado Mixto" class="menu-item-img">
+          <h3>Asado Mixto Acme</h3>
+          <p>Combinación perfecta de carne de res, cerdo y pollo, acompañado de papa criolla y ensalada.</p>
+          <div class="menu-item-price">$25.000 COP</div>
+        </div>
+        <div class="menu-item" data-category="asados">
+          <img src="https://via.placeholder.com/300x180/E11D48/FFFFFF?text=Churrasco" alt="Churrasco" class="menu-item-img">
+          <h3>Churrasco a la Brasa</h3>
+          <p>Corte premium de res a la brasa, servido con yuca frita y chimichurri casero.</p>
+          <div class="menu-item-price">$32.000 COP</div>
+        </div>
+        <div class="menu-item" data-category="asados">
+          <img src="https://via.placeholder.com/300x180/E11D48/FFFFFF?text=Costillas+BBQ" alt="Costillas BBQ" class="menu-item-img">
+          <h3>Costillas BBQ Acme</h3>
+          <p>Tiernas costillas de cerdo bañadas en nuestra salsa BBQ especial, con papas a la francesa.</p>
+          <div class="menu-item-price">$28.000 COP</div>
+        </div>
+
+        <!-- Arepas -->
+        <div class="menu-item" data-category="arepas">
+          <img src="https://via.placeholder.com/300x180/F59E0B/FFFFFF?text=Arepa+Rellena" alt="Arepa Rellena" class="menu-item-img">
+          <h3>Arepa Rellena de Carne Desmechada</h3>
+          <p>Arepa de maíz asada, rellena con carne desmechada sazonada y queso.</p>
+          <div class="menu-item-price">$12.000 COP</div>
+        </div>
+        <div class="menu-item" data-category="arepas">
+          <img src="https://via.placeholder.com/300x180/F59E0B/FFFFFF?text=Arepa+Pollo" alt="Arepa Pollo" class="menu-item-img">
+          <h3>Arepa con Pollo y Champiñones</h3>
+          <p>Deliciosa arepa con pollo salteado, champiñones y un toque de crema.</p>
+          <div class="menu-item-price">$13.500 COP</div>
+        </div>
+
+        <!-- Acompañamientos -->
+        <div class="menu-item" data-category="acompanamientos">
+          <img src="https://via.placeholder.com/300x180/10B981/FFFFFF?text=Papa+Criolla" alt="Papa Criolla" class="menu-item-img">
+          <h3>Papa Criolla</h3>
+          <p>Porción de papas criollas doradas y crujientes.</p>
+          <div class="menu-item-price">$6.000 COP</div>
+        </div>
+        <div class="menu-item" data-category="acompanamientos">
+          <img src="https://via.placeholder.com/300x180/10B981/FFFFFF?text=Ensalada" alt="Ensalada" class="menu-item-img">
+          <h3>Ensalada Fresca</h3>
+          <p>Mix de lechugas, tomate, cebolla y aderezo de la casa.</p>
+          <div class="menu-item-price">$7.500 COP</div>
+        </div>
+
+        <!-- Bebidas -->
+        <div class="menu-item" data-category="bebidas">
+          <img src="https://via.placeholder.com/300x180/FB7185/FFFFFF?text=Gaseosa" alt="Gaseosa" class="menu-item-img">
+          <h3>Gaseosa Personal</h3>
+          <p>Variedad de gaseosas.</p>
+          <div class="menu-item-price">$3.500 COP</div>
+        </div>
+        <div class="menu-item" data-category="bebidas">
+          <img src="https://via.placeholder.com/300x180/FB7185/FFFFFF?text=Jugo+Natural" alt="Jugo Natural" class="menu-item-img">
+          <h3>Jugo Natural</h3>
+          <p>Jugo de frutas frescas (maracuyá, lulo, mora).</p>
+          <div class="menu-item-price">$5.000 COP</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="container">
+      <h2>Nuestros Platos Hablan por Sí Solos</h2>
+      <p>Una pequeña muestra de lo que te espera en Asados Acme. ¡Síguenos en Instagram para más!</p>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/E11D48/FFFFFF?text=Foto+1" alt="Plato de Asados Acme 1"></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/F59E0B/FFFFFF?text=Foto+2" alt="Plato de Asados Acme 2"></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/E11D48/FFFFFF?text=Foto+3" alt="Plato de Asados Acme 3"></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/F59E0B/FFFFFF?text=Foto+4" alt="Plato de Asados Acme 4"></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/E11D48/FFFFFF?text=Foto+5" alt="Plato de Asados Acme 5"></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/F59E0B/FFFFFF?text=Foto+6" alt="Plato de Asados Acme 6"></div>
+      </div>
+      <a href="https://www.instagram.com/asadosacme/" target="_blank" class="gallery-link btn-primary" style="display:inline-block;margin-top:2rem;">
+        Ver más en Instagram
+      </a>
+    </section>
+
+    <section id="contact" class="container">
+      <h2>Encuéntranos y Contáctanos</h2>
+      <p>Estamos listos para atenderte. ¡Visítanos o haz tu pedido!</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Información de Contacto</h3>
+          <p><strong>Dirección:</strong> Carrera 44 # 10-10, Barrio El Guabal, Cali, Valle del Cauca</p>
+          <p><strong>Teléfono:</strong> <a href="tel:+573101234567">+57 310 123 4567</a> (Ejemplo)</p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/TU_NUMERO_WHATSAPP?text=Hola%2C%20tengo%20una%20pregunta%20para%20Asados%20Acme." target="_blank">+57 310 123 4567</a> (Ejemplo)</p>
+          <p><strong>Horario:</strong></p>
+          <ul>
+            <li>Lunes a Viernes: 12:00 PM - 10:00 PM</li>
+            <li>Sábados y Domingos: 11:00 AM - 11:00 PM</li>
+            <li>Festivos: 11:00 AM - 10:00 PM</li>
+          </ul>
+          <div class="social-links">
+            <a href="https://www.instagram.com/asadosacme/" target="_blank" aria-label="Instagram de Asados Acme">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <!-- Agrega más enlaces a redes sociales si las tienen (Facebook, TikTok, etc.) -->
+          </div>
+        </div>
+        <div class="map-container">
+          <h3>Nuestra Ubicación</h3>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.905615024765!2d-76.5176767!3d3.423151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a6dda1fb0e21%3A0x901a2c33a00b7b8d!2sArepas%20%26%20Asados%20ACME!5e0!3m2!1ses-419!2sco!4v1701800000000!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2024 Asados Acme. Todos los derechos reservados.</p>
+    <p>Diseñado con pasión por [Tu Nombre/Empresa]</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling para enlaces de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Filtrado de categorías del menú
+    const menuCategoryButtons = document.querySelectorAll('.menu-category-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuCategoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remover la clase 'active' de todos los botones
+        menuCategoryButtons.forEach(btn => btn.classList.remove('active'));
+        // Añadir la clase 'active' al botón clickeado
+        button.classList.add('active');
+
+        const category = button.dataset.category;
+
+        menuItems.forEach(item => {
+          if (category === 'all' || item.dataset.category === category) {
+            item.style.display = 'flex'; // Usar flex para mantener el diseño de tarjeta
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Asegurar que la categoría 'Todo' se muestre al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.menu-category-btn[data-category="all"]').click();
+    });
+  </script>
+</body>
+</html>
