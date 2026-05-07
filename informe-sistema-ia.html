@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Sistema IA — Manuel Mina · Mayo 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07070F;
+  --sur: #12121E;
+  --sur2: #1A1A2E;
+  --border: rgba(255,255,255,0.07);
+  --blue: #60A5FA;
+  --blue-d: #1D4ED8;
+  --green: #34D399;
+  --gold: #F4C97A;
+  --rose: #F4A0B0;
+  --purple: #A78BFA;
+  --orange: #FB923C;
+  --red: #EF4444;
+  --text: #F1F0EE;
+  --sec: #94A3B8;
+  --muted: #475569;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;line-height:1.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,7,15,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);padding:.75rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.nav-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.nav-links a{font-size:.78rem;color:var(--sec);text-decoration:none;font-weight:600;letter-spacing:.05em;transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;background:radial-gradient(ellipse at 30% 40%,rgba(96,165,250,.12) 0%,transparent 55%),radial-gradient(ellipse at 70% 70%,rgba(167,139,250,.08) 0%,transparent 50%),var(--bg);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3);color:var(--blue);padding:.35rem 1.1rem;border-radius:2rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;position:relative;z-index:1}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:700;line-height:1.05;margin-bottom:1.25rem;position:relative;z-index:1}
+.grad-blue{background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-green{background:linear-gradient(135deg,var(--green),#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-gold{background:linear-gradient(135deg,var(--gold),#C97A10);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.1rem;color:var(--sec);max-width:640px;position:relative;z-index:1;margin-bottom:2.5rem}
+.hero-stats{display:flex;gap:3rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+.hero-stat{text-align:center}
+.hero-stat-n{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.hero-stat-l{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:.3rem}
+
+/* SECTIONS */
+section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-tag{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem 1rem;border-radius:2rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.tag-blue{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.28);color:var(--blue)}
+.tag-green{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.28);color:var(--green)}
+.tag-gold{background:rgba(244,201,122,.1);border:1px solid rgba(244,201,122,.28);color:var(--gold)}
+.tag-purple{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.28);color:var(--purple)}
+.tag-orange{background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.28);color:var(--orange)}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:.5rem}
+.section-sub{font-size:.95rem;color:var(--sec);margin-bottom:2.5rem;max-width:640px}
+
+/* CARDS */
+.card{background:var(--sur);border:1px solid var(--border);border-radius:20px;padding:1.75rem;transition:border-color .25s,transform .25s}
+.card:hover{transform:translateY(-3px)}
+.card-blue{border-color:rgba(96,165,250,.2)}
+.card-blue:hover{border-color:rgba(96,165,250,.45)}
+.card-green{border-color:rgba(52,211,153,.2)}
+.card-green:hover{border-color:rgba(52,211,153,.45)}
+.card-gold{border-color:rgba(244,201,122,.2)}
+.card-gold:hover{border-color:rgba(244,201,122,.45)}
+.card-purple{border-color:rgba(167,139,250,.2)}
+.card-purple:hover{border-color:rgba(167,139,250,.45)}
+.card-orange{border-color:rgba(251,146,60,.2)}
+.card-orange:hover{border-color:rgba(251,146,60,.45)}
+.card-icon{font-size:2rem;margin-bottom:.75rem}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:.4rem}
+.card-desc{font-size:.85rem;color:var(--sec);line-height:1.7}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:900px){.grid-3,.grid-4{grid-template-columns:repeat(2,1fr)}.hero-stats{gap:1.5rem}}
+@media(max-width:600px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+/* STATUS BADGES */
+.badge{display:inline-block;font-size:.65rem;font-weight:700;padding:.2rem .7rem;border-radius:1rem;letter-spacing:.06em;text-transform:uppercase}
+.badge-active{background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+.badge-dev{background:rgba(251,146,60,.15);color:var(--orange);border:1px solid rgba(251,146,60,.3)}
+.badge-broken{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.badge-idle{background:rgba(148,163,184,.12);color:var(--sec);border:1px solid var(--border)}
+
+/* DIAGRAM - ACTUAL vs POTENCIAL */
+.diagram-wrap{background:var(--sur);border:1px solid var(--border);border-radius:24px;padding:2.5rem;margin-bottom:2rem}
+.diagram-title{font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+.diagram-row{display:grid;grid-template-columns:1fr 60px 1fr;gap:1rem;align-items:start;margin-bottom:1.25rem}
+.diagram-current{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1rem 1.25rem}
+.diagram-future{background:rgba(96,165,250,.04);border:1px solid rgba(96,165,250,.18);border-radius:12px;padding:1rem 1.25rem}
+.diagram-arrow{display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--blue);padding-top:.25rem}
+.diagram-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.label-current{color:var(--muted)}
+.label-future{color:var(--blue)}
+.diagram-text{font-size:.83rem;color:var(--sec);line-height:1.6}
+.diagram-text strong{color:var(--text)}
+
+/* MEJORAS LIST */
+.mejora-item{display:flex;gap:1rem;padding:1rem 1.25rem;background:var(--sur);border:1px solid var(--border);border-radius:14px;margin-bottom:.75rem;align-items:flex-start;transition:border-color .2s}
+.mejora-item:hover{border-color:rgba(96,165,250,.3)}
+.mejora-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}
+.mejora-body{}
+.mejora-title{font-weight:700;font-size:.9rem;margin-bottom:.2rem}
+.mejora-desc{font-size:.8rem;color:var(--sec);line-height:1.6}
+.mejora-impact{display:inline-block;font-size:.62rem;font-weight:800;padding:.15rem .6rem;border-radius:1rem;margin-top:.4rem;letter-spacing:.06em;text-transform:uppercase}
+.impact-alta{background:rgba(239,68,68,.15);color:#FCA5A5;border:1px solid rgba(239,68,68,.25)}
+.impact-media{background:rgba(244,201,122,.15);color:var(--gold);border:1px solid rgba(244,201,122,.25)}
+.impact-baja{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+
+/* BUSINESS IDEAS */
+.idea-card{background:var(--sur);border-radius:22px;padding:2rem;border:1px solid var(--border);position:relative;overflow:hidden;margin-bottom:1.5rem}
+.idea-num{position:absolute;top:1.5rem;right:1.75rem;font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;opacity:.05;line-height:1}
+.idea-tag{display:inline-block;font-size:.65rem;font-weight:700;padding:.2rem .75rem;border-radius:1rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
+.idea-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;margin-bottom:.6rem;line-height:1.2}
+.idea-desc{font-size:.87rem;color:var(--sec);line-height:1.75;margin-bottom:1.25rem}
+.idea-metrics{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.idea-metric{text-align:center}
+.idea-metric-v{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;line-height:1}
+.idea-metric-l{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.15rem}
+.idea-steps{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.idea-steps li{display:flex;align-items:flex-start;gap:.6rem;font-size:.83rem;color:var(--sec)}
+.idea-steps li::before{content:'→';color:var(--blue);flex-shrink:0;font-weight:700}
+
+/* ROADMAP */
+.roadmap{display:flex;flex-direction:column;gap:0}
+.roadmap-item{display:grid;grid-template-columns:120px 2px 1fr;gap:0 1.5rem;padding-bottom:2.5rem}
+.roadmap-date{text-align:right;padding-top:.25rem}
+.roadmap-date-label{font-size:.7rem;font-weight:800;color:var(--blue);letter-spacing:.1em;text-transform:uppercase}
+.roadmap-date-sub{font-size:.68rem;color:var(--muted);margin-top:.15rem}
+.roadmap-line{position:relative;display:flex;flex-direction:column;align-items:center}
+.roadmap-dot{width:12px;height:12px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:.3rem;box-shadow:0 0 12px rgba(96,165,250,.6)}
+.roadmap-line-v{flex:1;width:2px;background:linear-gradient(180deg,rgba(96,165,250,.4),rgba(96,165,250,.05));margin-top:4px}
+.roadmap-content{padding-top:.1rem}
+.roadmap-content h4{font-weight:700;font-size:.95rem;margin-bottom:.35rem}
+.roadmap-content p{font-size:.82rem;color:var(--sec);line-height:1.65}
+.roadmap-tasks{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.roadmap-task{font-size:.7rem;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:var(--blue);padding:.2rem .7rem;border-radius:.5rem}
+
+/* SKILLS TABLE */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.skill-row{background:var(--sur);border:1px solid var(--border);border-radius:14px;padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem}
+.skill-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--muted);line-height:1;min-width:2rem}
+.skill-body{flex:1}
+.skill-name{font-weight:700;font-size:.88rem;margin-bottom:.15rem}
+.skill-use{font-size:.77rem;color:var(--sec)}
+.skill-actions{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
+.skill-action{font-size:.65rem;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green);padding:.15rem .55rem;border-radius:.4rem}
+
+/* SECURITY */
+.alert{display:flex;gap:1rem;padding:1.1rem 1.4rem;border-radius:14px;margin-bottom:.75rem;align-items:flex-start}
+.alert-red{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2)}
+.alert-gold{background:rgba(244,201,122,.07);border:1px solid rgba(244,201,122,.2)}
+.alert-green{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2)}
+.alert-icon{font-size:1.2rem;flex-shrink:0}
+.alert-body{}
+.alert-title{font-weight:700;font-size:.87rem;margin-bottom:.2rem}
+.alert-desc{font-size:.8rem;color:var(--sec);line-height:1.6}
+
+/* DIVIDER */
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:3rem 0}
+
+/* FOOTER */
+footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem}
+footer strong{color:var(--sec)}
+
+/* SCROLL DOT NAV */
+.toc{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.6rem;z-index:99}
+.toc-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);cursor:pointer;transition:all .2s;display:block;text-decoration:none}
+.toc-dot:hover,.toc-dot.active{background:var(--blue);transform:scale(1.4)}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Sistema IA · Manuel Mina</span>
+  <div class="nav-links">
+    <a href="#estado">Estado Actual</a>
+    <a href="#diagrama">Actual vs Potencial</a>
+    <a href="#mejoras">Mejoras</a>
+    <a href="#skills">Skills</a>
+    <a href="#negocios">Ideas de Negocio</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#seguridad">Seguridad</a>
+  </div>
+</nav>
+
+<a href="#estado" class="toc-dot" title="Estado"></a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">📊 Informe Sistema · Mayo 2026</div>
+  <h1>Tu Infraestructura<br><span class="grad-blue">de IA y Automatización</span></h1>
+  <p>Diagnóstico completo de todo lo que tienes construido, qué puedes mejorar y cómo convertirlo en negocios escalables.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-n">10</div>
+      <div class="hero-stat-l">Skills IA activos</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">4</div>
+      <div class="hero-stat-l">Clientes activos</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">4</div>
+      <div class="hero-stat-l">Flujos n8n</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">381</div>
+      <div class="hero-stat-l">MB de infraestructura</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">3</div>
+      <div class="hero-stat-l">Servicios auto-start</div>
+    </div>
+  </div>
+</div>
+
+<!-- ESTADO ACTUAL -->
+<section id="estado">
+  <div class="section-tag tag-blue">🔍 Estado Actual</div>
+  <h2>Lo que tienes <span class="grad-blue">corriendo hoy</span></h2>
+  <p class="section-sub">Inventario completo de proyectos, herramientas y automatizaciones activas en tu equipo.</p>
+
+  <div class="grid-2" style="margin-bottom:1.25rem">
+    <div class="card card-green">
+      <div class="card-icon">👟</div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+        <div class="card-title">MilenaShoes</div>
+        <span class="badge badge-active">PRODUCCIÓN</span>
+      </div>
+      <div class="card-desc">Tienda online de zapatos en Cali. Página web en vivo (<strong>milenashoes.online</strong>), catálogo PDF automatizado, 4 flujos n8n activos (pedidos → Google Sheets, reportes de ventas, reseñas, captura de leads).</div>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem">
+        <span style="font-size:.7rem;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green);padding:.15rem .6rem;border-radius:.4rem">WhatsApp Bot</span>
+        <span style="font-size:.7rem;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green);padding:.15rem .6rem;border-radius:.4rem">n8n Workflows</span>
+        <span style="font-size:.7rem;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green);padding:.15rem .6rem;border-radius:.4rem">Google Sheets</span>
+        <span style="font-size:.7rem;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green);padding:.15rem .6rem;border-radius:.4rem">Notion Tasks</span>
+        <span style="font-size:.7rem;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green);padding:.15rem .6rem;border-radius:.4rem">GitHub Pages</span>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-icon">🤖</div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+        <div class="card-title">Agente WhatsApp</div>
+        <span class="badge badge-active">ACTIVO</span>
+      </div>
+      <div class="card-desc">Servidor Node.js con whatsapp-web.js que corre en tu PC al encender. Responde mensajes con IA (Groq/llama-3.3-70b), crea tareas en Notion, registra leads, distribuye catálogo PDF y maneja comandos de admin.</div>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem">
+        <span style="font-size:.7rem;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:var(--blue);padding:.15rem .6rem;border-radius:.4rem">Groq AI gratis</span>
+        <span style="font-size:.7rem;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:var(--blue);padding:.15rem .6rem;border-radius:.4rem">Notion API</span>
+        <span style="font-size:.7rem;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:var(--blue);padding:.15rem .6rem;border-radius:.4rem">Express.js</span>
+        <span style="font-size:.7rem;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:var(--blue);padding:.15rem .6rem;border-radius:.4rem">Auto-start VBS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:1.25rem">
+    <div class="card card-purple">
+      <div class="card-icon">👥</div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+        <div class="card-title">Portafolio Clientes</div>
+        <span class="badge badge-active">4 clientes</span>
+      </div>
+      <div class="card-desc">Webs de Cocoway, Espumas de Lujo, Valeria Rivera Mindset y Asados ACME. Sincronización automática con GitHub Pages. Script de un clic para publicar cambios.</div>
+    </div>
+
+    <div class="card card-orange">
+      <div class="card-icon">🔍</div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+        <div class="card-title">Buscador de Clientes</div>
+        <span class="badge badge-dev">EN DESARROLLO</span>
+      </div>
+      <div class="card-desc">Agente Python que raspa Google Maps, Instagram y directorios colombianos buscando pymes con sitios web desactualizados, los puntúa 1-100 y genera propuestas automáticas.</div>
+    </div>
+
+    <div class="card" style="border-color:rgba(167,139,250,.2)">
+      <div class="card-icon">⚡</div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+        <div class="card-title">n8n Local</div>
+        <span class="badge badge-active">ACTIVO</span>
+      </div>
+      <div class="card-desc">Instancia local de n8n con 4 flujos activos para MilenaShoes. Corriendo en puerto 5678. Email automation JSON ya diseñado para Gmail + Groq + Notion.</div>
+    </div>
+  </div>
+
+  <div class="grid-4">
+    <div class="card" style="padding:1.25rem">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">🛠️</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:.3rem">10 Skills Claude</div>
+      <div style="font-size:.78rem;color:var(--sec)">Web builder, SEO, Instagram→web, facturación, Meta Ads, prospectos, Chrome extensions, n8n builder, auditoría negocio, meta-skill creator.</div>
+    </div>
+    <div class="card" style="padding:1.25rem">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">🌐</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:.3rem">Web Personal</div>
+      <div style="font-size:.78rem;color:var(--sec)">Portfolio web de Manuel Mina en construcción. Dos versiones de HTML listas.</div>
+    </div>
+    <div class="card" style="padding:1.25rem">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">📊</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:.3rem">Email Automation</div>
+      <div style="font-size:.78rem;color:var(--sec)">Flujo n8n diseñado: Gmail → Groq clasifica → Notion tarea → respuesta automática cada 2 horas. Listo para activar.</div>
+    </div>
+    <div class="card" style="padding:1.25rem">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">📁</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:.3rem">Carpetas Vacías</div>
+      <div style="font-size:.78rem;color:var(--sec);"><strong style="color:var(--orange)">SERVIDORES/</strong> y <strong style="color:var(--orange)">AGENTES/</strong> reservadas pero sin contenido. Oportunidad lista para usar.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIAGRAMA ACTUAL vs POTENCIAL -->
+<section id="diagrama">
+  <div class="section-tag tag-green">📐 Diagnóstico</div>
+  <h2>Actual <span class="grad-green">vs Potencial</span></h2>
+  <p class="section-sub">Qué tienes corriendo hoy comparado con lo que podrías implementar con el conocimiento y herramientas que ya tienes.</p>
+
+  <div class="diagram-wrap">
+    <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">🔴 Estado Actual</div>
+      <div></div>
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)">🚀 Potencial Implementable</div>
+    </div>
+
+    <div class="diagram-row">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">WhatsApp Bot</div>
+        <div class="diagram-text">Responde mensajes de <strong>MilenaShoes</strong> con IA. Un solo negocio. Corre solo en tu PC (si se apaga, muere).</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">WhatsApp SaaS Multi-Cliente</div>
+        <div class="diagram-text">El mismo bot configurado para <strong>10-50 negocios distintos</strong> en un servidor en la nube (Render/Railway). Cada cliente paga $150K-300K/mes.</div>
+      </div>
+    </div>
+
+    <div class="diagram-row">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">4 Clientes · Webs estáticas</div>
+        <div class="diagram-text">Páginas HTML en GitHub Pages. Sin panel de administración. Sin métricas. Sin facturación automática.</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">Agencia Digital con CRM</div>
+        <div class="diagram-text"><strong>Panel de cliente</strong> donde cada uno ve sus visitas, métricas y estado. Facturación automática. Onboarding en 24h con los skills de Claude.</div>
+      </div>
+    </div>
+
+    <div class="diagram-row">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">n8n Local · 4 flujos</div>
+        <div class="diagram-text">n8n corriendo solo en tu PC. Si cierras el portátil, los flujos se detienen. Solo conectado a MilenaShoes.</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">n8n Cloud · Hub de Automatización</div>
+        <div class="diagram-text">n8n en servidor (n8n.cloud o VPS) corriendo <strong>24/7</strong>. Un flujo por cada cliente: emails, reportes, leads, CRM — todo automático.</div>
+      </div>
+    </div>
+
+    <div class="diagram-row">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">Buscador de Clientes · Manual</div>
+        <div class="diagram-text">Agente Python en desarrollo. Requiere ejecución manual. Resultados guardados en SQLite local.</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">Pipeline Automático de Ventas</div>
+        <div class="diagram-text">El agente corre <strong>cada noche</strong> via Task Scheduler, llena un CRM (Notion o Airtable), y envía propuestas personalizadas via WhatsApp/email automáticamente.</div>
+      </div>
+    </div>
+
+    <div class="diagram-row">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">10 Skills · Uso interno</div>
+        <div class="diagram-text">Skills de Claude usados solo por ti para crear webs y auditorías. Sin monetización directa.</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">Producto Vendible · Kit Agencia</div>
+        <div class="diagram-text">Empaquetar los 10 skills como un <strong>"Kit de Agencia Digital"</strong> y venderlo en Gumroad/Hotmart. Precio: $50-150 USD. Mercado: freelancers y agencias latam.</div>
+      </div>
+    </div>
+
+    <div class="diagram-row">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">Credenciales en .txt plano</div>
+        <div class="diagram-text">API keys de Groq, Notion, GitHub, Google en archivo de texto sin cifrar.</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">Gestión Segura de Secretos</div>
+        <div class="diagram-text">Variables de entorno (.env) + <strong>Windows Credential Manager</strong> + rotación de tokens cada 90 días. Sin riesgo de exposición.</div>
+      </div>
+    </div>
+
+    <div class="diagram-row" style="margin-bottom:0">
+      <div class="diagram-current">
+        <div class="diagram-label label-current">Web Personal · Sin publicar</div>
+        <div class="diagram-text">Dos versiones de HTML listas pero sin dominio propio ni presencia real online.</div>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-future">
+        <div class="diagram-label label-future">Marca Personal Online Activa</div>
+        <div class="diagram-text">manuelmina.co publicado y posicionado con <strong>blog de automatización</strong>, casos de éxito de clientes y formulario de contacto conectado a WhatsApp/n8n.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MEJORAS POR PROYECTO -->
+<section id="mejoras">
+  <div class="section-tag tag-gold">⚡ Mejoras</div>
+  <h2>Lo que puedes <span class="grad-gold">mejorar ya</span></h2>
+  <p class="section-sub">Ordenadas por impacto en tu negocio. Las de impacto ALTO generan dinero o ahorran tiempo inmediatamente.</p>
+
+  <div class="grid-2">
+    <div>
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">🏪 MILENASHOES</div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">💳</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Agregar pasarela de pago real</div>
+          <div class="mejora-desc">Wompi o PayU Colombia permiten pago con tarjeta/PSE directamente en la web. Hoy solo aceptas Nequi manual — perdes ventas de personas que no quieren escribir.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">🛒</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Carrito de compras con inventario</div>
+          <div class="mejora-desc">Agregar carrito al catálogo con stock en tiempo real desde Google Sheets. El bot de WhatsApp puede actualizar el inventario con comandos de voz de admin.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">🔁</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Retargeting automático por WhatsApp</div>
+          <div class="mejora-desc">n8n puede enviar mensaje a quien preguntó precio pero no compró (24h después). "Hola, sigues interesada en los tenis? Quedan 2 pares." Fácil de implementar con flujo nuevo.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">📊</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Dashboard de ventas diario automático</div>
+          <div class="mejora-desc">El flujo de ventas ya existe. Agregar reporte diario a las 8pm vía WhatsApp: ventas del día, total COP, productos más vendidos. 2h de trabajo en n8n.</div>
+          <span class="mejora-impact impact-media">IMPACTO MEDIO</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">🤖 AGENTE WHATSAPP</div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">☁️</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Moverlo a servidor en la nube</div>
+          <div class="mejora-desc">Railway.app o Render.com — $7 USD/mes. El bot funcionaría 24/7 sin depender de que tu PC esté encendida. Hoy si se va la luz o cierras el equipo, el bot muere.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">🏢</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Modo multi-negocio</div>
+          <div class="mejora-desc">El server.js ya tiene toda la lógica. Agregar un archivo config por cliente permite que el mismo código sirva a 10 negocios distintos, cada uno con su propio contexto de IA.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">📧</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Activar email automation (ya está listo)</div>
+          <div class="mejora-desc">Tienes el JSON de n8n_email_automation.json diseñado. Solo falta importarlo en n8n y conectar Gmail. Clasifica emails con IA y crea tareas en Notion automáticamente.</div>
+          <span class="mejora-impact impact-media">IMPACTO MEDIO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">📱</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Panel web de administración</div>
+          <div class="mejora-desc">El servidor ya expone el puerto 3001. Agregar una interfaz HTML que muestre conversaciones activas, estadísticas de mensajes y controles del bot sin tocar código.</div>
+          <span class="mejora-impact impact-media">IMPACTO MEDIO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin:2rem 0"></div>
+
+  <div class="grid-2">
+    <div>
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">👥 CLIENTES</div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">📋</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Portal de cliente con métricas</div>
+          <div class="mejora-desc">Una página HTML por cliente mostrando visitas (Google Analytics), último deploy, estado del sitio y formulario para pedir cambios. Profesionaliza tu servicio al 100%.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">🔄</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Sync automático con Task Scheduler</div>
+          <div class="mejora-desc">Hoy el sync es manual (doble clic). Con 1 comando en Task Scheduler puedes hacer que sincronice cada hora automáticamente sin intervención.</div>
+          <span class="mejora-impact impact-baja">IMPACTO BAJO</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">🔍 BUSCADOR DE CLIENTES</div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">⏰</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Automatizar ejecución nocturna</div>
+          <div class="mejora-desc">Task Scheduler a las 2am: el agente busca 20 negocios, los puntúa, y al despertar tienes una lista de prospectos calientes listos para contactar.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+
+      <div class="mejora-item">
+        <div class="mejora-icon">📩</div>
+        <div class="mejora-body">
+          <div class="mejora-title">Envío automático de propuestas</div>
+          <div class="mejora-desc">El agente ya genera la propuesta. Conectar con WhatsApp bot o email para enviarla automáticamente a los prospectos top 3 del día.</div>
+          <span class="mejora-impact impact-alta">IMPACTO ALTO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag tag-purple">🛠️ Skills Claude</div>
+  <h2>Tus <span class="grad-blue">10 herramientas IA</span></h2>
+  <p class="section-sub">Cada skill es un servicio vendible. Cómo puedes monetizar lo que ya creaste.</p>
+
+  <div class="skills-grid">
+    <div class="skill-row">
+      <div class="skill-num">01</div>
+      <div class="skill-body">
+        <div class="skill-name">Web Scrolling Builder</div>
+        <div class="skill-use">Genera webs completas de negocios en minutos</div>
+        <div class="skill-actions">
+          <span class="skill-action">Vender como servicio</span>
+          <span class="skill-action">$500K-1M por web</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">02</div>
+      <div class="skill-body">
+        <div class="skill-name">Instagram → Web</div>
+        <div class="skill-use">Convierte perfil de IG en sitio web profesional</div>
+        <div class="skill-actions">
+          <span class="skill-action">Servicio express 24h</span>
+          <span class="skill-action">Gran diferenciador</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">03</div>
+      <div class="skill-body">
+        <div class="skill-name">Auditoría SEO</div>
+        <div class="skill-use">Análisis completo con score y plan de mejoras</div>
+        <div class="skill-actions">
+          <span class="skill-action">Lead magnet</span>
+          <span class="skill-action">Upsell de servicios</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">04</div>
+      <div class="skill-body">
+        <div class="skill-name">Dashboard Facturas</div>
+        <div class="skill-use">Analiza ingresos, gastos, IVA y proyecciones</div>
+        <div class="skill-actions">
+          <span class="skill-action">Contadores y PYMEs</span>
+          <span class="skill-action">$200K/sesión</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">05</div>
+      <div class="skill-body">
+        <div class="skill-name">Automatizaciones n8n</div>
+        <div class="skill-use">Diseña y despliega flujos de n8n con IA</div>
+        <div class="skill-actions">
+          <span class="skill-action">Setup para clientes</span>
+          <span class="skill-action">$300K-800K setup</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">06</div>
+      <div class="skill-body">
+        <div class="skill-name">Prospección</div>
+        <div class="skill-use">Encuentra y analiza negocios objetivo</div>
+        <div class="skill-actions">
+          <span class="skill-action">Pipeline de ventas</span>
+          <span class="skill-action">Uso interno diario</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">07</div>
+      <div class="skill-body">
+        <div class="skill-name">Auditoría Negocio Digital</div>
+        <div class="skill-use">Analiza web, IG, embudo de ventas y competidores</div>
+        <div class="skill-actions">
+          <span class="skill-action">Consultoría premium</span>
+          <span class="skill-action">$500K-1M/auditoría</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">08</div>
+      <div class="skill-body">
+        <div class="skill-name">Auditoría Meta Ads</div>
+        <div class="skill-use">Analiza campañas de FB/IG y sugiere mejoras</div>
+        <div class="skill-actions">
+          <span class="skill-action">Negocios con ads</span>
+          <span class="skill-action">$400K/auditoría</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">09</div>
+      <div class="skill-body">
+        <div class="skill-name">Chrome Extension Builder</div>
+        <div class="skill-use">Genera extensiones de Chrome desde descripción</div>
+        <div class="skill-actions">
+          <span class="skill-action">Nicho técnico</span>
+          <span class="skill-action">Vender en Chrome Store</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-num">10</div>
+      <div class="skill-body">
+        <div class="skill-name">Meta-Skill Creator</div>
+        <div class="skill-use">Crea nuevos skills de Claude automáticamente</div>
+        <div class="skill-actions">
+          <span class="skill-action">Uso interno</span>
+          <span class="skill-action">Escalabilidad infinita</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IDEAS DE NEGOCIO -->
+<section id="negocios">
+  <div class="section-tag tag-orange">💡 Oportunidades</div>
+  <h2>Ideas de negocio <span class="grad-gold">con lo que ya tienes</span></h2>
+  <p class="section-sub">No necesitas construir nada nuevo. Estas ideas usan el código, skills y sistemas que ya creaste.</p>
+
+  <div class="idea-card" style="border-color:rgba(96,165,250,.25);background:linear-gradient(145deg,rgba(96,165,250,.04),var(--sur))">
+    <div class="idea-num">1</div>
+    <div class="idea-tag" style="background:rgba(96,165,250,.15);color:var(--blue);border:1px solid rgba(96,165,250,.3)">💡 Mayor potencial</div>
+    <div class="idea-title">WhatsApp Bot como Servicio <span class="grad-blue">(SaaS)</span></div>
+    <div class="idea-desc">Tu agente de WhatsApp ya funciona para MilenaShoes. La misma tecnología puede venderse como suscripción mensual a cualquier tienda pequeña: restaurantes, peluquerías, tiendas de ropa, farmacias. El bot responde preguntas frecuentes, envía catálogos, registra pedidos y notifica al dueño. <strong>Sin código extra — solo configuración por cliente.</strong></div>
+    <div class="idea-metrics">
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--green)">$200K</div>
+        <div class="idea-metric-l">COP/mes por cliente</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--blue)">20</div>
+        <div class="idea-metric-l">Clientes meta</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--gold)">$4M</div>
+        <div class="idea-metric-l">COP/mes posibles</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--purple)">$7 USD</div>
+        <div class="idea-metric-l">Costo servidor/mes</div>
+      </div>
+    </div>
+    <ul class="idea-steps">
+      <li>Subir el servidor a Railway.app (1 día de trabajo)</li>
+      <li>Crear un formulario de onboarding: nombre negocio, catálogo, número admin</li>
+      <li>Cobrar $200K COP/mes por "bot inteligente de WhatsApp"</li>
+      <li>Usar el buscador de clientes para encontrar 5 prospectos por semana</li>
+      <li>Escalar a 20 clientes = $4M COP/mes con costo fijo de $28 USD</li>
+    </ul>
+  </div>
+
+  <div class="idea-card" style="border-color:rgba(52,211,153,.2);background:linear-gradient(145deg,rgba(52,211,153,.03),var(--sur))">
+    <div class="idea-num">2</div>
+    <div class="idea-tag" style="background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.3)">🌐 Alta demanda</div>
+    <div class="idea-title">Agencia de Webs Express <span class="grad-green">en 24h</span></div>
+    <div class="idea-desc">Con tus skills de Claude puedes crear una web profesional en 2-3 horas. La propuesta de valor es brutal: <strong>"Tu negocio online en 24 horas"</strong>. Muchos freelancers cobran $2-5M y tardan semanas. Tú puedes cobrar $500K y entregar el mismo día. El buscador de clientes te trae prospectos calificados diariamente.</div>
+    <div class="idea-metrics">
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--green)">$500K</div>
+        <div class="idea-metric-l">COP por web</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--blue)">10</div>
+        <div class="idea-metric-l">Webs al mes posibles</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--gold)">$5M</div>
+        <div class="idea-metric-l">COP/mes potencial</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--purple)">3h</div>
+        <div class="idea-metric-l">Tiempo de entrega</div>
+      </div>
+    </div>
+    <ul class="idea-steps">
+      <li>El buscador detecta negocios sin web o con web mala cada noche</li>
+      <li>Al despertar tienes 5 prospectos — les envías una propuesta por WhatsApp</li>
+      <li>Usa el skill Instagram→Web: solo necesitas su handle de IG</li>
+      <li>Ofrece mantenimiento mensual $150K: actualizaciones, WhatsApp bot incluido</li>
+      <li>Plan Básico $500K · Plan Full $1.5M (ya tienes el modelo de Cocoway)</li>
+    </ul>
+  </div>
+
+  <div class="idea-card" style="border-color:rgba(244,201,122,.2);background:linear-gradient(145deg,rgba(244,201,122,.03),var(--sur))">
+    <div class="idea-num">3</div>
+    <div class="idea-tag" style="background:rgba(244,201,122,.15);color:var(--gold);border:1px solid rgba(244,201,122,.3)">📦 Producto digital</div>
+    <div class="idea-title">Kit de Agencia Digital IA <span class="grad-gold">para Latinoamérica</span></div>
+    <div class="idea-desc">Tus 10 skills de Claude son un sistema completo para operar una agencia digital. Empaquétalos como un producto vendible en Gumroad o Hotmart: <strong>"El sistema completo para crear y automatizar negocios digitales en Colombia"</strong>. Incluye web builder, auditoría SEO, prospectos, Meta Ads, n8n, WhatsApp bot. Un freelancer que compra esto puede facturar el doble.</div>
+    <div class="idea-metrics">
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--gold)">$97 USD</div>
+        <div class="idea-metric-l">Precio del kit</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--blue)">100</div>
+        <div class="idea-metric-l">Ventas meta mes 1</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--green)">$9.7K</div>
+        <div class="idea-metric-l">USD mes 1</div>
+      </div>
+      <div class="idea-metric">
+        <div class="idea-metric-v" style="color:var(--purple)">0</div>
+        <div class="idea-metric-l">Costo adicional</div>
+      </div>
+    </div>
+    <ul class="idea-steps">
+      <li>Grabar 10 videos cortos mostrando cada skill en acción (TikTok + IG)</li>
+      <li>Crear landing page con el skill de web builder (tienes todo lo necesario)</li>
+      <li>Publicar en Gumroad — cero comisiones hasta $10K</li>
+      <li>Estrategia de contenido: "Cree esta web en 3 minutos con IA" — viraliza solo</li>
+      <li>Upsell: mentoría grupal mensual $50 USD adicional</li>
+    </ul>
+  </div>
+
+  <div class="grid-2" style="margin-top:1.5rem">
+    <div class="idea-card" style="margin-bottom:0">
+      <div class="idea-num">4</div>
+      <div class="idea-tag" style="background:rgba(167,139,250,.15);color:var(--purple);border:1px solid rgba(167,139,250,.3)">🤝 Consultoría</div>
+      <div class="idea-title" style="font-size:1.5rem">Consultoría de <span class="grad-blue">Automatización</span></div>
+      <div class="idea-desc" style="margin-bottom:1rem">Muchas empresas en Colombia quieren automatizar pero no saben cómo. Tú puedes hacer un diagnóstico digital (skill 07) + implementar n8n + WhatsApp bot en 1 semana. Precio: $2-5M COP por proyecto.</div>
+      <ul class="idea-steps">
+        <li>Diagnóstico digital con skill de auditoría negocio ($500K)</li>
+        <li>Implementación n8n + WhatsApp bot ($2-3M)</li>
+        <li>Mantenimiento mensual ($300-500K)</li>
+        <li>Target: empresas medias, clínicas, restaurantes, consultorios</li>
+      </ul>
+    </div>
+
+    <div class="idea-card" style="margin-bottom:0">
+      <div class="idea-num">5</div>
+      <div class="idea-tag" style="background:rgba(251,146,60,.15);color:var(--orange);border:1px solid rgba(251,146,60,.3)">🏪 E-commerce</div>
+      <div class="idea-title" style="font-size:1.5rem">Escalar <span class="grad-gold">MilenaShoes</span></div>
+      <div class="idea-desc" style="margin-bottom:1rem">MilenaShoes ya tiene infraestructura completa. Con pasarela de pago + carrito + retargeting automático puede duplicar ventas sin esfuerzo extra. También puedes replicar el modelo para otras tiendas (zapatería 2, ropa, accesorios).</div>
+      <ul class="idea-steps">
+        <li>Integrar Wompi (30 min de trabajo)</li>
+        <li>Retargeting automático via n8n (2h)</li>
+        <li>Replicar para 2-3 tiendas más como modelo</li>
+        <li>Cobrar % de ventas generadas (10-15%)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-tag tag-blue">🗺️ Plan de Acción</div>
+  <h2>Roadmap <span class="grad-blue">próximos 90 días</span></h2>
+  <p class="section-sub">Qué implementar primero para maximizar resultados con el mínimo esfuerzo.</p>
+
+  <div class="roadmap">
+    <div class="roadmap-item">
+      <div class="roadmap-date">
+        <div class="roadmap-date-label">Semana 1-2</div>
+        <div class="roadmap-date-sub">Mayo 2026</div>
+      </div>
+      <div class="roadmap-line">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-line-v"></div>
+      </div>
+      <div class="roadmap-content">
+        <h4>🔧 Infraestructura y seguridad</h4>
+        <p>Mover credenciales a variables de entorno. Activar email automation (ya tienes el JSON). Subir WhatsApp bot a Railway. Activar sync automático de clientes con Task Scheduler.</p>
+        <div class="roadmap-tasks">
+          <span class="roadmap-task">.env para API keys</span>
+          <span class="roadmap-task">Railway deploy</span>
+          <span class="roadmap-task">Email n8n activo</span>
+          <span class="roadmap-task">Task Scheduler sync</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-date">
+        <div class="roadmap-date-label">Semana 3-4</div>
+        <div class="roadmap-date-sub">Mayo 2026</div>
+      </div>
+      <div class="roadmap-line">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-line-v"></div>
+      </div>
+      <div class="roadmap-content">
+        <h4>💰 Monetización rápida</h4>
+        <p>Publicar web personal. Integrar Wompi en MilenaShoes. Activar buscador de clientes nocturno. Empezar a vender webs con el skill Instagram→Web.</p>
+        <div class="roadmap-tasks">
+          <span class="roadmap-task">manuelmina.co live</span>
+          <span class="roadmap-task">Wompi MilenaShoes</span>
+          <span class="roadmap-task">5 prospectos/semana</span>
+          <span class="roadmap-task">Primera web vendida</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-date">
+        <div class="roadmap-date-label">Mes 2</div>
+        <div class="roadmap-date-sub">Junio 2026</div>
+      </div>
+      <div class="roadmap-line">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-line-v"></div>
+      </div>
+      <div class="roadmap-content">
+        <h4>📈 Escalar clientes</h4>
+        <p>Configurar bot multi-cliente en Railway. Conseguir 5 primeros suscriptores del bot ($1M COP/mes). Cerrar 5 webs nuevas. Preparar el kit de skills para venta.</p>
+        <div class="roadmap-tasks">
+          <span class="roadmap-task">5 clientes bot</span>
+          <span class="roadmap-task">10 webs entregadas</span>
+          <span class="roadmap-task">Kit en Gumroad</span>
+          <span class="roadmap-task">Retargeting MilenaShoes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-item" style="padding-bottom:0">
+      <div class="roadmap-date">
+        <div class="roadmap-date-label">Mes 3</div>
+        <div class="roadmap-date-sub">Julio 2026</div>
+      </div>
+      <div class="roadmap-line">
+        <div class="roadmap-dot"></div>
+      </div>
+      <div class="roadmap-content">
+        <h4>🚀 Sistema completo operando</h4>
+        <p>20 clientes del bot ($4M/mes), 10+ webs al mes ($5M/mes), kit vendiendo pasivamente. n8n manejando todo automáticamente. Tú supervisas, el sistema trabaja.</p>
+        <div class="roadmap-tasks">
+          <span class="roadmap-task">$9M+ COP/mes potencial</span>
+          <span class="roadmap-task">20 clientes bot</span>
+          <span class="roadmap-task">Ingresos pasivos kit</span>
+          <span class="roadmap-task">Sistema 90% automático</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEGURIDAD -->
+<section id="seguridad">
+  <div class="section-tag tag-orange">🔒 Seguridad</div>
+  <h2>Puntos <span style="background:linear-gradient(135deg,var(--orange),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">críticos a resolver</span></h2>
+  <p class="section-sub">Tu sistema es poderoso pero tiene vulnerabilidades que deben resolverse antes de escalar.</p>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-body">
+      <div class="alert-title">API Keys en texto plano (CRÍTICO)</div>
+      <div class="alert-desc">CREDENCIALES_AGENTE_COLOMBIA.txt contiene Groq, Notion, Google Cloud y GitHub tokens en un archivo de texto sin cifrar en OneDrive. Si alguien accede a tu cuenta de Microsoft, tiene todo. <strong>Solución:</strong> Mover a .env con dotenv + Windows Credential Manager. Tomar 1 hora.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-body">
+      <div class="alert-title">Token GitHub en script de PowerShell (CRÍTICO)</div>
+      <div class="alert-desc">Un token de GitHub estaba expuesto en sync-clientes.ps1 (ya se eliminó de ese archivo). Verifica que no esté en otros archivos del proyecto. <strong>Solución:</strong> Revocar y regenerar en github.com/settings/tokens.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-gold">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <div class="alert-title">Google Service Account JSON expuesta</div>
+      <div class="alert-desc">El archivo n8n-server-495201-7bc018352e59.json (credenciales de Google Cloud) está en la raíz de OneDrive. Si se sube accidentalmente a un repo público, terceros acceden a tu Google Sheets. <strong>Solución:</strong> Moverlo a carpeta fuera de OneDrive + agregar al .gitignore global.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-gold">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-body">
+      <div class="alert-title">Bot depende del PC encendido</div>
+      <div class="alert-desc">WhatsApp bot y n8n mueren si cierras el portátil o hay un corte de luz. MilenaShoes pierde ventas automáticas ese tiempo. <strong>Solución:</strong> Railway.app a $7 USD/mes — 5 min de setup.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon">✅</div>
+    <div class="alert-body">
+      <div class="alert-title">Puntos fuertes de seguridad</div>
+      <div class="alert-desc">✓ Windows Credential Manager para GitHub sync · ✓ Números de admin whitelisteados en WhatsApp bot · ✓ .gitignore en repo de clientes · ✓ GitHub Pages sin backend expuesto</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;margin-bottom:.5rem;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Manuel Mina · Sistema IA</div>
+  <div>Informe generado el <strong>7 de Mayo 2026</strong> · Carpeta IA · Cali, Colombia</div>
+  <div style="margin-top:.5rem">manuelmyna97@gmail.com · WhatsApp <strong>3145569567</strong></div>
+</footer>
+
+<script>
+const sections = document.querySelectorAll('section[id], .hero');
+const dots = document.querySelectorAll('.toc-dot');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      dots.forEach(d => d.classList.remove('active'));
+      const idx = Array.from(sections).indexOf(e.target);
+      if(dots[idx]) dots[idx].classList.add('active');
+    }
+  });
+}, {threshold:.3});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
