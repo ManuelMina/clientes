@@ -11,543 +11,436 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --marfil: #F9F6F1;
-      --vino: #7B2D42;
-      --vino-light: #A84560;
-      --vino-dark: #5A1F30;
-      --dorado: #C4A882;
-      --texto: #2C1A1A;
-      --texto-medio: #6B4E4E;
-      --borde: #EDE8E0;
-      --blanco: #FFFFFF;
-      --whatsapp: #25D366;
-      --nav-h: 72px;
+      --bg:          #F8F8F5;
+      --azul:        #1A2E4A;
+      --azul-light:  #28487A;
+      --azul-dark:   #0F1D30;
+      --dorado:      #C4983A;
+      --dorado-soft: rgba(196,152,58,.12);
+      --texto:       #0F1520;
+      --texto-medio: #4A5468;
+      --borde:       #DCE0E8;
+      --blanco:      #FFFFFF;
+      --whatsapp:    #25D366;
+      --nav-h:       80px;
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Lato', sans-serif;
-      background: var(--marfil);
-      color: var(--texto);
-      overflow-x: hidden;
-    }
-
-    /* ─── SCROLLBAR ─── */
+    body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--texto); overflow-x: hidden; }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--marfil); }
-    ::-webkit-scrollbar-thumb { background: var(--vino); border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--azul); border-radius: 3px; }
 
-    /* ─── NAVBAR ─── */
+    /* ════════════════ NAVBAR ════════════════ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       height: var(--nav-h);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px;
-      background: rgba(249,246,241,0.92);
-      backdrop-filter: blur(12px);
+      padding: 0 44px;
+      background: rgba(248,248,245,.94);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--borde);
       transition: box-shadow .3s;
     }
-    nav.scrolled { box-shadow: 0 2px 20px rgba(123,45,66,.12); }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(26,46,74,.1); }
 
-    .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none;
-    }
-    .nav-logo img { height: 46px; width: 46px; border-radius: 50%; object-fit: cover; }
-    .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--vino); line-height: 1.2; }
-    .nav-logo-sub { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo img { height: 54px; width: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--dorado); }
+    .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--azul); line-height: 1.15; }
+    .nav-logo-sub { font-size: 0.67rem; font-weight: 300; letter-spacing: 2.5px; text-transform: uppercase; color: var(--texto-medio); }
 
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 34px; list-style: none; }
     .nav-links a {
       text-decoration: none; color: var(--texto-medio);
-      font-size: 0.82rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase;
-      transition: color .2s;
-      position: relative;
+      font-size: 0.8rem; letter-spacing: 1.2px; text-transform: uppercase;
+      transition: color .2s; position: relative;
     }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
-      background: var(--vino); transform: scaleX(0); transition: transform .25s;
-    }
-    .nav-links a:hover { color: var(--vino); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1.5px; background: var(--dorado); transform: scaleX(0); transition: transform .25s; }
+    .nav-links a:hover { color: var(--azul); }
     .nav-links a:hover::after { transform: scaleX(1); }
 
-    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
 
     .btn-cart {
       position: relative; background: none; border: none; cursor: pointer;
-      color: var(--texto); padding: 8px; border-radius: 8px;
-      transition: background .2s, color .2s;
+      color: var(--texto-medio); padding: 8px; border-radius: 8px; transition: background .2s, color .2s;
     }
-    .btn-cart:hover { background: var(--borde); color: var(--vino); }
+    .btn-cart:hover { background: var(--borde); color: var(--azul); }
     .btn-cart svg { display: block; width: 22px; height: 22px; }
     .cart-badge {
-      position: absolute; top: 2px; right: 2px;
-      background: var(--vino); color: #fff;
-      font-size: 0.6rem; font-weight: 700;
-      width: 16px; height: 16px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      display: none;
+      position: absolute; top: 1px; right: 1px;
+      background: var(--dorado); color: #fff;
+      font-size: 0.58rem; font-weight: 700;
+      width: 17px; height: 17px; border-radius: 50%;
+      display: none; align-items: center; justify-content: center;
     }
 
     .btn-wa-nav {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--vino); color: #fff;
+      display: flex; align-items: center; gap: 7px;
+      background: var(--azul); color: #fff;
       border: none; border-radius: 24px;
-      padding: 8px 18px; font-size: 0.8rem; font-weight: 700;
+      padding: 9px 20px; font-size: 0.78rem; font-weight: 700;
       letter-spacing: 0.5px; text-transform: uppercase;
       cursor: pointer; text-decoration: none;
       transition: background .2s, transform .2s;
     }
-    .btn-wa-nav:hover { background: var(--vino-light); transform: translateY(-1px); }
-    .btn-wa-nav svg { width: 16px; height: 16px; fill: #fff; }
+    .btn-wa-nav:hover { background: var(--azul-light); transform: translateY(-1px); }
+    .btn-wa-nav svg { width: 15px; height: 15px; fill: #fff; }
 
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--texto); border-radius: 2px; transition: .3s; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--texto); border-radius: 2px; }
 
-    /* ─── HERO CAROUSEL ─── */
+    .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--blanco); z-index: 999; padding: 20px 24px; flex-direction: column; gap: 4px; box-shadow: 0 8px 32px rgba(26,46,74,.1); border-bottom: 1px solid var(--borde); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { text-decoration: none; color: var(--texto-medio); font-size: 0.88rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid var(--borde); transition: color .2s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--azul); }
+
+    /* ════════════════ HERO BANNER INFINITO ════════════════ */
     .hero {
-      margin-top: var(--nav-h);
-      position: relative; overflow: hidden;
-      height: calc(100vh - var(--nav-h));
-      min-height: 500px;
+      margin-top: var(--nav-h); position: relative; overflow: hidden;
+      height: calc(100vh - var(--nav-h)); min-height: 520px;
     }
-    .hero-slides { display: flex; height: 100%; transition: transform .8s cubic-bezier(.77,0,.175,1); }
-    .hero-slide {
-      min-width: 100%; height: 100%;
-      position: relative; overflow: hidden;
+    .hero-track {
+      display: flex; height: 100%;
+      transition: transform .75s cubic-bezier(.77,0,.175,1);
     }
-    .hero-slide img {
-      width: 100%; height: 100%; object-fit: cover;
-      transform: scale(1.05); transition: transform 6s ease;
-    }
-    .hero-slide.active img { transform: scale(1); }
+    .hero-track.no-transition { transition: none; }
+    .hero-slide { min-width: 100%; height: 100%; position: relative; overflow: hidden; flex-shrink: 0; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(90,31,48,.55) 0%, rgba(44,26,26,.2) 60%, transparent 100%);
+      background: linear-gradient(120deg, rgba(15,29,48,.65) 0%, rgba(26,46,74,.25) 55%, transparent 100%);
       display: flex; align-items: center; padding: 0 8%;
     }
-    .hero-content { color: #fff; max-width: 600px; }
-    .hero-eyebrow {
-      font-family: 'Lato', sans-serif; font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 4px; text-transform: uppercase; color: var(--dorado);
-      margin-bottom: 16px; opacity: 0; transform: translateY(20px);
-      transition: opacity .8s .3s, transform .8s .3s;
-    }
-    .hero-slide.active .hero-eyebrow { opacity: 1; transform: translateY(0); }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 300; line-height: 1.15; margin-bottom: 20px;
-      opacity: 0; transform: translateY(30px);
-      transition: opacity .8s .5s, transform .8s .5s;
-    }
-    .hero-slide.active .hero-title { opacity: 1; transform: translateY(0); }
+    .hero-content { color: #fff; max-width: 580px; }
+    .hero-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 16px; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 300; line-height: 1.15; margin-bottom: 18px; }
     .hero-title em { font-style: italic; color: var(--dorado); }
-    .hero-sub {
-      font-size: 1rem; font-weight: 300; line-height: 1.6; margin-bottom: 32px;
-      opacity: 0; transform: translateY(20px);
-      transition: opacity .8s .7s, transform .8s .7s;
-    }
-    .hero-slide.active .hero-sub { opacity: 1; transform: translateY(0); }
-    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; transition: opacity .8s .9s; }
-    .hero-slide.active .hero-ctas { opacity: 1; }
+    .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.6; margin-bottom: 32px; color: rgba(255,255,255,.88); }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--vino); color: #fff;
+      background: var(--dorado); color: #fff;
       border: none; border-radius: 4px;
-      padding: 14px 28px; font-size: 0.85rem; font-weight: 700;
+      padding: 14px 28px; font-size: 0.84rem; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
       cursor: pointer; text-decoration: none;
       transition: background .25s, transform .25s, box-shadow .25s;
     }
-    .btn-primary:hover { background: var(--vino-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,45,66,.35); }
+    .btn-primary:hover { background: #b5882e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,152,58,.4); }
 
     .btn-outline {
       display: inline-flex; align-items: center; gap: 8px;
       background: transparent; color: #fff;
-      border: 1.5px solid rgba(255,255,255,.7);
+      border: 1.5px solid rgba(255,255,255,.65);
       border-radius: 4px; padding: 13px 28px;
-      font-size: 0.85rem; font-weight: 400;
+      font-size: 0.84rem; font-weight: 400;
       letter-spacing: 1px; text-transform: uppercase;
       cursor: pointer; text-decoration: none;
       transition: background .25s, border-color .25s;
     }
     .btn-outline:hover { background: rgba(255,255,255,.12); border-color: #fff; }
 
-    .hero-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
-    .hero-dot {
-      width: 8px; height: 8px; border-radius: 50%; border: none;
-      background: rgba(255,255,255,.4); cursor: pointer; transition: background .3s, width .3s;
-    }
-    .hero-dot.active { background: #fff; width: 24px; border-radius: 4px; }
+    .hero-dots { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); display: flex; gap: 9px; }
+    .hero-dot { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,.4); cursor: pointer; transition: background .3s, width .3s; }
+    .hero-dot.active { background: var(--dorado); width: 24px; border-radius: 4px; }
 
-    .hero-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; }
-    .hero-arrow {
-      pointer-events: all; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
-      color: #fff; width: 44px; height: 44px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background .2s; backdrop-filter: blur(4px);
-    }
-    .hero-arrow:hover { background: rgba(255,255,255,.3); }
-
-    /* ─── SECTION BASE ─── */
-    section { padding: 80px 40px; max-width: 1280px; margin: 0 auto; }
-    .section-full { max-width: 100%; padding-left: 0; padding-right: 0; }
-
-    .section-label {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--vino); margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 300; line-height: 1.2; color: var(--texto);
-    }
-    .section-title em { font-style: italic; color: var(--vino); }
-    .section-divider {
-      width: 48px; height: 2px; background: var(--vino); margin: 20px 0 32px;
-    }
+    /* ════════════════ SECCIÓN BASE ════════════════ */
+    section { padding: 84px 44px; max-width: 1280px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 10px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.2; color: var(--texto); }
+    .section-title em { font-style: italic; color: var(--azul); }
+    .section-divider { width: 44px; height: 2px; background: var(--dorado); margin: 18px 0 28px; }
     .section-sub { font-size: 1rem; color: var(--texto-medio); line-height: 1.7; max-width: 560px; }
 
-    /* ─── ABOUT ─── */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    }
-    .about-img-wrap {
-      position: relative;
-    }
-    .about-img-wrap img {
-      width: 100%; border-radius: 4px; object-fit: cover;
-      box-shadow: 16px 20px 48px rgba(123,45,66,.12);
-    }
-    .about-badge {
-      position: absolute; bottom: -20px; right: -20px;
-      background: var(--vino); color: #fff;
-      padding: 20px 24px; border-radius: 4px; text-align: center;
-      box-shadow: 0 8px 32px rgba(123,45,66,.3);
-    }
-    .about-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; line-height: 1; }
-    .about-badge-txt { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; opacity: .85; }
-
-    .about-stats { display: flex; gap: 32px; margin-top: 40px; }
-    .stat { text-align: center; }
-    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--vino); }
-    .stat-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); margin-top: 4px; }
-
-    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-    .tag {
-      background: var(--borde); color: var(--vino);
-      padding: 6px 14px; border-radius: 20px;
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;
-    }
-
-    /* ─── BRAND BELT ─── */
-    .brand-belt-wrap {
-      background: var(--blanco); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde);
-      padding: 32px 0; overflow: hidden;
-    }
-    .brand-belt-label {
-      text-align: center; font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 4px; text-transform: uppercase; color: var(--texto-medio);
-      margin-bottom: 24px;
-    }
-    .brand-track { display: flex; gap: 60px; width: max-content; animation: beltSlide 28s linear infinite; }
-    .brand-track img {
-      height: 36px; width: auto; opacity: .45;
-      filter: grayscale(1); transition: opacity .3s, filter .3s;
-      flex-shrink: 0;
-    }
-    .brand-track img:hover { opacity: .85; filter: grayscale(0); }
-    @keyframes beltSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* ─── PRESENTACIONES ─── */
-    .pres-intro { text-align: center; margin-bottom: 56px; }
-    .pres-intro .section-divider { margin-left: auto; margin-right: auto; }
-    .pres-intro .section-sub { max-width: 640px; margin: 0 auto; text-align: center; }
-
-    .pres-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .pres-card {
-      background: var(--blanco); border-radius: 8px; overflow: hidden;
-      box-shadow: 0 4px 24px rgba(44,26,26,.07);
-      transition: transform .35s, box-shadow .35s;
-      border: 1px solid var(--borde);
-    }
-    .pres-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(123,45,66,.15); }
-    .pres-card-img { height: 320px; overflow: hidden; }
-    .pres-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-    .pres-card:hover .pres-card-img img { transform: scale(1.04); }
-    .pres-card-body { padding: 28px 32px 32px; }
-    .pres-card-icon { font-size: 1.4rem; margin-bottom: 12px; }
-    .pres-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--texto); margin-bottom: 8px; }
-    .pres-card-desc { font-size: 0.9rem; color: var(--texto-medio); line-height: 1.6; margin-bottom: 20px; }
-    .pres-sizes { display: flex; gap: 10px; flex-wrap: wrap; }
-    .pres-size {
-      background: var(--marfil); border: 1.5px solid var(--vino);
-      color: var(--vino); padding: 6px 16px; border-radius: 20px;
-      font-size: 0.8rem; font-weight: 700;
-    }
-    .pres-note {
-      background: rgba(196,168,130,.15); border-left: 3px solid var(--dorado);
-      padding: 16px 20px; border-radius: 0 6px 6px 0; margin-top: 32px;
-      font-size: 0.88rem; color: var(--texto-medio); line-height: 1.6;
-    }
-
-    /* ─── MÉTODOS DE PAGO ─── */
-    .pagos-wrap { background: var(--vino); padding: 72px 40px; text-align: center; }
-    .pagos-inner { max-width: 1000px; margin: 0 auto; }
-    .pagos-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; color: #fff; margin-bottom: 8px; }
-    .pagos-sub { color: rgba(255,255,255,.75); font-size: 0.92rem; margin-bottom: 40px; }
-    .pagos-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 32px; }
-    .pago-chip {
-      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
-      color: #fff; padding: 12px 24px; border-radius: 40px;
-      font-size: 0.88rem; font-weight: 700; letter-spacing: 0.5px;
-      backdrop-filter: blur(6px);
-    }
-    .pago-warning {
-      background: rgba(255,255,255,.1); border-radius: 8px;
-      padding: 14px 24px; display: inline-block;
-      font-size: 0.82rem; color: rgba(255,255,255,.85);
-      border: 1px solid rgba(255,255,255,.2);
-    }
-    .pago-warning strong { color: #fff; }
-
-    /* ─── POPULARES ─── */
-    .populares-wrap { background: var(--marfil); overflow: hidden; padding: 80px 0; }
-    .populares-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
-    .pop-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+    /* ════════════════ LO MÁS PEDIDO (después del banner) ════════════════ */
+    .populares-wrap { background: var(--azul-dark); overflow: hidden; padding: 72px 0; }
+    .populares-inner { max-width: 1280px; margin: 0 auto; padding: 0 44px; }
+    .pop-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; }
+    .pop-header .section-label { color: var(--dorado); }
+    .pop-header .section-title { color: #fff; }
+    .pop-header .section-title em { color: var(--dorado); }
     .pop-track-wrap { overflow: hidden; }
-    .pop-track { display: flex; gap: 24px; width: max-content; animation: popSlide 40s linear infinite; }
+    .pop-track { display: flex; gap: 22px; width: max-content; animation: popSlide 42s linear infinite; }
     .pop-track:hover { animation-play-state: paused; }
     @keyframes popSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     .pop-card {
-      width: 200px; flex-shrink: 0; background: var(--blanco);
-      border-radius: 8px; overflow: hidden; border: 1px solid var(--borde);
-      transition: transform .3s, box-shadow .3s;
+      width: 200px; flex-shrink: 0; background: rgba(255,255,255,.06);
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      transition: transform .3s, background .3s;
       cursor: pointer;
     }
-    .pop-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(123,45,66,.15); }
+    .pop-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.12); }
     .pop-card-img { height: 200px; overflow: hidden; }
     .pop-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
     .pop-card:hover .pop-card-img img { transform: scale(1.06); }
     .pop-card-body { padding: 14px; }
-    .pop-card-marca { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--vino); margin-bottom: 4px; }
-    .pop-card-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--texto); line-height: 1.3; }
-    .pop-card-genero { font-size: 0.7rem; color: var(--texto-medio); margin-top: 4px; }
+    .pop-card-marca { font-size: 0.67rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dorado); margin-bottom: 4px; }
+    .pop-card-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: #fff; line-height: 1.3; }
+    .pop-card-genero { font-size: 0.7rem; color: rgba(255,255,255,.55); margin-top: 4px; }
     .pop-card-btn {
-      width: 100%; margin-top: 10px; background: var(--vino); color: #fff;
-      border: none; border-radius: 4px; padding: 8px;
+      width: 100%; margin-top: 10px; background: var(--dorado); color: #fff;
+      border: none; border-radius: 4px; padding: 9px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
       cursor: pointer; transition: background .2s;
     }
-    .pop-card-btn:hover { background: var(--vino-light); }
+    .pop-card-btn:hover { background: #b5882e; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--vino-dark); color: rgba(255,255,255,.8);
-      padding: 64px 40px 32px;
+    .btn-pop-more {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--dorado); color: #fff;
+      border: none; border-radius: 4px;
+      padding: 12px 24px; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .2s;
     }
-    .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
-    .footer-brand img { height: 60px; width: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; filter: brightness(1.1); }
-    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: #fff; margin-bottom: 8px; }
-    .footer-brand-slogan { font-size: 0.82rem; font-style: italic; color: var(--dorado); margin-bottom: 16px; }
-    .footer-brand-desc { font-size: 0.84rem; line-height: 1.7; }
+    .btn-pop-more:hover { background: #b5882e; transform: translateY(-1px); }
 
-    .footer-col-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dorado); margin-bottom: 20px; }
+    /* ════════════════ NOSOTROS ════════════════ */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img { width: 100%; height: 480px; object-fit: cover; border-radius: 6px; box-shadow: 20px 24px 60px rgba(26,46,74,.15); }
+    .about-frame {
+      position: absolute; inset: -16px 16px 16px -16px;
+      border: 2px solid var(--dorado); border-radius: 6px; z-index: -1; opacity: .4;
+    }
+
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px; }
+    .tag { background: var(--dorado-soft); color: var(--azul); border: 1px solid rgba(196,152,58,.3); padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px; }
+
+    /* Stats animados */
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .stat-card {
+      background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px;
+      padding: 20px 16px; text-align: center;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--azul), var(--dorado));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .6s ease;
+    }
+    .stat-card.animated::before { transform: scaleX(1); }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,46,74,.12); border-color: var(--dorado); }
+    .stat-icon { font-size: 1.6rem; margin-bottom: 8px; display: block; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300;
+      color: var(--azul); line-height: 1; display: block;
+    }
+    .stat-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); margin-top: 6px; display: block; }
+
+    /* ════════════════ PRESENTACIONES ════════════════ */
+    .pres-intro { text-align: center; margin-bottom: 52px; }
+    .pres-intro .section-divider { margin: 18px auto 28px; }
+    .pres-intro .section-sub { max-width: 620px; margin: 0 auto; text-align: center; font-size: 1.08rem; }
+
+    .pres-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .pres-card {
+      background: var(--blanco); border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--borde);
+      box-shadow: 0 4px 20px rgba(26,46,74,.06);
+      transition: transform .35s, box-shadow .35s;
+    }
+    .pres-card:hover { transform: translateY(-6px); box-shadow: 0 18px 52px rgba(26,46,74,.13); }
+    .pres-card-img { height: 300px; overflow: hidden; }
+    .pres-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .pres-card:hover .pres-card-img img { transform: scale(1.04); }
+    .pres-card-body { padding: 28px 32px 32px; }
+    .pres-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .pres-card-ico {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--azul); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .pres-card-ico svg { width: 18px; height: 18px; fill: var(--dorado); }
+    .pres-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; color: var(--texto); }
+    .pres-card-desc { font-size: 0.9rem; color: var(--texto-medio); line-height: 1.65; margin-bottom: 18px; }
+    .pres-sizes { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pres-size { background: var(--dorado-soft); border: 1.5px solid var(--dorado); color: var(--azul); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+    .pres-note {
+      background: var(--dorado-soft); border-left: 3px solid var(--dorado);
+      padding: 18px 22px; border-radius: 0 8px 8px 0; margin-top: 32px;
+      font-size: 0.9rem; color: var(--texto-medio); line-height: 1.65;
+      max-width: 860px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ════════════════ MÉTODOS DE PAGO ════════════════ */
+    .pagos-wrap { background: var(--azul); padding: 56px 44px; }
+    .pagos-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .pagos-left { flex-shrink: 0; }
+    .pagos-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: #fff; margin-bottom: 6px; }
+    .pagos-sub { color: rgba(255,255,255,.65); font-size: 0.9rem; }
+    .pagos-right { flex: 1; }
+    .pagos-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .pago-chip {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; padding: 10px 20px; border-radius: 40px;
+      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .pago-chip svg { width: 14px; height: 14px; vertical-align: middle; margin-right: 4px; }
+    .pago-warning {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px; padding: 12px 20px; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.88rem; color: rgba(255,255,255,.8);
+    }
+    .pago-warning strong { color: #fff; }
+
+    /* ════════════════ MARCAS MÁS RECONOCIDAS (abajo) ════════════════ */
+    .marcas-wrap { background: var(--blanco); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 64px 0; overflow: hidden; }
+    .marcas-inner { max-width: 1280px; margin: 0 auto; padding: 0 44px; text-align: center; margin-bottom: 40px; }
+    .marcas-belt-wrap { overflow: hidden; }
+    .marcas-track { display: flex; gap: 64px; width: max-content; animation: beltSlide 32s linear infinite; align-items: center; }
+    @keyframes beltSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Logos como texto elegante en lugar de SVG — evita riesgo legal */
+    .marca-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      flex-shrink: 0; cursor: default;
+      opacity: .55; transition: opacity .3s;
+      padding: 8px 20px;
+    }
+    .marca-item:hover { opacity: 1; }
+    .marca-logo-img {
+      height: 80px; width: auto; max-width: 160px;
+      filter: grayscale(1); opacity: .75;
+      transition: filter .3s, opacity .3s;
+      object-fit: contain;
+    }
+    .marca-item:hover .marca-logo-img { filter: grayscale(0); opacity: 1; }
+    .marca-ref { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); }
+
+    /* ════════════════ FOOTER ════════════════ */
+    footer { background: var(--azul-dark); color: rgba(255,255,255,.75); padding: 64px 44px 28px; }
+    .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 44px; }
+    .footer-brand-img { height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--dorado); margin-bottom: 14px; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: #fff; margin-bottom: 6px; }
+    .footer-brand-slogan { font-size: 0.82rem; font-style: italic; color: var(--dorado); margin-bottom: 14px; }
+    .footer-brand-desc { font-size: 0.84rem; line-height: 1.7; }
+    .footer-col-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dorado); margin-bottom: 18px; }
     .footer-links { list-style: none; }
     .footer-links li { margin-bottom: 10px; }
-    .footer-links a { text-decoration: none; color: rgba(255,255,255,.7); font-size: 0.88rem; transition: color .2s; }
+    .footer-links a { text-decoration: none; color: rgba(255,255,255,.65); font-size: 0.88rem; transition: color .2s; }
     .footer-links a:hover { color: #fff; }
-
-    .footer-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 0.88rem; }
-    .footer-contact-item svg { width: 16px; height: 16px; fill: var(--dorado); flex-shrink: 0; }
-    .footer-contact-item a { color: rgba(255,255,255,.8); text-decoration: none; transition: color .2s; }
+    .footer-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.88rem; }
+    .footer-contact-item svg { width: 15px; height: 15px; fill: var(--dorado); flex-shrink: 0; }
+    .footer-contact-item a { color: rgba(255,255,255,.75); text-decoration: none; transition: color .2s; }
     .footer-contact-item a:hover { color: #fff; }
-
     .btn-wa-footer {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: var(--whatsapp); color: #fff;
-      border: none; border-radius: 8px; padding: 14px 20px;
-      font-size: 0.88rem; font-weight: 700; letter-spacing: 0.5px;
-      cursor: pointer; text-decoration: none; width: 100%; margin-top: 8px;
+      background: var(--whatsapp); color: #fff; border: none; border-radius: 8px;
+      padding: 13px 18px; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; width: 100%; margin-top: 6px;
       transition: background .2s, transform .2s;
     }
     .btn-wa-footer:hover { background: #1ebe5c; transform: translateY(-2px); }
-    .btn-wa-footer svg { width: 18px; height: 18px; fill: #fff; }
-
-    .footer-social { display: flex; gap: 12px; margin-top: 16px; }
-    .social-icon {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; text-decoration: none; transition: background .2s, transform .2s;
-    }
-    .social-icon:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
-    .social-icon svg { width: 16px; height: 16px; fill: #fff; }
-
-    .footer-bottom {
-      max-width: 1280px; margin: 0 auto;
-      padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1);
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,.5); }
-    .footer-bottom a { color: rgba(255,255,255,.6); text-decoration: none; }
+    .btn-wa-footer svg { width: 17px; height: 17px; fill: #fff; }
+    .footer-social { display: flex; gap: 10px; margin-top: 14px; }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: background .2s; }
+    .social-icon:hover { background: rgba(255,255,255,.18); }
+    .social-icon svg { width: 15px; height: 15px; fill: #fff; }
+    .footer-disclaimer { max-width: 1280px; margin: 0 auto 28px; background: rgba(196,152,58,.1); border-left: 3px solid var(--dorado); padding: 12px 18px; border-radius: 0 6px 6px 0; font-size: 0.78rem; color: rgba(255,255,255,.6); line-height: 1.6; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,.4); }
+    .footer-bottom a { color: rgba(255,255,255,.55); text-decoration: none; }
     .footer-bottom a:hover { color: #fff; }
-    .footer-disclaimer {
-      background: rgba(255,255,255,.06); border-left: 3px solid var(--dorado);
-      padding: 12px 16px; border-radius: 0 6px 6px 0;
-      font-size: 0.76rem; color: rgba(255,255,255,.6); margin-bottom: 12px;
-      max-width: 1280px; margin: 0 auto 24px;
-    }
 
-    /* ─── FLOAT WA ─── */
-    .float-wa {
-      position: fixed; bottom: 28px; right: 28px; z-index: 900;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: var(--whatsapp); border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 24px rgba(37,211,102,.45);
-      transition: transform .25s, box-shadow .25s;
-    }
-    .float-wa:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,.55); }
-    .float-wa svg { width: 28px; height: 28px; fill: #fff; }
-    .float-wa-pulse {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      border-radius: 50%; background: var(--whatsapp);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100% { transform: scale(1); opacity: .6; } 50% { transform: scale(1.35); opacity: 0; } }
+    /* ════════════════ FLOAT WA ════════════════ */
+    .float-wa { position: fixed; bottom: 28px; right: 28px; z-index: 900; width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,.45); transition: transform .25s; text-decoration: none; }
+    .float-wa:hover { transform: scale(1.1); }
+    .float-wa svg { width: 28px; height: 28px; fill: #fff; position: relative; z-index: 1; }
+    .float-wa-pulse { position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50%; background: var(--whatsapp); animation: pulse 2.2s infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.38); opacity: 0; } }
 
-    /* ─── CART DRAWER ─── */
-    .cart-overlay {
-      position: fixed; inset: 0; background: rgba(44,26,26,.5);
-      z-index: 1100; opacity: 0; pointer-events: none; transition: opacity .35s;
-      backdrop-filter: blur(2px);
+    /* ════════════════ CART TOAST ════════════════ */
+    .cart-toast {
+      position: fixed; bottom: 96px; right: 28px; z-index: 950;
+      background: var(--azul-dark); color: #fff;
+      padding: 12px 20px 12px 14px; border-radius: 10px;
+      font-size: 0.85rem; display: flex; align-items: center; gap: 10px;
+      transform: translateY(16px); opacity: 0;
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      border-left: 3px solid var(--dorado);
+      box-shadow: 0 8px 24px rgba(15,21,32,.25);
     }
+    .cart-toast.show { opacity: 1; transform: translateY(0); }
+    .cart-toast svg { width: 18px; height: 18px; fill: var(--dorado); flex-shrink: 0; }
+
+    /* ════════════════ CART DRAWER ════════════════ */
+    .cart-overlay { position: fixed; inset: 0; background: rgba(15,21,32,.55); z-index: 1100; opacity: 0; pointer-events: none; transition: opacity .35s; backdrop-filter: blur(3px); }
     .cart-overlay.open { opacity: 1; pointer-events: all; }
-
-    .cart-drawer {
-      position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 95vw;
-      background: var(--blanco); z-index: 1101;
-      display: flex; flex-direction: column;
-      transform: translateX(100%); transition: transform .4s cubic-bezier(.77,0,.175,1);
-      box-shadow: -8px 0 48px rgba(44,26,26,.15);
-    }
+    .cart-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 95vw; background: var(--blanco); z-index: 1101; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .4s cubic-bezier(.77,0,.175,1); box-shadow: -8px 0 48px rgba(15,21,32,.18); }
     .cart-drawer.open { transform: translateX(0); }
-
-    .cart-header {
-      padding: 24px; border-bottom: 1px solid var(--borde);
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .cart-header { padding: 24px; border-bottom: 1px solid var(--borde); display: flex; align-items: center; justify-content: space-between; }
     .cart-header-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; }
     .cart-close { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; transition: background .2s; }
     .cart-close:hover { background: var(--borde); }
     .cart-close svg { width: 20px; height: 20px; }
-
-    .cart-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
-    .cart-empty { text-align: center; padding: 60px 20px; color: var(--texto-medio); }
-    .cart-empty svg { width: 48px; height: 48px; opacity: .3; margin: 0 auto 16px; display: block; }
-    .cart-empty p { font-size: 0.92rem; }
-
-    .cart-item {
-      display: flex; gap: 14px; padding: 14px 0;
-      border-bottom: 1px solid var(--borde); align-items: flex-start;
-    }
-    .cart-item-img { width: 64px; height: 64px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+    .cart-body { flex: 1; overflow-y: auto; padding: 18px 22px; }
+    .cart-empty { text-align: center; padding: 56px 20px; color: var(--texto-medio); }
+    .cart-empty svg { width: 44px; height: 44px; opacity: .25; display: block; margin: 0 auto 14px; }
+    .cart-item { display: flex; gap: 13px; padding: 13px 0; border-bottom: 1px solid var(--borde); align-items: flex-start; }
+    .cart-item-img { width: 62px; height: 62px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
     .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
     .cart-item-info { flex: 1; }
-    .cart-item-marca { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--vino); }
-    .cart-item-nombre { font-size: 0.9rem; font-weight: 400; margin: 2px 0 8px; }
-    .cart-item-qty { display: flex; align-items: center; gap: 10px; }
-    .qty-btn { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--borde); background: var(--marfil); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .cart-item-marca { font-size: 0.67rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dorado); }
+    .cart-item-nombre { font-size: 0.9rem; margin: 2px 0 8px; }
+    .cart-item-qty { display: flex; align-items: center; gap: 9px; }
+    .qty-btn { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--borde); background: var(--bg); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background .2s; }
     .qty-btn:hover { background: var(--borde); }
     .qty-val { font-size: 0.9rem; font-weight: 700; min-width: 20px; text-align: center; }
     .cart-item-remove { background: none; border: none; cursor: pointer; padding: 4px; color: var(--texto-medio); transition: color .2s; }
-    .cart-item-remove:hover { color: var(--vino); }
-    .cart-item-remove svg { width: 16px; height: 16px; }
-
-    .cart-footer { padding: 20px 24px; border-top: 1px solid var(--borde); }
-    .cart-name-field { margin-bottom: 16px; }
-    .cart-name-field label { font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--texto-medio); display: block; margin-bottom: 8px; }
-    .cart-name-field input {
-      width: 100%; padding: 10px 14px; border: 1.5px solid var(--borde);
-      border-radius: 6px; font-size: 0.92rem; font-family: inherit;
-      background: var(--marfil); transition: border-color .2s; outline: none;
-    }
-    .cart-name-field input:focus { border-color: var(--vino); }
+    .cart-item-remove:hover { color: var(--azul); }
+    .cart-item-remove svg { width: 15px; height: 15px; }
+    .cart-footer { padding: 18px 22px; border-top: 1px solid var(--borde); }
+    .cart-name-field { margin-bottom: 14px; }
+    .cart-name-field label { font-size: 0.76rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--texto-medio); display: block; margin-bottom: 7px; }
+    .cart-name-field input { width: 100%; padding: 10px 13px; border: 1.5px solid var(--borde); border-radius: 6px; font-size: 0.92rem; font-family: inherit; background: var(--bg); outline: none; transition: border-color .2s; }
+    .cart-name-field input:focus { border-color: var(--azul); }
     .cart-name-field input.error { border-color: #e74c3c; }
-
-    .btn-finalizar {
-      width: 100%; background: var(--whatsapp); color: #fff;
-      border: none; border-radius: 8px; padding: 16px;
-      font-size: 0.92rem; font-weight: 700; letter-spacing: 0.5px;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-      transition: background .2s, transform .2s;
-    }
-    .btn-finalizar:hover { background: #1ebe5c; transform: translateY(-1px); }
-    .btn-finalizar svg { width: 20px; height: 20px; fill: #fff; }
-    .btn-finalizar:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-
+    .btn-finalizar { width: 100%; background: var(--whatsapp); color: #fff; border: none; border-radius: 8px; padding: 16px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background .2s; }
+    .btn-finalizar:hover { background: #1ebe5c; }
+    .btn-finalizar svg { width: 19px; height: 19px; fill: #fff; }
     .cart-count-label { font-size: 0.78rem; color: var(--texto-medio); text-align: center; margin-bottom: 12px; }
 
-    /* ─── REVEAL ANIMATIONS ─── */
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity .7s ease, transform .7s ease; }
+    /* ════════════════ REVEAL ANIMATIONS ════════════════ */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity .7s ease, transform .7s ease; }
     .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right { opacity: 0; transform: translateX(36px); transition: opacity .7s ease, transform .7s ease; }
     .reveal-right.visible { opacity: 1; transform: translateX(0); }
-    .stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
-    .stagger.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: .05s; }
-    .stagger.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: .15s; }
-    .stagger.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: .25s; }
-    .stagger.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: .35s; }
-    .stagger.visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: .45s; }
-    .stagger.visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: .55s; }
-    .stagger.visible > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: .65s; }
-    .stagger.visible > *:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: .75s; }
 
-    /* ─── RESPONSIVE ─── */
+    /* ════════════════ RESPONSIVE ════════════════ */
     @media (max-width: 1024px) {
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .about-img-wrap { max-width: 500px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .pres-grid { grid-template-columns: 1fr; }
+      .pagos-inner { flex-direction: column; gap: 28px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links, .btn-wa-nav { display: none; }
       .hamburger { display: flex; }
       section { padding: 56px 20px; }
-      .about-stats { gap: 16px; }
-      .pagos-wrap { padding: 56px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; padding: 0 20px; }
-      footer { padding: 48px 0 24px; }
-      .footer-bottom { padding: 20px; }
+      .pagos-wrap { padding: 48px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      footer { padding: 48px 20px 24px; }
       .pop-card { width: 170px; }
       .pop-card-img { height: 170px; }
-      .about-badge { display: none; }
-      .hero-arrows { display: none; }
+      .about-grid { gap: 32px; }
+      .about-stats { grid-template-columns: 1fr; gap: 12px; }
+      .populares-inner { padding: 0 20px; }
+      .marcas-inner { padding: 0 20px; }
     }
-
-    /* ─── MOBILE MENU ─── */
-    .mobile-menu {
-      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
-      background: var(--blanco); z-index: 999; padding: 24px;
-      flex-direction: column; gap: 8px;
-      box-shadow: 0 8px 32px rgba(44,26,26,.1);
-      border-bottom: 1px solid var(--borde);
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      text-decoration: none; color: var(--texto-medio);
-      font-size: 0.9rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase;
-      padding: 12px 0; border-bottom: 1px solid var(--borde);
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--vino); }
   </style>
 </head>
 <body>
@@ -555,13 +448,12 @@
 <!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="assets/logo.jpeg" alt="JG Distribuidora Logo">
+    <img src="assets/logo.jpeg" alt="JG Distribuidora">
     <div>
       <div class="nav-logo-text">JG Distribuidora</div>
       <div class="nav-logo-sub">Fragancias Reembazadas</div>
     </div>
   </a>
-
   <ul class="nav-links">
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="productos.html">Catálogo</a></li>
@@ -569,230 +461,40 @@
     <li><a href="#pagos">Pagos</a></li>
     <li><a href="politicas.html">Políticas</a></li>
   </ul>
-
   <div class="nav-actions">
     <button class="btn-cart" id="btnCartNav" title="Ver carrito">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <span class="cart-badge" id="cartBadge">0</span>
     </button>
-    <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!%20Quisiera%20información%20sobre%20las%20fragancias." target="_blank" class="btn-wa-nav">
+    <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!" target="_blank" class="btn-wa-nav">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       WhatsApp
     </a>
-    <button class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#nosotros" onclick="closeMobileMenu()">Nosotros</a>
+  <a href="#nosotros" onclick="document.getElementById('mobileMenu').classList.remove('open')">Nosotros</a>
   <a href="productos.html">Catálogo</a>
-  <a href="#presentaciones" onclick="closeMobileMenu()">Presentaciones</a>
-  <a href="#pagos" onclick="closeMobileMenu()">Pagos</a>
+  <a href="#presentaciones" onclick="document.getElementById('mobileMenu').classList.remove('open')">Presentaciones</a>
+  <a href="#pagos" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pagos</a>
   <a href="politicas.html">Políticas</a>
 </div>
 
-<!-- ═══════════════ HERO CAROUSEL ═══════════════ -->
-<section class="hero section-full" id="inicio">
-  <div class="hero-slides" id="heroSlides">
-    <div class="hero-slide active">
-      <img src="assets/Banner/Banner1.webp" alt="JG Distribuidora Fragancias">
-      <div class="hero-overlay">
-        <div class="hero-content">
-          <p class="hero-eyebrow">Tienda Virtual · Jamundí, Valle del Cauca</p>
-          <h1 class="hero-title">Fragancias que <em>enamoran</em>,<br>precios que sorprenden</h1>
-          <p class="hero-sub">Más de 105 referencias reembazadas de las mejores casas del mundo. Envíos a nivel nacional.</p>
-          <div class="hero-ctas">
-            <a href="productos.html" class="btn-primary">Ver catálogo completo</a>
-            <a href="https://wa.me/573128682456?text=Hola!%20Quiero%20conocer%20sus%20fragancias." target="_blank" class="btn-outline">Escribir por WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide">
-      <img src="assets/Banner/Banner2.webp" alt="Fragancias para ella">
-      <div class="hero-overlay">
-        <div class="hero-content">
-          <p class="hero-eyebrow">Colección Dama · 25 Referencias</p>
-          <h1 class="hero-title">El lujo que <em>mereces</em>,<br>ahora al alcance de todos</h1>
-          <p class="hero-sub">Fragancias femeninas inspiradas en las más icónicas marcas del mundo. Al por mayor y al detal.</p>
-          <div class="hero-ctas">
-            <a href="productos.html?genero=Dama" class="btn-primary">Ver fragancias para ella</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide">
-      <img src="assets/Banner/Banner3.webp" alt="Presentaciones reembazadas">
-      <div class="hero-overlay">
-        <div class="hero-content">
-          <p class="hero-eyebrow">Reembazado Premium · Envases de Calidad</p>
-          <h1 class="hero-title">Tu <em>aroma favorito</em><br>en el tamaño ideal</h1>
-          <p class="hero-sub">Presentación tubular 30–100ml y cuadrada 60–100ml. Compra el volumen que necesitas.</p>
-          <div class="hero-ctas">
-            <a href="#presentaciones" class="btn-primary">Ver presentaciones</a>
-            <a href="productos.html" class="btn-outline">Explorar catálogo</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ═══════════════ HERO BANNER INFINITO SEAMLESS ═══════════════ -->
+<div class="hero" id="hero">
+  <div class="hero-track" id="heroTrack">
+    <!-- [clone_3] [1] [2] [3] [clone_1] — se construye con JS -->
   </div>
-
-  <div class="hero-arrows">
-    <button class="hero-arrow" id="heroPrev">&#8592;</button>
-    <button class="hero-arrow" id="heroNext">&#8594;</button>
-  </div>
-
   <div class="hero-dots" id="heroDots">
     <button class="hero-dot active"></button>
     <button class="hero-dot"></button>
     <button class="hero-dot"></button>
   </div>
-</section>
-
-<!-- ═══════════════ NOSOTROS ═══════════════ -->
-<section id="nosotros">
-  <div class="about-grid">
-    <div class="about-img-wrap reveal-left">
-      <img src="assets/Presentación/1.jpeg" alt="JG Distribuidora - Envases Premium" style="height:460px;">
-      <div class="about-badge">
-        <div class="about-badge-num">105</div>
-        <div class="about-badge-txt">Referencias</div>
-      </div>
-    </div>
-    <div class="reveal-right">
-      <p class="section-label">Quiénes somos</p>
-      <h2 class="section-title">Tu tienda de <em>fragancias</em><br>de confianza</h2>
-      <div class="section-divider"></div>
-      <p class="section-sub">Somos JG Distribuidora, una tienda virtual ubicada en <strong>Jamundí, Valle del Cauca</strong>, especializada en fragancias reembazadas de las mejores marcas del mundo.</p>
-      <br>
-      <p class="section-sub">Ofrecemos esencias inspiradas en los perfumes más icónicos, reembazadas con los mejores materiales, a precios accesibles para todos. Al por mayor y al detal, con envíos seguros a todo Colombia.</p>
-      <div class="about-tags stagger" style="margin-top: 28px;">
-        <span class="tag">Envíos Nacionales</span>
-        <span class="tag">Al Por Mayor</span>
-        <span class="tag">Al Detal</span>
-        <span class="tag">Jamundí, Valle</span>
-        <span class="tag">+105 Referencias</span>
-      </div>
-      <div class="about-stats stagger" style="margin-top: 36px;">
-        <div class="stat">
-          <div class="stat-num counter" data-target="105">0</div>
-          <div class="stat-label">Referencias</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num counter" data-target="3">0</div>
-          <div class="stat-label">Géneros</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num counter" data-target="11">0</div>
-          <div class="stat-label">Marcas</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ BRAND BELT ═══════════════ -->
-<div class="brand-belt-wrap">
-  <p class="brand-belt-label">Marcas que reembazamos</p>
-  <div style="overflow:hidden;">
-    <div class="brand-track" id="brandTrack">
-      <img src="assets/Marcas/chanel_245x.svg" alt="Chanel">
-      <img src="assets/Marcas/dior_245x.svg" alt="Dior">
-      <img src="assets/Marcas/gucci_245x.svg" alt="Gucci">
-      <img src="assets/Marcas/carolina-herrera_245x.svg" alt="Carolina Herrera">
-      <img src="assets/Marcas/calvin-klein_245x.svg" alt="Calvin Klein">
-      <img src="assets/Marcas/montblanc_245x.svg" alt="Montblanc">
-      <img src="assets/Marcas/Rabanne_245x.svg" alt="Rabanne">
-      <img src="assets/Marcas/Lacoste_245x.svg" alt="Lacoste">
-      <img src="assets/Marcas/lattafa_245x.svg" alt="Lattafa">
-      <img src="assets/Marcas/Afnan_245x.svg" alt="Afnan">
-      <img src="assets/Marcas/Benetton_245x.svg" alt="Benetton">
-      <!-- Duplicado para loop infinito -->
-      <img src="assets/Marcas/chanel_245x.svg" alt="Chanel">
-      <img src="assets/Marcas/dior_245x.svg" alt="Dior">
-      <img src="assets/Marcas/gucci_245x.svg" alt="Gucci">
-      <img src="assets/Marcas/carolina-herrera_245x.svg" alt="Carolina Herrera">
-      <img src="assets/Marcas/calvin-klein_245x.svg" alt="Calvin Klein">
-      <img src="assets/Marcas/montblanc_245x.svg" alt="Montblanc">
-      <img src="assets/Marcas/Rabanne_245x.svg" alt="Rabanne">
-      <img src="assets/Marcas/Lacoste_245x.svg" alt="Lacoste">
-      <img src="assets/Marcas/lattafa_245x.svg" alt="Lattafa">
-      <img src="assets/Marcas/Afnan_245x.svg" alt="Afnan">
-      <img src="assets/Marcas/Benetton_245x.svg" alt="Benetton">
-    </div>
-  </div>
 </div>
 
-<!-- ═══════════════ PRESENTACIONES ═══════════════ -->
-<section id="presentaciones">
-  <div class="pres-intro reveal">
-    <p class="section-label">Presentaciones disponibles</p>
-    <h2 class="section-title">¿Cómo te llega tu <em>fragancia</em>?</h2>
-    <div class="section-divider"></div>
-    <p class="section-sub">Trabajamos con envases de vidrio de alta calidad. Elige el tamaño y la presentación que más te convenga.</p>
-  </div>
-
-  <div class="pres-grid">
-    <div class="pres-card reveal-left">
-      <div class="pres-card-img">
-        <img src="assets/Presentación/4.jpeg" alt="Presentación Tubular">
-      </div>
-      <div class="pres-card-body">
-        <div class="pres-card-icon">🧪</div>
-        <h3 class="pres-card-title">Presentación Tubular</h3>
-        <p class="pres-card-desc">Envase cilíndrico transparente con válvula spray de alta calidad. Ideal para llevar en bolso o bolsillo. Disponible en varios colores de tapa.</p>
-        <div class="pres-sizes">
-          <span class="pres-size">30 ml</span>
-          <span class="pres-size">60 ml</span>
-          <span class="pres-size">100 ml</span>
-        </div>
-      </div>
-    </div>
-    <div class="pres-card reveal-right">
-      <div class="pres-card-img">
-        <img src="assets/Presentación/1.jpeg" alt="Presentación Cuadrada">
-      </div>
-      <div class="pres-card-body">
-        <div class="pres-card-icon">🟫</div>
-        <h3 class="pres-card-title">Presentación Cuadrada</h3>
-        <p class="pres-card-desc">Envase corrugado cuadrado con válvula rosca tipo atómizador. Diseño elegante y sofisticado, perfecto para el hogar o como regalo.</p>
-        <div class="pres-sizes">
-          <span class="pres-size">60 ml</span>
-          <span class="pres-size">100 ml</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="pres-note reveal" style="max-width: 860px; margin: 0 auto;">
-    <strong>Nota importante:</strong> Todos nuestros productos son <strong>esencias reembazadas inspiradas</strong> en los perfumes originales de las grandes marcas. No vendemos productos originales. Al hacer tu pedido por WhatsApp, indícanos la presentación y el volumen que deseas.
-  </div>
-</section>
-
-<!-- ═══════════════ MÉTODOS DE PAGO ═══════════════ -->
-<div class="pagos-wrap" id="pagos">
-  <div class="pagos-inner reveal">
-    <h2 class="pagos-title">Métodos de pago disponibles</h2>
-    <p class="pagos-sub">Escoge la opción que más te convenga. Aceptamos múltiples plataformas.</p>
-    <div class="pagos-grid stagger">
-      <div class="pago-chip">💳 Transferencia Bancaria</div>
-      <div class="pago-chip">📱 Nequi</div>
-      <div class="pago-chip">💜 Daviplata</div>
-      <div class="pago-chip">💛 Dale</div>
-      <div class="pago-chip">🔑 Llave</div>
-      <div class="pago-chip">🟣 NU Bank</div>
-      <div class="pago-chip">💵 Efectivo</div>
-    </div>
-    <div class="pago-warning">
-      ⚠️ <strong>Importante:</strong> No realizamos envíos sin pago previo confirmado.
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ PERFUMES POPULARES ═══════════════ -->
+<!-- ═══════════════ LO MÁS PEDIDO (después del banner) ═══════════════ -->
 <div class="populares-wrap" id="populares">
   <div class="populares-inner">
     <div class="pop-header reveal">
@@ -800,7 +502,7 @@
         <p class="section-label">Lo más pedido</p>
         <h2 class="section-title">Fragancias <em>populares</em></h2>
       </div>
-      <a href="productos.html" class="btn-primary">Ver todo el catálogo</a>
+      <a href="productos.html" class="btn-pop-more">Ver catálogo completo</a>
     </div>
   </div>
   <div class="pop-track-wrap">
@@ -808,19 +510,171 @@
   </div>
 </div>
 
+<!-- ═══════════════ NOSOTROS ═══════════════ -->
+<section id="nosotros">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal-left">
+      <div class="about-frame"></div>
+      <img src="assets/Presentación/1.jpeg" alt="JG Distribuidora — Envases Premium">
+    </div>
+    <div class="reveal-right">
+      <p class="section-label">Quiénes somos</p>
+      <h2 class="section-title">Tu tienda de <em>fragancias</em><br>de confianza</h2>
+      <div class="section-divider"></div>
+      <p class="section-sub">Somos JG Distribuidora, una tienda virtual ubicada en <strong>Jamundí, Valle del Cauca</strong>, especializada en fragancias reembazadas de las mejores marcas del mundo.</p>
+      <br>
+      <p class="section-sub">Ofrecemos esencias inspiradas en los perfumes más icónicos, reembazadas con los mejores materiales, a precios accesibles para todos.</p>
+      <div class="about-tags" style="margin-top:24px;">
+        <span class="tag">Envíos Nacionales</span>
+        <span class="tag">Al Por Mayor</span>
+        <span class="tag">Al Detal</span>
+        <span class="tag">Jamundí, Valle</span>
+      </div>
+      <div class="about-stats" style="margin-top:28px;" id="statsContainer">
+        <div class="stat-card">
+          <span class="stat-icon">🌺</span>
+          <span class="stat-num counter" data-target="105">0</span>
+          <span class="stat-label">Referencias</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">✨</span>
+          <span class="stat-num counter" data-target="3">0</span>
+          <span class="stat-label">Géneros</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🏆</span>
+          <span class="stat-num counter" data-target="11">0</span>
+          <span class="stat-label">Marcas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRESENTACIONES ═══════════════ -->
+<section id="presentaciones" style="background: var(--blanco); max-width:100%; padding: 84px 44px;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <div class="pres-intro reveal">
+      <p class="section-label">Presentaciones disponibles</p>
+      <h2 class="section-title">¿Cómo te llega tu <em>fragancia</em>?</h2>
+      <div class="section-divider"></div>
+      <p class="section-sub">Trabajamos con envases de vidrio de alta calidad, solo debes elegir el tamaño y la presentación que más te convenga.</p>
+    </div>
+    <div class="pres-grid">
+      <div class="pres-card reveal-left">
+        <div class="pres-card-img"><img src="assets/Presentación/4.jpeg" alt="Presentación Tubular"></div>
+        <div class="pres-card-body">
+          <div class="pres-card-header">
+            <div class="pres-card-ico">
+              <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="3"/></svg>
+            </div>
+            <h3 class="pres-card-title">Presentación Tubular</h3>
+          </div>
+          <p class="pres-card-desc">Envase cilíndrico transparente con válvula spray de alta calidad. Ideal para llevar en bolso o bolsillo. Disponible en varios colores de tapa.</p>
+          <div class="pres-sizes">
+            <span class="pres-size">30 ml</span>
+            <span class="pres-size">60 ml</span>
+            <span class="pres-size">100 ml</span>
+          </div>
+        </div>
+      </div>
+      <div class="pres-card reveal-right">
+        <div class="pres-card-img"><img src="assets/Presentación/1.jpeg" alt="Presentación Cuadrada"></div>
+        <div class="pres-card-body">
+          <div class="pres-card-header">
+            <div class="pres-card-ico">
+              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
+            </div>
+            <h3 class="pres-card-title">Presentación Cuadrada</h3>
+          </div>
+          <p class="pres-card-desc">Envase corrugado cuadrado con válvula rosca tipo atomizador. Diseño elegante y sofisticado, perfecto para el hogar o como regalo.</p>
+          <div class="pres-sizes">
+            <span class="pres-size">60 ml</span>
+            <span class="pres-size">100 ml</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pres-note reveal" style="margin-top:36px;">
+      <strong>Aviso:</strong> Todos nuestros productos son <strong>esencias reembazadas inspiradas</strong> en perfumes originales de grandes marcas. No vendemos productos originales. Al pedir por WhatsApp, indícanos la presentación y volumen que deseas.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MÉTODOS DE PAGO ═══════════════ -->
+<div class="pagos-wrap" id="pagos">
+  <div class="pagos-inner reveal">
+    <div class="pagos-left">
+      <h2 class="pagos-title">Métodos de<br>pago</h2>
+      <p class="pagos-sub">Múltiples opciones<br>para tu comodidad</p>
+    </div>
+    <div class="pagos-right">
+      <div class="pagos-row">
+        <span class="pago-chip">💳 Transferencia</span>
+        <span class="pago-chip">📱 Nequi</span>
+        <span class="pago-chip">💜 Daviplata</span>
+        <span class="pago-chip">💛 Dale</span>
+        <span class="pago-chip">🔑 Llave</span>
+        <span class="pago-chip">🟣 NU</span>
+        <span class="pago-chip">💵 Efectivo</span>
+      </div>
+      <div class="pago-warning">
+        ⚠ <strong>Sin pago previo no hay envío.</strong> Una vez confirmado el pago despachamos tu pedido.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MARCAS MÁS RECONOCIDAS (abajo) ═══════════════ -->
+<div class="marcas-wrap">
+  <div class="marcas-inner reveal">
+    <p class="section-label">Inspiradas en las mejores</p>
+    <h2 class="section-title">Marcas más <em>reconocidas</em></h2>
+    <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
+    <p class="section-sub" style="margin:0 auto; text-align:center;">Nuestras esencias están inspiradas en las casas de perfumería más icónicas del mundo.</p>
+  </div>
+  <div class="marcas-belt-wrap" style="margin-top:36px;">
+    <div class="marcas-track">
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt="Inspirado en Chanel"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt="Inspirado en Dior"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/gucci_245x.svg" alt="Inspirado en Gucci"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/carolina-herrera_245x.svg" alt="Inspirado en Carolina Herrera"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/calvin-klein_245x.svg" alt="Inspirado en Calvin Klein"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/montblanc_245x.svg" alt="Inspirado en Montblanc"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Rabanne_245x.svg" alt="Inspirado en Rabanne"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Lacoste_245x.svg" alt="Inspirado en Lacoste"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/lattafa_245x.svg" alt="Inspirado en Lattafa"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Afnan_245x.svg" alt="Inspirado en Afnan"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Benetton_245x.svg" alt="Inspirado en Benetton"><span class="marca-ref">Referencia</span></div>
+      <!-- Duplicado para loop infinito -->
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/gucci_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/carolina-herrera_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/calvin-klein_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/montblanc_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Rabanne_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Lacoste_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/lattafa_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Afnan_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Benetton_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
   <div class="footer-disclaimer">
-    <strong>Aviso:</strong> JG Distribuidora comercializa esencias reembazadas <em>inspiradas</em> en perfumes de marca. No somos distribuidores oficiales ni vendemos productos originales de las marcas mencionadas.
+    <strong>Aviso legal:</strong> JG Distribuidora comercializa esencias reembazadas <em>inspiradas</em> en perfumes de marca. No somos distribuidores oficiales ni vendemos productos originales. Las marcas mencionadas son referencias de inspiración únicamente.
   </div>
   <div class="footer-grid">
-    <div class="footer-brand">
-      <img src="assets/logo.jpeg" alt="JG Distribuidora">
+    <div>
+      <img class="footer-brand-img" src="assets/logo.jpeg" alt="JG Distribuidora">
       <div class="footer-brand-name">JG Distribuidora</div>
       <div class="footer-brand-slogan">"Fragancias que enamoran, precios que sorprenden"</div>
-      <p class="footer-brand-desc">Tienda virtual de fragancias reembazadas. Desde Jamundí para todo Colombia. Al por mayor y al detal.</p>
-      <div class="footer-social" style="margin-top:20px;">
-        <a href="#" class="social-icon" id="igLink" title="Instagram JG Distribuidora" target="_blank">
+      <p class="footer-brand-desc">Tienda virtual de fragancias, desde Jamundí para todo Colombia, al por mayor y al detal.</p>
+      <div class="footer-social" style="margin-top:18px;">
+        <a href="#" class="social-icon" title="Instagram JG Distribuidora" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
       </div>
@@ -838,7 +692,7 @@
       <p class="footer-col-title">Legal</p>
       <ul class="footer-links">
         <li><a href="politicas.html#envios">Política de envíos</a></li>
-        <li><a href="politicas.html#devoluciones">Política de devoluciones</a></li>
+        <li><a href="politicas.html#devoluciones">Devoluciones</a></li>
         <li><a href="politicas.html#datos">Datos personales</a></li>
       </ul>
     </div>
@@ -865,12 +719,18 @@
 </footer>
 
 <!-- Float WhatsApp -->
-<a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!%20Me%20interesa%20conocer%20sus%20fragancias." target="_blank" class="float-wa" title="Escríbenos por WhatsApp">
+<a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!" target="_blank" class="float-wa" title="WhatsApp">
   <span class="float-wa-pulse"></span>
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- ═══════════════ CART DRAWER ═══════════════ -->
+<!-- Toast carrito -->
+<div class="cart-toast" id="cartToast">
+  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+  <span id="toastMsg">Agregado al carrito</span>
+</div>
+
+<!-- Cart Drawer -->
 <div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
@@ -899,7 +759,121 @@
 </div>
 
 <script>
-// ─── CART STATE (shared via localStorage) ───
+// ─── HERO SEAMLESS INFINITO ───
+const heroSlides = [
+  { img: 'assets/Banner/Banner1.webp', eyebrow: 'Tienda Virtual · Jamundí, Valle del Cauca', title: 'Fragancias que <em>enamoran</em>,<br>precios que sorprenden', sub: 'Más de 105 referencias reembazadas. Envíos a nivel nacional, al por mayor y al detal.', cta1: { label: 'Ver catálogo', href: 'productos.html' }, cta2: { label: 'Escribir por WhatsApp', href: 'https://wa.me/573128682456?text=Hola!' } },
+  { img: 'assets/Banner/Banner2.webp', eyebrow: 'Colección Dama · 25 Referencias', title: 'El lujo que <em>mereces</em>,<br>al alcance de todos', sub: 'Fragancias femeninas inspiradas en las marcas más icónicas del mundo.', cta1: { label: 'Fragancias para ella', href: 'productos.html?genero=Dama' } },
+  { img: 'assets/Banner/Banner3.webp', eyebrow: 'Reembazado Premium · Envases de Calidad', title: 'Tu <em>aroma favorito</em><br>en el tamaño ideal', sub: 'Tubular 30–100ml · Cuadrada 60–100ml. El volumen que necesitas.', cta1: { label: 'Ver presentaciones', href: '#presentaciones' }, cta2: { label: 'Explorar catálogo', href: 'productos.html' } }
+];
+
+const N = heroSlides.length;
+let heroIdx = 0; // índice real (0-based)
+let heroAuto;
+
+function buildHero() {
+  const track = document.getElementById('heroTrack');
+  // Orden: [clone_last, ...slides, clone_first]
+  const order = [N - 1, ...Array.from({length: N}, (_, i) => i), 0];
+  track.innerHTML = order.map(i => {
+    const s = heroSlides[i];
+    return `<div class="hero-slide" style="min-width:100%;height:100%;position:relative;overflow:hidden;flex-shrink:0;">
+      <img src="${s.img}" alt="JG Distribuidora" style="width:100%;height:100%;object-fit:cover;">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <p class="hero-eyebrow">${s.eyebrow}</p>
+          <h1 class="hero-title">${s.title}</h1>
+          <p class="hero-sub">${s.sub}</p>
+          <div class="hero-ctas">
+            ${s.cta1 ? `<a href="${s.cta1.href}" class="btn-primary">${s.cta1.label}</a>` : ''}
+            ${s.cta2 ? `<a href="${s.cta2.href}" class="btn-outline">${s.cta2.label}</a>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  // Posición inicial: mostrar slide real 0 (track index 1)
+  track.style.transform = `translateX(-100%)`;
+}
+
+function heroGoTo(realIdx, animate = true) {
+  const track = document.getElementById('heroTrack');
+  const dots = document.querySelectorAll('.hero-dot');
+  heroIdx = ((realIdx % N) + N) % N;
+  const trackIdx = heroIdx + 1; // +1 por el clone_last al inicio
+  if (!animate) track.classList.add('no-transition');
+  track.style.transform = `translateX(-${trackIdx * 100}%)`;
+  if (!animate) { track.getBoundingClientRect(); track.classList.remove('no-transition'); }
+  dots.forEach((d, i) => d.classList.toggle('active', i === heroIdx));
+}
+
+function heroNext() { heroGoTo(heroIdx + 1); }
+
+// Al final de la transición, reposicionar silenciosamente si está en clone
+document.getElementById('heroTrack').addEventListener('transitionend', () => {
+  const track = document.getElementById('heroTrack');
+  const slideCount = N + 2; // clones incluidos
+  const current = heroIdx + 1;
+  if (current === 0) { heroGoTo(N - 1, false); }
+  else if (current === slideCount - 1) { heroGoTo(0, false); }
+});
+
+document.querySelectorAll('.hero-dot').forEach((d, i) => d.addEventListener('click', () => { clearInterval(heroAuto); heroGoTo(i); startHeroAuto(); }));
+
+function startHeroAuto() { heroAuto = setInterval(heroNext, 5000); }
+
+buildHero();
+startHeroAuto();
+document.getElementById('hero').addEventListener('mouseenter', () => clearInterval(heroAuto));
+document.getElementById('hero').addEventListener('mouseleave', startHeroAuto);
+
+// ─── NAVBAR SCROLL ───
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ─── MOBILE MENU ───
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+// ─── POPULARES ───
+const popularData = [
+  {id:1,nombre:'Cloud',marca:'Ariana Grande',genero:'Dama'},
+  {id:6,nombre:'Good Girl',marca:'Carolina Herrera',genero:'Dama'},
+  {id:27,nombre:'Bleu de Chanel',marca:'Chanel',genero:'Caballero'},
+  {id:34,nombre:'Eros',marca:'Versace',genero:'Caballero'},
+  {id:24,nombre:'La Vida es Bella',marca:'Lancôme',genero:'Dama'},
+  {id:65,nombre:'One Million Lucky',marca:'Paco Rabanne',genero:'Caballero'},
+  {id:95,nombre:'Baccarat Rouge 540',marca:'MFK',genero:'Unisex'},
+  {id:72,nombre:'Invictus',marca:'Paco Rabanne',genero:'Caballero'},
+  {id:23,nombre:'Bombshell',marca:"Victoria's Secret",genero:'Dama'},
+  {id:100,nombre:'Layton',marca:'Parfums de Marly',genero:'Unisex'},
+  {id:93,nombre:'Ombré Leather',marca:'Tom Ford',genero:'Unisex'},
+  {id:73,nombre:'212 VIP Black',marca:'Carolina Herrera',genero:'Caballero'},
+  {id:13,nombre:'Yara',marca:'Lattafa',genero:'Dama'},
+  {id:59,nombre:'Creed Aventus',marca:'Creed',genero:'Caballero'},
+  {id:26,nombre:'Angel',marca:'Mugler',genero:'Caballero'},
+];
+
+(function buildPop() {
+  const track = document.getElementById('popTrack');
+  const items = [...popularData, ...popularData];
+  track.innerHTML = items.map(p => {
+    const sn = p.nombre.replace(/'/g,"\\'");
+    const sm = p.marca.replace(/'/g,"\\'");
+    return `<div class="pop-card">
+      <div class="pop-card-img"><img src="assets/Productos/Imagen${p.id}.png" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/logo.jpeg'"></div>
+      <div class="pop-card-body">
+        <div class="pop-card-marca">${p.marca}</div>
+        <div class="pop-card-nombre">${p.nombre}</div>
+        <div class="pop-card-genero">${p.genero}</div>
+        <button class="pop-card-btn" onclick="addToCart({id:${p.id},nombre:'${sn}',marca:'${sm}',genero:'${p.genero}'})">+ Agregar al carrito</button>
+      </div>
+    </div>`;
+  }).join('');
+})();
+
+// ─── CART (SIN auto-abrir) ───
 const CART_KEY = 'jg_cart';
 function getCart() { try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; } }
 function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); }
@@ -911,7 +885,15 @@ function addToCart(product) {
   else cart.push({ ...product, qty: 1 });
   saveCart(cart);
   renderCart();
-  openCart();
+  showToast(product.nombre); // Toast en vez de abrir carrito
+}
+
+function showToast(nombre) {
+  const toast = document.getElementById('cartToast');
+  document.getElementById('toastMsg').textContent = `✓ "${nombre}" agregado`;
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
 function updateQty(id, delta) {
@@ -920,69 +902,43 @@ function updateQty(id, delta) {
   if (idx < 0) return;
   cart[idx].qty += delta;
   if (cart[idx].qty <= 0) cart.splice(idx, 1);
-  saveCart(cart);
-  renderCart();
+  saveCart(cart); renderCart();
 }
-
-function removeItem(id) {
-  saveCart(getCart().filter(i => i.id !== id));
-  renderCart();
-}
+function removeItem(id) { saveCart(getCart().filter(i => i.id !== id)); renderCart(); }
 
 function renderCart() {
   const cart = getCart();
   const body = document.getElementById('cartBody');
   const footer = document.getElementById('cartFooter');
   const badge = document.getElementById('cartBadge');
-  const countLabel = document.getElementById('cartCountLabel');
+  const label = document.getElementById('cartCountLabel');
   const total = cart.reduce((s, i) => s + i.qty, 0);
-
   badge.textContent = total;
   badge.style.display = total > 0 ? 'flex' : 'none';
-
-  if (cart.length === 0) {
-    body.innerHTML = `<div class="cart-empty">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <p>Tu carrito está vacío.<br>Agrega fragancias desde el catálogo.</p>
-    </div>`;
-    footer.style.display = 'none';
-    return;
+  if (!cart.length) {
+    body.innerHTML = `<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Tu carrito está vacío.<br>Agrega fragancias desde el catálogo.</p></div>`;
+    footer.style.display = 'none'; return;
   }
-
   footer.style.display = 'block';
-  countLabel.textContent = `${total} producto${total !== 1 ? 's' : ''} en tu carrito`;
-
+  label.textContent = `${total} producto${total !== 1 ? 's' : ''} en tu carrito`;
   body.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img">
-        <img src="assets/Productos/Imagen${item.id}.png" alt="${item.nombre}" onerror="this.src='assets/logo.jpeg'">
-      </div>
+      <div class="cart-item-img"><img src="assets/Productos/Imagen${item.id}.png" alt="${item.nombre}" onerror="this.src='assets/logo.jpeg'"></div>
       <div class="cart-item-info">
-        <div class="cart-item-marca">${item.marca || 'Ref.'}</div>
+        <div class="cart-item-marca">${item.marca || ''}</div>
         <div class="cart-item-nombre">${item.nombre}</div>
         <div class="cart-item-qty">
-          <button class="qty-btn" onclick="updateQty(${item.id}, -1)">−</button>
+          <button class="qty-btn" onclick="updateQty(${item.id},-1)">−</button>
           <span class="qty-val">${item.qty}</span>
-          <button class="qty-btn" onclick="updateQty(${item.id}, +1)">+</button>
+          <button class="qty-btn" onclick="updateQty(${item.id},+1)">+</button>
         </div>
       </div>
-      <button class="cart-item-remove" onclick="removeItem(${item.id})" title="Eliminar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14H6L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/><path d="M9,6V4h6v2"/></svg>
-      </button>
-    </div>
-  `).join('');
+      <button class="cart-item-remove" onclick="removeItem(${item.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14H6L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/><path d="M9,6V4h6v2"/></svg></button>
+    </div>`).join('');
 }
 
-function openCart() {
-  document.getElementById('cartOverlay').classList.add('open');
-  document.getElementById('cartDrawer').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeCart() {
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function openCart() { document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartDrawer').classList.remove('open'); document.body.style.overflow = ''; }
 
 document.getElementById('btnCartNav').addEventListener('click', openCart);
 document.getElementById('cartClose').addEventListener('click', closeCart);
@@ -990,130 +946,43 @@ document.getElementById('cartOverlay').addEventListener('click', closeCart);
 
 document.getElementById('btnFinalizar').addEventListener('click', () => {
   const name = document.getElementById('clientName').value.trim();
-  const nameInput = document.getElementById('clientName');
-  if (!name) {
-    nameInput.classList.add('error');
-    nameInput.focus();
-    nameInput.placeholder = '⚠ Tu nombre es obligatorio';
-    return;
-  }
-  nameInput.classList.remove('error');
-  const cart = getCart();
-  if (!cart.length) return;
-
+  const inp = document.getElementById('clientName');
+  if (!name) { inp.classList.add('error'); inp.focus(); inp.placeholder = '⚠ Tu nombre es obligatorio'; return; }
+  inp.classList.remove('error');
+  const cart = getCart(); if (!cart.length) return;
   let msg = `Hola JG Distribuidora! 🌸\n\nMe llamo *${name}* y quisiera hacer el siguiente pedido:\n\n`;
-  cart.forEach(item => {
-    msg += `• *${item.nombre}*${item.marca ? ' (' + item.marca + ')' : ''} — x${item.qty}\n`;
-  });
+  cart.forEach(item => { msg += `• *${item.nombre}*${item.marca ? ' ('+item.marca+')' : ''} — x${item.qty}\n`; });
   msg += `\n¿Tienen disponibilidad y cuál es el precio? ¡Gracias!`;
-
-  const url = `https://wa.me/573128682456?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank');
+  window.open(`https://wa.me/573128682456?text=${encodeURIComponent(msg)}`, '_blank');
 });
 
-// ─── HERO CAROUSEL ───
-let heroIdx = 0;
-const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.hero-dot');
-
-function goToSlide(n) {
-  slides[heroIdx].classList.remove('active');
-  dots[heroIdx].classList.remove('active');
-  heroIdx = (n + slides.length) % slides.length;
-  slides[heroIdx].classList.add('active');
-  dots[heroIdx].classList.add('active');
-  document.getElementById('heroSlides').style.transform = `translateX(-${heroIdx * 100}%)`;
-}
-
-document.getElementById('heroNext').addEventListener('click', () => goToSlide(heroIdx + 1));
-document.getElementById('heroPrev').addEventListener('click', () => goToSlide(heroIdx - 1));
-dots.forEach((d, i) => d.addEventListener('click', () => goToSlide(i)));
-let heroTimer = setInterval(() => goToSlide(heroIdx + 1), 5000);
-document.querySelector('.hero').addEventListener('mouseenter', () => clearInterval(heroTimer));
-document.querySelector('.hero').addEventListener('mouseleave', () => { heroTimer = setInterval(() => goToSlide(heroIdx + 1), 5000); });
-
-// ─── NAVBAR SCROLL ───
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// ─── MOBILE MENU ───
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-function closeMobileMenu() { mobileMenu.classList.remove('open'); }
-
-// ─── PERFUMES POPULARES ───
-const popularIds = [1,6,27,34,24,65,95,72,23,100,93,73,13,59,26];
-const popularData = [
-  {id:1, nombre:'Cloud', marca:'Ariana Grande', genero:'Dama'},
-  {id:6, nombre:'Good Girl', marca:'Carolina Herrera', genero:'Dama'},
-  {id:27, nombre:'Bleu de Chanel', marca:'Chanel', genero:'Caballero'},
-  {id:34, nombre:'Eros', marca:'Versace', genero:'Caballero'},
-  {id:24, nombre:'La Vida es Bella', marca:'Lancôme', genero:'Dama'},
-  {id:65, nombre:'One Million Lucky', marca:'Paco Rabanne', genero:'Caballero'},
-  {id:95, nombre:'Baccarat Rouge', marca:'MFK', genero:'Unisex'},
-  {id:72, nombre:'Invictus', marca:'Paco Rabanne', genero:'Caballero'},
-  {id:23, nombre:'Bombshell', marca:"Victoria's Secret", genero:'Dama'},
-  {id:100, nombre:'Layton', marca:'Parfums de Marly', genero:'Unisex'},
-  {id:93, nombre:'Ombré Leather', marca:'Tom Ford', genero:'Unisex'},
-  {id:73, nombre:'212 VIP Black', marca:'Carolina Herrera', genero:'Caballero'},
-  {id:13, nombre:'Yara', marca:'Lattafa', genero:'Dama'},
-  {id:59, nombre:'Creed Aventus', marca:'Creed', genero:'Caballero'},
-  {id:26, nombre:'Angel', marca:'Mugler', genero:'Caballero'},
-];
-
-function buildPopTrack() {
-  const track = document.getElementById('popTrack');
-  const items = [...popularData, ...popularData]; // doble para loop
-  track.innerHTML = items.map(p => `
-    <div class="pop-card" onclick="addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g,"\\'")}', marca:'${p.marca.replace(/'/g,"\\'")}', genero:'${p.genero}'})">
-      <div class="pop-card-img">
-        <img src="assets/Productos/Imagen${p.id}.png" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/logo.jpeg'">
-      </div>
-      <div class="pop-card-body">
-        <div class="pop-card-marca">${p.marca}</div>
-        <div class="pop-card-nombre">${p.nombre}</div>
-        <div class="pop-card-genero">${p.genero}</div>
-        <button class="pop-card-btn" onclick="event.stopPropagation(); addToCart({id:${p.id}, nombre:'${p.nombre.replace(/'/g,"\\'")}', marca:'${p.marca.replace(/'/g,"\\'")}', genero:'${p.genero}'})">+ Agregar al carrito</button>
-      </div>
-    </div>
-  `).join('');
-}
-buildPopTrack();
-
-// ─── INTERSECTION OBSERVER (reveal) ───
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger').forEach(el => revealObs.observe(el));
-
-// ─── COUNTER ANIMATION ───
-const counterObs = new IntersectionObserver((entries) => {
+// ─── STATS ANIMADOS ───
+const statsObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    const el = e.target;
-    const target = +el.dataset.target;
-    const dur = 1400;
-    const step = target / (dur / 16);
-    let cur = 0;
-    const timer = setInterval(() => {
-      cur = Math.min(cur + step, target);
-      el.textContent = Math.floor(cur);
-      if (cur >= target) clearInterval(timer);
-    }, 16);
-    counterObs.unobserve(el);
+    const cards = document.querySelectorAll('.stat-card');
+    cards.forEach((card, i) => {
+      setTimeout(() => {
+        card.classList.add('animated');
+        const el = card.querySelector('.counter');
+        if (!el) return;
+        const target = +el.dataset.target;
+        let cur = 0; const step = target / 60;
+        const t = setInterval(() => { cur = Math.min(cur + step, target); el.textContent = Math.floor(cur); if (cur >= target) clearInterval(t); }, 20);
+      }, i * 150);
+    });
+    statsObs.unobserve(e.target);
   });
-}, { threshold: 0.5 });
-document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+}, { threshold: 0.3 });
+const statsEl = document.getElementById('statsContainer');
+if (statsEl) statsObs.observe(statsEl);
 
-// ─── INIT CART ───
+// ─── REVEAL ───
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => revealObs.observe(el));
+
 renderCart();
 </script>
 </body>
