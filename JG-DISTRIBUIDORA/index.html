@@ -102,7 +102,7 @@
     /* ════════════════ HERO BANNER INFINITO ════════════════ */
     .hero {
       margin-top: var(--nav-h); position: relative; overflow: hidden;
-      height: min(50vw, 680px);
+      aspect-ratio: 2 / 1; max-height: 680px; width: 100%;
     }
     .hero-track {
       display: flex; height: 100%;
@@ -443,7 +443,7 @@
       .about-stats { grid-template-columns: 1fr; gap: 12px; }
       .populares-inner { padding: 0 20px; }
       .marcas-inner { padding: 0 20px; }
-      .hero { height: min(50vw, 260px); }
+      .hero { max-height: none; }
       .hero-text-section { padding: 40px 20px; }
     }
   </style>
@@ -793,8 +793,8 @@ function buildHero() {
   const order = [N - 1, ...Array.from({length: N}, (_, i) => i), 0];
   track.innerHTML = order.map((i, pos) => {
     const s = heroSlides[i];
-    const attrs = pos === 1 ? 'fetchpriority="high"' : 'loading="lazy"';
-    return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora" ${attrs}></div>`;
+    const priority = pos === 1 ? ' fetchpriority="high"' : '';
+    return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora"${priority}></div>`;
   }).join('');
   track.style.transform = `translateX(-100%)`;
 }
