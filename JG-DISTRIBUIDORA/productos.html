@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Fragancias — JG Distribuidora</title>
   <meta name="description" content="Catálogo completo de fragancias reembazadas. Filtra por género o marca. Más de 105 referencias.">
-  <link rel="icon" type="image/jpeg" href="assets/logo.jpeg">
+  <link rel="icon" type="image/png" href="assets/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -219,6 +219,54 @@
     @media (max-width: 480px) {
       .product-grid { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ─── PRODUCT MODAL ─── */
+    .prod-modal-overlay {
+      position: fixed; inset: 0; z-index: 1200;
+      background: rgba(15,21,32,.75); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+      padding: 20px;
+    }
+    .prod-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .prod-modal {
+      background: var(--blanco); border-radius: 14px;
+      max-width: 860px; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      overflow: hidden; position: relative;
+      max-height: 90vh;
+      transform: scale(.95); transition: transform .3s;
+      box-shadow: 0 32px 80px rgba(15,21,32,.35);
+    }
+    .prod-modal-overlay.open .prod-modal { transform: scale(1); }
+    .prod-modal-img { background: var(--bg); overflow: hidden; }
+    .prod-modal-img img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; display: block; }
+    .prod-modal-body { padding: 36px 32px; display: flex; flex-direction: column; overflow-y: auto; }
+    .prod-modal-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .prod-modal-badge.Dama { background: rgba(212,130,160,.18); color: #8B2252; }
+    .prod-modal-badge.Caballero { background: rgba(26,46,74,.1); color: var(--azul); }
+    .prod-modal-badge.Unisex { background: rgba(196,152,58,.12); color: var(--azul); }
+    .prod-modal-marca { font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dorado); margin-bottom: 8px; }
+    .prod-modal-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--texto); line-height: 1.2; margin-bottom: 18px; }
+    .prod-modal-precio { font-size: 0.88rem; color: var(--texto-medio); padding: 12px 16px; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--dorado); margin-bottom: 24px; line-height: 1.6; }
+    .prod-modal-actions { display: flex; flex-direction: column; gap: 10px; }
+    .prod-modal-nav { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--borde); }
+    .prod-modal-nav-btn { background: none; border: 1.5px solid var(--borde); border-radius: 8px; padding: 8px 16px; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: border-color .2s, color .2s; color: var(--texto-medio); font-family: inherit; }
+    .prod-modal-nav-btn:hover:not(:disabled) { border-color: var(--azul); color: var(--azul); }
+    .prod-modal-nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+    .prod-modal-counter { font-size: 0.75rem; color: var(--texto-medio); }
+    .prod-modal-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.92); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; z-index: 10; box-shadow: 0 2px 8px rgba(15,21,32,.15); }
+    .prod-modal-close:hover { background: #fff; }
+    .prod-modal-close svg { width: 15px; height: 15px; stroke: var(--texto); }
+    .btn-wa-modal { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--whatsapp); color: #fff; border: none; border-radius: 6px; padding: 12px 16px; font-size: 0.82rem; font-weight: 700; text-decoration: none; transition: background .2s; cursor: pointer; }
+    .btn-wa-modal:hover { background: #1ebe5c; }
+    .btn-wa-modal svg { width: 17px; height: 17px; fill: #fff; flex-shrink: 0; }
+    .product-card { cursor: pointer; }
+    @media (max-width: 640px) {
+      .prod-modal { grid-template-columns: 1fr; }
+      .prod-modal-img img { min-height: 240px; max-height: 280px; }
+      .prod-modal-body { padding: 22px 18px; }
+    }
   </style>
 </head>
 <body>
@@ -226,7 +274,7 @@
 <!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="assets/logo.jpeg" alt="JG Distribuidora">
+    <img src="assets/logo.png" alt="JG Distribuidora">
     <div>
       <div class="nav-logo-text">JG Distribuidora</div>
       <div class="nav-logo-sub">Fragancias Reembazadas</div>
@@ -291,6 +339,7 @@
 <div class="catalog-wrap">
   <div class="catalog-info">
     <p class="catalog-count">Mostrando <strong id="countShown">0</strong> fragancias</p>
+    <p style="font-size:0.82rem;color:var(--texto-medio);background:rgba(196,152,58,.1);border:1px solid rgba(196,152,58,.3);border-radius:6px;padding:6px 14px;">💬 Los precios se consultan directamente por WhatsApp — respondemos al instante.</p>
   </div>
   <div class="product-grid" id="productGrid"></div>
 </div>
@@ -300,6 +349,39 @@
   <span class="float-wa-pulse"></span>
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+
+<!-- ═══════════════ PRODUCT MODAL ═══════════════ -->
+<div class="prod-modal-overlay" id="prodModalOverlay">
+  <div class="prod-modal" id="prodModal">
+    <button class="prod-modal-close" id="prodModalClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="prod-modal-img">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="prod-modal-body">
+      <span class="prod-modal-badge" id="modalBadge"></span>
+      <div class="prod-modal-marca" id="modalMarca"></div>
+      <div class="prod-modal-nombre" id="modalNombre"></div>
+      <div class="prod-modal-precio">Consulta el precio y disponibilidad directamente por WhatsApp — te respondemos al instante.</div>
+      <div class="prod-modal-actions">
+        <button class="btn-add-cart" id="modalBtnCart" style="padding:13px 16px;font-size:0.84rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Agregar al carrito
+        </button>
+        <a class="btn-wa-modal" id="modalBtnWA" href="#" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Preguntar por WhatsApp
+        </a>
+      </div>
+      <div class="prod-modal-nav" style="margin-top:20px;">
+        <button class="prod-modal-nav-btn" id="modalPrev">← Anterior</button>
+        <span class="prod-modal-counter" id="modalCounter"></span>
+        <button class="prod-modal-nav-btn" id="modalNext">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════ CART TOAST ═══════════════ -->
 <div id="cartToast">
@@ -440,10 +522,20 @@ const PRODUCTS = [
   {id:105, nombre:'CK One', marca:'Calvin Klein', genero:'Unisex'},
 ];
 
+// ─── IMAGEN PATH (combina formato img y Imagen) ───
+function getImgSrc(id) {
+  if ((id >= 22 && id <= 73) || id === 76) return `assets/Productos/Imagen${id}.png`;
+  const extMap = {5:'jpeg',7:'jpeg',9:'jpeg',11:'jpeg',20:'jpg',21:'jpg'};
+  const ext = extMap[id] || 'png';
+  const num = id === 1 ? '1' : id < 10 ? '0'+id : ''+id;
+  return `assets/Productos/img${num}.${ext}`;
+}
+
 // ─── STATE ───
 let activeGenero = 'Todos';
 let activeMarca = 'Todas';
 let searchTerm = '';
+let modalFiltered = [];
 
 // ─── MARCAS ÚNICAS ───
 const marcas = ['Todas', ...new Set(PRODUCTS.map(p => p.marca).sort())];
@@ -492,6 +584,7 @@ function renderProducts() {
   });
 
   document.getElementById('countShown').textContent = filtered.length;
+  modalFiltered = filtered;
 
   if (!filtered.length) {
     grid.innerHTML = `<div class="no-results">
@@ -503,26 +596,25 @@ function renderProducts() {
 
   const badgeClass = { Dama: 'badge-dama', Caballero: 'badge-caballero', Unisex: 'badge-unisex' };
 
-  grid.innerHTML = filtered.map(p => {
+  grid.innerHTML = filtered.map((p, idx) => {
     const waMsg = encodeURIComponent(`Hola JG Distribuidora! Me interesa la fragancia *${p.nombre}* (${p.marca}) — ¿Cuál es el precio y tienen disponibilidad?`);
     const safeNombre = p.nombre.replace(/'/g, "\\'").replace(/"/g, '\\"');
     const safeMarca = p.marca.replace(/'/g, "\\'").replace(/"/g, '\\"');
     return `
-    <div class="product-card">
+    <div class="product-card" onclick="openProductModal(${idx})">
       <div class="product-card-img">
-        <img src="assets/Productos/Imagen${p.id}.png" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/logo.jpeg'">
+        <img src="${getImgSrc(p.id)}" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/logo.png'">
         <span class="product-badge ${badgeClass[p.genero] || ''}">${p.genero}</span>
       </div>
       <div class="product-card-body">
         <div class="product-card-marca">${p.marca}</div>
         <div class="product-card-nombre">${p.nombre}</div>
-        <div class="product-card-precio">Precio: consultar por WhatsApp</div>
         <div class="product-card-actions">
-          <button class="btn-add-cart" onclick="addToCart({id:${p.id}, nombre:'${safeNombre}', marca:'${safeMarca}', genero:'${p.genero}'})">
+          <button class="btn-add-cart" onclick="event.stopPropagation();addToCart({id:${p.id}, nombre:'${safeNombre}', marca:'${safeMarca}', genero:'${p.genero}'})">
             <svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
             + Carrito
           </button>
-          <a href="https://wa.me/573128682456?text=${waMsg}" target="_blank" class="btn-wa-prod" title="Preguntar por WhatsApp">
+          <a href="https://wa.me/573128682456?text=${waMsg}" target="_blank" class="btn-wa-prod" onclick="event.stopPropagation()" title="Preguntar por WhatsApp">
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </a>
         </div>
@@ -579,7 +671,7 @@ function renderCart() {
   countLabel.textContent = `${total} producto${total !== 1 ? 's' : ''} en tu carrito`;
   body.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img"><img src="assets/Productos/Imagen${item.id}.png" alt="${item.nombre}" onerror="this.src='assets/logo.jpeg'"></div>
+      <div class="cart-item-img"><img src="${getImgSrc(item.id)}" alt="${item.nombre}" onerror="this.src='assets/logo.png'"></div>
       <div class="cart-item-info">
         <div class="cart-item-marca">${item.marca}</div>
         <div class="cart-item-nombre">${item.nombre}</div>
@@ -623,6 +715,57 @@ document.getElementById('btnFinalizar').addEventListener('click', () => {
 
 // ─── MOBILE MENU ───
 document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+
+// ─── PRODUCT MODAL ───
+let modalIdx = 0;
+
+function openProductModal(idx) {
+  modalIdx = idx;
+  renderModal();
+  document.getElementById('prodModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProductModal() {
+  document.getElementById('prodModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function renderModal() {
+  const p = modalFiltered[modalIdx];
+  if (!p) return;
+  const img = document.getElementById('modalImg');
+  img.src = getImgSrc(p.id);
+  img.alt = p.nombre;
+  img.onerror = () => { img.src = 'assets/logo.png'; };
+  document.getElementById('modalBadge').textContent = p.genero;
+  document.getElementById('modalBadge').className = `prod-modal-badge ${p.genero}`;
+  document.getElementById('modalMarca').textContent = p.marca;
+  document.getElementById('modalNombre').textContent = p.nombre;
+  const waMsg = encodeURIComponent(`Hola JG Distribuidora! Me interesa la fragancia *${p.nombre}* (${p.marca}) — ¿Cuál es el precio y disponibilidad?`);
+  document.getElementById('modalBtnWA').href = `https://wa.me/573128682456?text=${waMsg}`;
+  document.getElementById('modalBtnCart').onclick = () => {
+    addToCart({id: p.id, nombre: p.nombre, marca: p.marca, genero: p.genero});
+  };
+  document.getElementById('modalPrev').disabled = modalIdx === 0;
+  document.getElementById('modalNext').disabled = modalIdx === modalFiltered.length - 1;
+  document.getElementById('modalCounter').textContent = `${modalIdx + 1} / ${modalFiltered.length}`;
+}
+
+document.getElementById('prodModalClose').addEventListener('click', closeProductModal);
+document.getElementById('prodModalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('prodModalOverlay')) closeProductModal();
+});
+document.getElementById('modalPrev').addEventListener('click', () => {
+  if (modalIdx > 0) { modalIdx--; renderModal(); }
+});
+document.getElementById('modalNext').addEventListener('click', () => {
+  if (modalIdx < modalFiltered.length - 1) { modalIdx++; renderModal(); }
+});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('prodModalOverlay').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') { if (modalIdx > 0) { modalIdx--; renderModal(); } }
+  else if (e.key === 'ArrowRight') { if (modalIdx < modalFiltered.length - 1) { modalIdx++; renderModal(); } }
+  else if (e.key === 'Escape') closeProductModal();
+});
 
 // ─── URL PARAM (filtro desde index) ───
 const urlParams = new URLSearchParams(window.location.search);

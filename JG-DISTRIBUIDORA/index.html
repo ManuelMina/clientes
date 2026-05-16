@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JG Distribuidora — Fragancias que enamoran, precios que sorprenden</title>
   <meta name="description" content="Tienda virtual de fragancias reembazadas. Envíos a nivel nacional desde Jamundí, Valle del Cauca. Al por mayor y al detal.">
-  <link rel="icon" type="image/jpeg" href="assets/logo.jpeg">
+  <link rel="icon" type="image/png" href="assets/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -99,26 +99,15 @@
     /* ════════════════ HERO BANNER INFINITO ════════════════ */
     .hero {
       margin-top: var(--nav-h); position: relative; overflow: hidden;
-      height: calc(100vh - var(--nav-h)); min-height: 520px;
+      height: min(50vw, 680px);
     }
     .hero-track {
       display: flex; height: 100%;
       transition: transform .75s cubic-bezier(.77,0,.175,1);
     }
     .hero-track.no-transition { transition: none; }
-    .hero-slide { min-width: 100%; height: 100%; position: relative; overflow: hidden; flex-shrink: 0; }
-    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(120deg, rgba(15,29,48,.65) 0%, rgba(26,46,74,.25) 55%, transparent 100%);
-      display: flex; align-items: center; padding: 0 8%;
-    }
-    .hero-content { color: #fff; max-width: 580px; }
-    .hero-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 16px; }
-    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 300; line-height: 1.15; margin-bottom: 18px; }
-    .hero-title em { font-style: italic; color: var(--dorado); }
-    .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.6; margin-bottom: 32px; color: rgba(255,255,255,.88); }
-    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-slide { min-width: 100%; height: 100%; flex-shrink: 0; overflow: hidden; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
@@ -147,6 +136,17 @@
     .hero-dot { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,.4); cursor: pointer; transition: background .3s, width .3s; }
     .hero-dot.active { background: var(--dorado); width: 24px; border-radius: 4px; }
 
+    /* ════════════════ HERO TEXT (después del banner) ════════════════ */
+    .hero-text-section { background: var(--azul); padding: 52px 44px; text-align: center; }
+    .hero-text-inner { max-width: 700px; margin: 0 auto; }
+    .hero-eyebrow-txt { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 16px; }
+    .hero-title-txt { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 18px; }
+    .hero-title-txt em { font-style: italic; color: var(--dorado); }
+    .hero-sub-txt { font-size: 1rem; color: rgba(255,255,255,.82); line-height: 1.65; margin-bottom: 30px; }
+    .hero-ctas-txt { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-outline-hero { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5); border-radius: 4px; padding: 13px 28px; font-size: 0.84rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .25s, border-color .25s; }
+    .btn-outline-hero:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
     /* ════════════════ SECCIÓN BASE ════════════════ */
     section { padding: 84px 44px; max-width: 1280px; margin: 0 auto; }
     .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 10px; }
@@ -156,39 +156,40 @@
     .section-sub { font-size: 1rem; color: var(--texto-medio); line-height: 1.7; max-width: 560px; }
 
     /* ════════════════ LO MÁS PEDIDO (después del banner) ════════════════ */
-    .populares-wrap { background: var(--azul-dark); overflow: hidden; padding: 72px 0; }
+    .populares-wrap { background: #F0F5FB; overflow: hidden; padding: 72px 0; }
     .populares-inner { max-width: 1280px; margin: 0 auto; padding: 0 44px; }
     .pop-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; }
     .pop-header .section-label { color: var(--dorado); }
-    .pop-header .section-title { color: #fff; }
-    .pop-header .section-title em { color: var(--dorado); }
+    .pop-header .section-title { color: var(--texto); }
+    .pop-header .section-title em { color: var(--azul); }
     .pop-track-wrap { overflow: hidden; }
     .pop-track { display: flex; gap: 22px; width: max-content; animation: popSlide 42s linear infinite; }
     .pop-track:hover { animation-play-state: paused; }
     @keyframes popSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     .pop-card {
-      width: 200px; flex-shrink: 0; background: rgba(255,255,255,.06);
+      width: 200px; flex-shrink: 0; background: var(--blanco);
       border-radius: 10px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,.1);
-      transition: transform .3s, background .3s;
+      border: 1px solid var(--borde);
+      box-shadow: 0 2px 16px rgba(26,46,74,.07);
+      transition: transform .3s, box-shadow .3s;
       cursor: pointer;
     }
-    .pop-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.12); }
+    .pop-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(26,46,74,.14); }
     .pop-card-img { height: 200px; overflow: hidden; }
     .pop-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
     .pop-card:hover .pop-card-img img { transform: scale(1.06); }
     .pop-card-body { padding: 14px; }
     .pop-card-marca { font-size: 0.67rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dorado); margin-bottom: 4px; }
-    .pop-card-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: #fff; line-height: 1.3; }
-    .pop-card-genero { font-size: 0.7rem; color: rgba(255,255,255,.55); margin-top: 4px; }
+    .pop-card-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--texto); line-height: 1.3; }
+    .pop-card-genero { font-size: 0.7rem; color: var(--texto-medio); margin-top: 4px; }
     .pop-card-btn {
-      width: 100%; margin-top: 10px; background: var(--dorado); color: #fff;
+      width: 100%; margin-top: 10px; background: var(--azul); color: #fff;
       border: none; border-radius: 4px; padding: 9px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
       cursor: pointer; transition: background .2s;
     }
-    .pop-card-btn:hover { background: #b5882e; }
+    .pop-card-btn:hover { background: var(--azul-light); }
 
     .btn-pop-more {
       display: inline-flex; align-items: center; gap: 8px;
@@ -299,22 +300,20 @@
     .marcas-track { display: flex; gap: 64px; width: max-content; animation: beltSlide 32s linear infinite; align-items: center; }
     @keyframes beltSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* Logos como texto elegante en lugar de SVG — evita riesgo legal */
     .marca-item {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      display: flex; flex-direction: column; align-items: center;
       flex-shrink: 0; cursor: default;
       opacity: .55; transition: opacity .3s;
-      padding: 8px 20px;
+      padding: 8px 28px;
     }
     .marca-item:hover { opacity: 1; }
     .marca-logo-img {
-      height: 80px; width: auto; max-width: 160px;
+      height: 120px; width: auto; max-width: 220px;
       filter: grayscale(1); opacity: .75;
       transition: filter .3s, opacity .3s;
       object-fit: contain;
     }
     .marca-item:hover .marca-logo-img { filter: grayscale(0); opacity: 1; }
-    .marca-ref { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); }
 
     /* ════════════════ FOOTER ════════════════ */
     footer { background: var(--azul-dark); color: rgba(255,255,255,.75); padding: 64px 44px 28px; }
@@ -440,6 +439,8 @@
       .about-stats { grid-template-columns: 1fr; gap: 12px; }
       .populares-inner { padding: 0 20px; }
       .marcas-inner { padding: 0 20px; }
+      .hero { height: min(50vw, 260px); }
+      .hero-text-section { padding: 40px 20px; }
     }
   </style>
 </head>
@@ -448,7 +449,7 @@
 <!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="assets/logo.jpeg" alt="JG Distribuidora">
+    <img src="assets/logo.png" alt="JG Distribuidora">
     <div>
       <div class="nav-logo-text">JG Distribuidora</div>
       <div class="nav-logo-sub">Fragancias Reembazadas</div>
@@ -491,6 +492,19 @@
     <button class="hero-dot active"></button>
     <button class="hero-dot"></button>
     <button class="hero-dot"></button>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO TEXT (después del banner) ═══════════════ -->
+<div class="hero-text-section">
+  <div class="hero-text-inner">
+    <p class="hero-eyebrow-txt">Tienda Virtual · Jamundí, Valle del Cauca</p>
+    <h1 class="hero-title-txt">Fragancias que <em>enamoran</em>,<br>precios que sorprenden</h1>
+    <p class="hero-sub-txt">Más de 105 referencias reembazadas. Envíos a nivel nacional, al por mayor y al detal.</p>
+    <div class="hero-ctas-txt">
+      <a href="productos.html" class="btn-primary">Ver catálogo completo</a>
+      <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!" target="_blank" class="btn-outline-hero">Escribir por WhatsApp</a>
+    </div>
   </div>
 </div>
 
@@ -631,33 +645,33 @@
     <p class="section-label">Inspiradas en las mejores</p>
     <h2 class="section-title">Marcas más <em>reconocidas</em></h2>
     <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
-    <p class="section-sub" style="margin:0 auto; text-align:center;">Nuestras esencias están inspiradas en las casas de perfumería más icónicas del mundo.</p>
+    <p class="section-sub" style="margin:0 auto; text-align:center;">Nuestras esencias están inspiradas en las casas de perfumería más icónicas del mundo. Los logos se muestran como <strong>referencia de inspiración</strong> únicamente — no somos distribuidores oficiales.</p>
   </div>
   <div class="marcas-belt-wrap" style="margin-top:36px;">
     <div class="marcas-track">
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt="Inspirado en Chanel"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt="Inspirado en Dior"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/gucci_245x.svg" alt="Inspirado en Gucci"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/carolina-herrera_245x.svg" alt="Inspirado en Carolina Herrera"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/calvin-klein_245x.svg" alt="Inspirado en Calvin Klein"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/montblanc_245x.svg" alt="Inspirado en Montblanc"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Rabanne_245x.svg" alt="Inspirado en Rabanne"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Lacoste_245x.svg" alt="Inspirado en Lacoste"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/lattafa_245x.svg" alt="Inspirado en Lattafa"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Afnan_245x.svg" alt="Inspirado en Afnan"><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Benetton_245x.svg" alt="Inspirado en Benetton"><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt="Inspirado en Chanel"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt="Inspirado en Dior"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/gucci_245x.svg" alt="Inspirado en Gucci"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/carolina-herrera_245x.svg" alt="Inspirado en Carolina Herrera"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/calvin-klein_245x.svg" alt="Inspirado en Calvin Klein"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/montblanc_245x.svg" alt="Inspirado en Montblanc"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Rabanne_245x.svg" alt="Inspirado en Rabanne"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Lacoste_245x.svg" alt="Inspirado en Lacoste"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/lattafa_245x.svg" alt="Inspirado en Lattafa"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Afnan_245x.svg" alt="Inspirado en Afnan"></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Benetton_245x.svg" alt="Inspirado en Benetton"></div>
       <!-- Duplicado para loop infinito -->
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/gucci_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/carolina-herrera_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/calvin-klein_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/montblanc_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Rabanne_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Lacoste_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/lattafa_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Afnan_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
-      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Benetton_245x.svg" alt=""><span class="marca-ref">Referencia</span></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/gucci_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/carolina-herrera_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/calvin-klein_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/montblanc_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Rabanne_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Lacoste_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/lattafa_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Afnan_245x.svg" alt=""></div>
+      <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/Benetton_245x.svg" alt=""></div>
     </div>
   </div>
 </div>
@@ -669,7 +683,7 @@
   </div>
   <div class="footer-grid">
     <div>
-      <img class="footer-brand-img" src="assets/logo.jpeg" alt="JG Distribuidora">
+      <img class="footer-brand-img" src="assets/logo.png" alt="JG Distribuidora">
       <div class="footer-brand-name">JG Distribuidora</div>
       <div class="footer-brand-slogan">"Fragancias que enamoran, precios que sorprenden"</div>
       <p class="footer-brand-desc">Tienda virtual de fragancias, desde Jamundí para todo Colombia, al por mayor y al detal.</p>
@@ -761,37 +775,22 @@
 <script>
 // ─── HERO SEAMLESS INFINITO ───
 const heroSlides = [
-  { img: 'assets/Banner/Banner1.webp', eyebrow: 'Tienda Virtual · Jamundí, Valle del Cauca', title: 'Fragancias que <em>enamoran</em>,<br>precios que sorprenden', sub: 'Más de 105 referencias reembazadas. Envíos a nivel nacional, al por mayor y al detal.', cta1: { label: 'Ver catálogo', href: 'productos.html' }, cta2: { label: 'Escribir por WhatsApp', href: 'https://wa.me/573128682456?text=Hola!' } },
-  { img: 'assets/Banner/Banner2.webp', eyebrow: 'Colección Dama · 25 Referencias', title: 'El lujo que <em>mereces</em>,<br>al alcance de todos', sub: 'Fragancias femeninas inspiradas en las marcas más icónicas del mundo.', cta1: { label: 'Fragancias para ella', href: 'productos.html?genero=Dama' } },
-  { img: 'assets/Banner/Banner3.webp', eyebrow: 'Reembazado Premium · Envases de Calidad', title: 'Tu <em>aroma favorito</em><br>en el tamaño ideal', sub: 'Tubular 30–100ml · Cuadrada 60–100ml. El volumen que necesitas.', cta1: { label: 'Ver presentaciones', href: '#presentaciones' }, cta2: { label: 'Explorar catálogo', href: 'productos.html' } }
+  { img: 'assets/Banner/Banner1.png' },
+  { img: 'assets/Banner/Banner2.png' },
+  { img: 'assets/Banner/Banner3.png' }
 ];
 
 const N = heroSlides.length;
-let heroIdx = 0; // índice real (0-based)
+let heroIdx = 0;
 let heroAuto;
 
 function buildHero() {
   const track = document.getElementById('heroTrack');
-  // Orden: [clone_last, ...slides, clone_first]
   const order = [N - 1, ...Array.from({length: N}, (_, i) => i), 0];
   track.innerHTML = order.map(i => {
     const s = heroSlides[i];
-    return `<div class="hero-slide" style="min-width:100%;height:100%;position:relative;overflow:hidden;flex-shrink:0;">
-      <img src="${s.img}" alt="JG Distribuidora" style="width:100%;height:100%;object-fit:cover;">
-      <div class="hero-overlay">
-        <div class="hero-content">
-          <p class="hero-eyebrow">${s.eyebrow}</p>
-          <h1 class="hero-title">${s.title}</h1>
-          <p class="hero-sub">${s.sub}</p>
-          <div class="hero-ctas">
-            ${s.cta1 ? `<a href="${s.cta1.href}" class="btn-primary">${s.cta1.label}</a>` : ''}
-            ${s.cta2 ? `<a href="${s.cta2.href}" class="btn-outline">${s.cta2.label}</a>` : ''}
-          </div>
-        </div>
-      </div>
-    </div>`;
+    return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora"></div>`;
   }).join('');
-  // Posición inicial: mostrar slide real 0 (track index 1)
   track.style.transform = `translateX(-100%)`;
 }
 
@@ -836,23 +835,38 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// ─── POPULARES ───
+// ─── IMAGEN PATH (combina formato img y Imagen mientras se actualizan) ───
+function getImgSrc(id) {
+  if ((id >= 22 && id <= 73) || id === 76) return `assets/Productos/Imagen${id}.png`;
+  const extMap = {5:'jpeg',7:'jpeg',9:'jpeg',11:'jpeg',20:'jpg',21:'jpg'};
+  const ext = extMap[id] || 'png';
+  const num = id === 1 ? '1' : id < 10 ? '0'+id : ''+id;
+  return `assets/Productos/img${num}.${ext}`;
+}
+
+// ─── POPULARES (productos 1-10 Dama y 90-100 Unisex) ───
 const popularData = [
-  {id:1,nombre:'Cloud',marca:'Ariana Grande',genero:'Dama'},
-  {id:6,nombre:'Good Girl',marca:'Carolina Herrera',genero:'Dama'},
-  {id:27,nombre:'Bleu de Chanel',marca:'Chanel',genero:'Caballero'},
-  {id:34,nombre:'Eros',marca:'Versace',genero:'Caballero'},
-  {id:24,nombre:'La Vida es Bella',marca:'Lancôme',genero:'Dama'},
-  {id:65,nombre:'One Million Lucky',marca:'Paco Rabanne',genero:'Caballero'},
-  {id:95,nombre:'Baccarat Rouge 540',marca:'MFK',genero:'Unisex'},
-  {id:72,nombre:'Invictus',marca:'Paco Rabanne',genero:'Caballero'},
-  {id:23,nombre:'Bombshell',marca:"Victoria's Secret",genero:'Dama'},
-  {id:100,nombre:'Layton',marca:'Parfums de Marly',genero:'Unisex'},
-  {id:93,nombre:'Ombré Leather',marca:'Tom Ford',genero:'Unisex'},
-  {id:73,nombre:'212 VIP Black',marca:'Carolina Herrera',genero:'Caballero'},
-  {id:13,nombre:'Yara',marca:'Lattafa',genero:'Dama'},
-  {id:59,nombre:'Creed Aventus',marca:'Creed',genero:'Caballero'},
-  {id:26,nombre:'Angel',marca:'Mugler',genero:'Caballero'},
+  {id:1,  nombre:'Cloud',               marca:'Ariana Grande',     genero:'Dama'},
+  {id:2,  nombre:'Chanel Nº 5 Classic', marca:'Chanel',            genero:'Dama'},
+  {id:3,  nombre:'Moon Sparkle',        marca:'Lattafa',            genero:'Dama'},
+  {id:4,  nombre:'Thank U Next',        marca:'Ariana Grande',     genero:'Dama'},
+  {id:5,  nombre:'Delilah',             marca:'Juliette Has a Gun', genero:'Dama'},
+  {id:6,  nombre:'Good Girl',           marca:'Carolina Herrera',  genero:'Dama'},
+  {id:7,  nombre:'Noble Blush',         marca:'Lattafa',            genero:'Dama'},
+  {id:8,  nombre:'212 VIP',             marca:'Carolina Herrera',  genero:'Dama'},
+  {id:9,  nombre:'Heiress Pink',        marca:'Paris Hilton',      genero:'Dama'},
+  {id:10, nombre:'Toy 2',               marca:'Moschino',          genero:'Dama'},
+  {id:90, nombre:'Manège Rouge',        marca:'Al Haramain',       genero:'Unisex'},
+  {id:91, nombre:'Amber Oud Gold',      marca:'Al Haramain',       genero:'Unisex'},
+  {id:92, nombre:'Club de Nuit Milestone',marca:'Armaf',           genero:'Unisex'},
+  {id:93, nombre:'Ombré Leather 16',    marca:'Tom Ford',          genero:'Unisex'},
+  {id:94, nombre:'Ombré Nomade',        marca:'Louis Vuitton',     genero:'Unisex'},
+  {id:95, nombre:'Baccarat Rouge 540',  marca:'MFK',               genero:'Unisex'},
+  {id:96, nombre:'Intense Café',        marca:'Montale',           genero:'Unisex'},
+  {id:97, nombre:'9PM Rebel',           marca:'Afnan',             genero:'Unisex'},
+  {id:98, nombre:'Stallion 53',         marca:'Afnan',             genero:'Unisex'},
+  {id:99, nombre:'Sceptre Malachite',   marca:'Orientica',         genero:'Unisex'},
+  {id:100,nombre:'Layton',              marca:'Parfums de Marly',  genero:'Unisex'},
 ];
 
 (function buildPop() {
@@ -862,7 +876,7 @@ const popularData = [
     const sn = p.nombre.replace(/'/g,"\\'");
     const sm = p.marca.replace(/'/g,"\\'");
     return `<div class="pop-card">
-      <div class="pop-card-img"><img src="assets/Productos/Imagen${p.id}.png" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/logo.jpeg'"></div>
+      <div class="pop-card-img"><img src="${getImgSrc(p.id)}" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/logo.png'"></div>
       <div class="pop-card-body">
         <div class="pop-card-marca">${p.marca}</div>
         <div class="pop-card-nombre">${p.nombre}</div>
@@ -923,7 +937,7 @@ function renderCart() {
   label.textContent = `${total} producto${total !== 1 ? 's' : ''} en tu carrito`;
   body.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img"><img src="assets/Productos/Imagen${item.id}.png" alt="${item.nombre}" onerror="this.src='assets/logo.jpeg'"></div>
+      <div class="cart-item-img"><img src="assets/Productos/Imagen${item.id}.png" alt="${item.nombre}" onerror="this.src='assets/logo.png'"></div>
       <div class="cart-item-info">
         <div class="cart-item-marca">${item.marca || ''}</div>
         <div class="cart-item-nombre">${item.nombre}</div>
