@@ -102,7 +102,7 @@
     /* ════════════════ HERO BANNER INFINITO ════════════════ */
     .hero {
       margin-top: var(--nav-h); position: relative; overflow: hidden;
-      aspect-ratio: 2 / 1; max-height: 680px; width: 100%;
+      height: min(50vw, 680px);
     }
     .hero-track {
       display: flex; height: 100%;
@@ -443,7 +443,7 @@
       .about-stats { grid-template-columns: 1fr; gap: 12px; }
       .populares-inner { padding: 0 20px; }
       .marcas-inner { padding: 0 20px; }
-      .hero { max-height: none; }
+      .hero { height: 50vw; }
       .hero-text-section { padding: 40px 20px; }
     }
   </style>
