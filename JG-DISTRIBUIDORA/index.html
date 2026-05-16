@@ -6,6 +6,9 @@
   <title>JG Distribuidora — Fragancias que enamoran, precios que sorprenden</title>
   <meta name="description" content="Tienda virtual de fragancias reembazadas. Envíos a nivel nacional desde Jamundí, Valle del Cauca. Al por mayor y al detal.">
   <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/Banner/Banner1.png" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,6 +107,7 @@
     .hero-track {
       display: flex; height: 100%;
       transition: transform .75s cubic-bezier(.77,0,.175,1);
+      will-change: transform;
     }
     .hero-track.no-transition { transition: none; }
     .hero-slide { min-width: 100%; height: 100%; flex-shrink: 0; overflow: hidden; }
@@ -163,7 +167,7 @@
     .pop-header .section-title { color: var(--texto); }
     .pop-header .section-title em { color: var(--azul); }
     .pop-track-wrap { overflow: hidden; }
-    .pop-track { display: flex; gap: 22px; width: max-content; animation: popSlide 42s linear infinite; }
+    .pop-track { display: flex; gap: 22px; width: max-content; animation: popSlide 42s linear infinite; will-change: transform; }
     .pop-track:hover { animation-play-state: paused; }
     @keyframes popSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -297,7 +301,7 @@
     .marcas-wrap { background: var(--blanco); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 64px 0; overflow: hidden; }
     .marcas-inner { max-width: 1280px; margin: 0 auto; padding: 0 44px; text-align: center; margin-bottom: 40px; }
     .marcas-belt-wrap { overflow: hidden; }
-    .marcas-track { display: flex; gap: 64px; width: max-content; animation: beltSlide 32s linear infinite; align-items: center; }
+    .marcas-track { display: flex; gap: 64px; width: max-content; animation: beltSlide 32s linear infinite; align-items: center; will-change: transform; }
     @keyframes beltSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     .marca-item {
@@ -787,9 +791,10 @@ let heroAuto;
 function buildHero() {
   const track = document.getElementById('heroTrack');
   const order = [N - 1, ...Array.from({length: N}, (_, i) => i), 0];
-  track.innerHTML = order.map(i => {
+  track.innerHTML = order.map((i, pos) => {
     const s = heroSlides[i];
-    return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora"></div>`;
+    const attrs = pos === 1 ? 'fetchpriority="high"' : 'loading="lazy"';
+    return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora" ${attrs}></div>`;
   }).join('');
   track.style.transform = `translateX(-100%)`;
 }

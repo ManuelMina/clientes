@@ -6,6 +6,8 @@
   <title>Catálogo de Fragancias — JG Distribuidora</title>
   <meta name="description" content="Catálogo completo de fragancias reembazadas. Filtra por género o marca. Más de 105 referencias.">
   <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -103,8 +105,9 @@
       background: var(--blanco); border-radius: 10px; overflow: hidden;
       border: 1px solid var(--borde); transition: transform .3s, box-shadow .3s;
       display: flex; flex-direction: column;
+      content-visibility: auto; contain-intrinsic-size: 0 340px;
     }
-    .product-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,46,74,.14); }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,46,74,.14); will-change: transform; }
     .product-card-img {
       aspect-ratio: 3/4; overflow: hidden; position: relative; background: var(--bg);
     }
