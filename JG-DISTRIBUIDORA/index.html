@@ -141,15 +141,15 @@
     .hero-dot.active { background: var(--dorado); width: 24px; border-radius: 4px; }
 
     /* ════════════════ HERO TEXT (después del banner) ════════════════ */
-    .hero-text-section { background: var(--azul); padding: 52px 44px; text-align: center; }
+    .hero-text-section { background: var(--bg); padding: 52px 44px; text-align: center; border-bottom: 1px solid var(--borde); }
     .hero-text-inner { max-width: 700px; margin: 0 auto; }
     .hero-eyebrow-txt { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 16px; }
-    .hero-title-txt { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 18px; }
+    .hero-title-txt { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: var(--azul); line-height: 1.2; margin-bottom: 18px; }
     .hero-title-txt em { font-style: italic; color: var(--dorado); }
-    .hero-sub-txt { font-size: 1rem; color: rgba(255,255,255,.82); line-height: 1.65; margin-bottom: 30px; }
+    .hero-sub-txt { font-size: 1rem; color: var(--texto-medio); line-height: 1.65; margin-bottom: 30px; }
     .hero-ctas-txt { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-    .btn-outline-hero { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5); border-radius: 4px; padding: 13px 28px; font-size: 0.84rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .25s, border-color .25s; }
-    .btn-outline-hero:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+    .btn-outline-hero { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--azul); border: 1.5px solid var(--azul); border-radius: 4px; padding: 13px 28px; font-size: 0.84rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .25s, border-color .25s; }
+    .btn-outline-hero:hover { background: rgba(26,46,74,.08); border-color: var(--azul); }
 
     /* ════════════════ SECCIÓN BASE ════════════════ */
     section { padding: 84px 44px; max-width: 1280px; margin: 0 auto; }
@@ -276,26 +276,26 @@
     }
 
     /* ════════════════ MÉTODOS DE PAGO ════════════════ */
-    .pagos-wrap { background: var(--azul); padding: 56px 44px; }
+    .pagos-wrap { background: #F0F5FB; padding: 56px 44px; border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); }
     .pagos-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
     .pagos-left { flex-shrink: 0; }
-    .pagos-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: #fff; margin-bottom: 6px; }
-    .pagos-sub { color: rgba(255,255,255,.65); font-size: 0.9rem; }
+    .pagos-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: var(--azul); margin-bottom: 6px; }
+    .pagos-sub { color: var(--texto-medio); font-size: 0.9rem; }
     .pagos-right { flex: 1; }
     .pagos-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
     .pago-chip {
-      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-      color: #fff; padding: 10px 20px; border-radius: 40px;
+      background: var(--blanco); border: 1.5px solid var(--borde);
+      color: var(--azul); padding: 10px 20px; border-radius: 40px;
       font-size: 0.95rem; font-weight: 700; letter-spacing: 0.3px;
-      white-space: nowrap;
+      white-space: nowrap; box-shadow: 0 2px 8px rgba(26,46,74,.06);
     }
     .pago-chip svg { width: 14px; height: 14px; vertical-align: middle; margin-right: 4px; }
     .pago-warning {
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      background: var(--dorado-soft); border: 1px solid rgba(196,152,58,.3);
       border-radius: 8px; padding: 12px 20px; display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.88rem; color: rgba(255,255,255,.8);
+      font-size: 0.88rem; color: var(--texto-medio);
     }
-    .pago-warning strong { color: #fff; }
+    .pago-warning strong { color: var(--azul); }
 
     /* ════════════════ MARCAS MÁS RECONOCIDAS (abajo) ════════════════ */
     .marcas-wrap { background: var(--blanco); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 32px 0; overflow: hidden; }
@@ -313,28 +313,28 @@
     .marca-item:hover { opacity: 1; }
     .marca-logo-img {
       height: 160px; width: auto; max-width: 280px;
-      filter: grayscale(1); opacity: .8;
+      filter: grayscale(1) brightness(0.15); opacity: .9;
       transition: filter .3s, opacity .3s;
       object-fit: contain;
     }
     .marca-item:hover .marca-logo-img { filter: grayscale(0); opacity: 1; }
 
     /* ════════════════ FOOTER ════════════════ */
-    footer { background: var(--azul-dark); color: rgba(255,255,255,.75); padding: 64px 44px 28px; }
+    footer { background: var(--bg); color: var(--texto-medio); padding: 64px 44px 28px; border-top: 2px solid var(--borde); }
     .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 44px; }
     .footer-brand-img { height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--dorado); margin-bottom: 14px; }
-    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: #fff; margin-bottom: 6px; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--azul); margin-bottom: 6px; }
     .footer-brand-slogan { font-size: 0.82rem; font-style: italic; color: var(--dorado); margin-bottom: 14px; }
-    .footer-brand-desc { font-size: 0.84rem; line-height: 1.7; }
+    .footer-brand-desc { font-size: 0.84rem; line-height: 1.7; color: var(--texto-medio); }
     .footer-col-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dorado); margin-bottom: 18px; }
     .footer-links { list-style: none; }
     .footer-links li { margin-bottom: 10px; }
-    .footer-links a { text-decoration: none; color: rgba(255,255,255,.65); font-size: 0.88rem; transition: color .2s; }
-    .footer-links a:hover { color: #fff; }
-    .footer-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.88rem; }
+    .footer-links a { text-decoration: none; color: var(--texto-medio); font-size: 0.88rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--azul); }
+    .footer-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.88rem; color: var(--texto-medio); }
     .footer-contact-item svg { width: 15px; height: 15px; fill: var(--dorado); flex-shrink: 0; }
-    .footer-contact-item a { color: rgba(255,255,255,.75); text-decoration: none; transition: color .2s; }
-    .footer-contact-item a:hover { color: #fff; }
+    .footer-contact-item a { color: var(--texto-medio); text-decoration: none; transition: color .2s; }
+    .footer-contact-item a:hover { color: var(--azul); }
     .btn-wa-footer {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       background: var(--whatsapp); color: #fff; border: none; border-radius: 8px;
@@ -345,21 +345,16 @@
     .btn-wa-footer:hover { background: #1ebe5c; transform: translateY(-2px); }
     .btn-wa-footer svg { width: 17px; height: 17px; fill: #fff; }
     .footer-social { display: flex; gap: 10px; margin-top: 14px; }
-    .social-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: background .2s; }
-    .social-icon:hover { background: rgba(255,255,255,.18); }
-    .social-icon svg { width: 15px; height: 15px; fill: #fff; }
-    .footer-disclaimer { max-width: 1280px; margin: 0 auto 28px; background: rgba(196,152,58,.1); border-left: 3px solid var(--dorado); padding: 12px 18px; border-radius: 0 6px 6px 0; font-size: 0.78rem; color: rgba(255,255,255,.6); line-height: 1.6; }
-    .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,.4); }
-    .footer-bottom a { color: rgba(255,255,255,.55); text-decoration: none; }
-    .footer-bottom a:hover { color: #fff; }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--borde); border: 1px solid var(--borde); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background .2s; }
+    .social-icon:hover { background: rgba(26,46,74,.12); }
+    .social-icon svg { width: 15px; height: 15px; fill: var(--azul); }
+    .footer-disclaimer { max-width: 1280px; margin: 0 auto 28px; background: var(--dorado-soft); border-left: 3px solid var(--dorado); padding: 12px 18px; border-radius: 0 6px 6px 0; font-size: 0.78rem; color: var(--texto-medio); line-height: 1.6; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 20px; border-top: 1px solid var(--borde); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { font-size: 0.78rem; color: var(--texto-medio); }
+    .footer-bottom a { color: var(--texto-medio); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--azul); }
 
-    /* ════════════════ FLOAT WA ════════════════ */
-    .float-wa { position: fixed; bottom: 28px; right: 28px; z-index: 900; width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,.45); transition: transform .25s; text-decoration: none; }
-    .float-wa:hover { transform: scale(1.1); }
-    .float-wa svg { width: 28px; height: 28px; fill: #fff; position: relative; z-index: 1; }
-    .float-wa-pulse { position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50%; background: var(--whatsapp); animation: pulse 2.2s infinite; }
-    @keyframes pulse { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.38); opacity: 0; } }
+    /* float-wa eliminado */
 
     /* ════════════════ CART TOAST ════════════════ */
     .cart-toast {
@@ -528,47 +523,6 @@
   </div>
 </div>
 
-<!-- ═══════════════ NOSOTROS ═══════════════ -->
-<section id="nosotros">
-  <div class="about-grid">
-    <div class="about-img-wrap reveal-left">
-      <div class="about-frame"></div>
-      <img src="assets/Presentación/1.jpeg" alt="JG Distribuidora — Envases Premium">
-    </div>
-    <div class="reveal-right">
-      <p class="section-label">Quiénes somos</p>
-      <h2 class="section-title">Tu tienda de <em>fragancias</em><br>de confianza</h2>
-      <div class="section-divider"></div>
-      <p class="section-sub">Somos JG Distribuidora, una tienda virtual ubicada en <strong>Jamundí, Valle del Cauca</strong>, especializada en fragancias reembazadas de las mejores marcas del mundo.</p>
-      <br>
-      <p class="section-sub">Ofrecemos esencias inspiradas en los perfumes más icónicos, reembazadas con los mejores materiales, a precios accesibles para todos.</p>
-      <div class="about-tags" style="margin-top:24px;">
-        <span class="tag">Envíos Nacionales</span>
-        <span class="tag">Al Por Mayor</span>
-        <span class="tag">Al Detal</span>
-        <span class="tag">Jamundí, Valle</span>
-      </div>
-      <div class="about-stats" style="margin-top:28px;" id="statsContainer">
-        <div class="stat-card">
-          <span class="stat-icon">🌺</span>
-          <span class="stat-num counter" data-target="105">0</span>
-          <span class="stat-label">Referencias</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">✨</span>
-          <span class="stat-num counter" data-target="3">0</span>
-          <span class="stat-label">Géneros</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">🏆</span>
-          <span class="stat-num counter" data-target="11">0</span>
-          <span class="stat-label">Marcas</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════════ PRESENTACIONES ═══════════════ -->
 <section id="presentaciones" style="background: var(--blanco); max-width:100%; padding: 84px 44px;">
   <div style="max-width:1280px; margin:0 auto;">
@@ -615,6 +569,47 @@
     </div>
     <div class="pres-note reveal" style="margin-top:36px;">
       <strong>Aviso:</strong> Todos nuestros productos son <strong>esencias reembazadas inspiradas</strong> en perfumes originales de grandes marcas. No vendemos productos originales. Al pedir por WhatsApp, indícanos la presentación y volumen que deseas.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NOSOTROS ═══════════════ -->
+<section id="nosotros">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal-left">
+      <div class="about-frame"></div>
+      <img src="assets/Presentación/1.jpeg" alt="JG Distribuidora — Envases Premium">
+    </div>
+    <div class="reveal-right">
+      <p class="section-label">Quiénes somos</p>
+      <h2 class="section-title">Tu tienda de <em>fragancias</em><br>de confianza</h2>
+      <div class="section-divider"></div>
+      <p class="section-sub">Somos JG Distribuidora, una tienda virtual ubicada en <strong>Jamundí, Valle del Cauca</strong>, especializada en fragancias reembazadas de las mejores marcas del mundo.</p>
+      <br>
+      <p class="section-sub">Ofrecemos esencias inspiradas en los perfumes más icónicos, reembazadas con los mejores materiales, a precios accesibles para todos.</p>
+      <div class="about-tags" style="margin-top:24px;">
+        <span class="tag">Envíos Nacionales</span>
+        <span class="tag">Al Por Mayor</span>
+        <span class="tag">Al Detal</span>
+        <span class="tag">Jamundí, Valle</span>
+      </div>
+      <div class="about-stats" style="margin-top:28px;" id="statsContainer">
+        <div class="stat-card">
+          <span class="stat-icon">🌺</span>
+          <span class="stat-num counter" data-target="105">0</span>
+          <span class="stat-label">Referencias</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">✨</span>
+          <span class="stat-num counter" data-target="3">0</span>
+          <span class="stat-label">Géneros</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🏆</span>
+          <span class="stat-num counter" data-target="11">0</span>
+          <span class="stat-label">Marcas</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -736,12 +731,6 @@
   </div>
 </footer>
 
-<!-- Float WhatsApp -->
-<a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!" target="_blank" class="float-wa" title="WhatsApp">
-  <span class="float-wa-pulse"></span>
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
 <!-- Toast carrito -->
 <div class="cart-toast" id="cartToast">
   <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -840,9 +829,8 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// ─── IMAGEN PATH (combina formato img y Imagen mientras se actualizan) ───
+// ─── IMAGEN PATH ───
 function getImgSrc(id) {
-  if ((id >= 22 && id <= 73) || id === 76) return `assets/Productos/Imagen${id}.png`;
   const extMap = {5:'jpeg',7:'jpeg',9:'jpeg',11:'jpeg',20:'jpg',21:'jpg'};
   const ext = extMap[id] || 'png';
   const num = id === 1 ? '1' : id < 10 ? '0'+id : ''+id;
