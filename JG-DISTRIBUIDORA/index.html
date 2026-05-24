@@ -110,8 +110,8 @@
       will-change: transform;
     }
     .hero-track.no-transition { transition: none; }
-    .hero-slide { min-width: 100%; height: 100%; flex-shrink: 0; overflow: hidden; }
-    .hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-slide { flex: 0 0 auto; height: 100%; overflow: hidden; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
@@ -802,71 +802,79 @@
 </div>
 
 <script>
-// ─── HERO SEAMLESS INFINITO (corregido para móvil) ───
-// Track layout: [clone_last | slide0 | slide1 | slide2 | clone_first]
-// Posiciones:         0          1        2        3          4
+// ─── HERO SEAMLESS INFINITO ───
+// Layout del track: [clone_N-1 | slide_0 | slide_1 | slide_2 | clone_0]
+// El error anterior: min-width:100% en CSS tomaba el tamaño natural de la imagen (3780px)
+// Fix: cada slide recibe width en PÍXELES desde JS basado en hero.offsetWidth
 const heroSlides = [
   { img: 'assets/Banner/Banner1.png' },
   { img: 'assets/Banner/Banner2.png' },
   { img: 'assets/Banner/Banner3.png' }
 ];
 
-const N = heroSlides.length;
-let heroPos = 1; // posición actual en el track (1 = primer slide real)
+const HN = heroSlides.length;
+let heroPos = 1;
 let heroAuto;
+
+function heroW() {
+  return document.getElementById('hero').offsetWidth || window.innerWidth;
+}
 
 function buildHero() {
   const track = document.getElementById('heroTrack');
-  const order = [N - 1, ...Array.from({length: N}, (_, i) => i), 0];
+  const w = heroW();
+  const order = [HN - 1, ...Array.from({length: HN}, (_, i) => i), 0];
   track.innerHTML = order.map((i, pos) => {
-    const s = heroSlides[i];
     const priority = pos === 1 ? ' fetchpriority="high"' : '';
-    return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora"${priority}></div>`;
+    return `<div class="hero-slide" style="width:${w}px;height:100%;flex-shrink:0;overflow:hidden;">` +
+           `<img src="${heroSlides[i].img}" alt="JG Distribuidora" style="width:100%;height:100%;object-fit:cover;display:block;"${priority}></div>`;
   }).join('');
 }
 
-function heroW() { return document.getElementById('hero').offsetWidth; }
-
-function heroMove(pos, animate = true) {
+function heroMove(pos, animate) {
+  if (animate === undefined) animate = true;
   const track = document.getElementById('heroTrack');
   heroPos = pos;
   if (!animate) track.classList.add('no-transition');
-  track.style.transform = `translateX(${-heroPos * heroW()}px)`;
+  track.style.transform = 'translateX(' + (-heroPos * heroW()) + 'px)';
   if (!animate) { track.getBoundingClientRect(); track.classList.remove('no-transition'); }
-  const realIdx = ((heroPos - 1) % N + N) % N;
-  document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === realIdx));
+  const realIdx = ((heroPos - 1) % HN + HN) % HN;
+  document.querySelectorAll('.hero-dot').forEach(function(d, i) { d.classList.toggle('active', i === realIdx); });
 }
 
 function heroNext() { heroMove(heroPos + 1); }
 function heroPrev() { heroMove(heroPos - 1); }
 
 // Salto silencioso al llegar a un clon
-document.getElementById('heroTrack').addEventListener('transitionend', () => {
-  if (heroPos <= 0) heroMove(N, false);
-  else if (heroPos >= N + 1) heroMove(1, false);
+document.getElementById('heroTrack').addEventListener('transitionend', function() {
+  if (heroPos <= 0) heroMove(HN, false);
+  else if (heroPos >= HN + 1) heroMove(1, false);
 });
 
-document.querySelectorAll('.hero-dot').forEach((d, i) =>
-  d.addEventListener('click', () => { clearInterval(heroAuto); heroMove(i + 1); startHeroAuto(); })
-);
+// Dots
+document.querySelectorAll('.hero-dot').forEach(function(d, i) {
+  d.addEventListener('click', function() { clearInterval(heroAuto); heroMove(i + 1); startHeroAuto(); });
+});
 
-// Reposicionar en resize sin animación
-window.addEventListener('resize', () => heroMove(heroPos, false));
+// Resize: reconstruye slides con nuevo ancho
+window.addEventListener('resize', function() { buildHero(); heroMove(heroPos, false); });
 
-// Touch swipe en móvil
-let _tx = 0;
-document.getElementById('hero').addEventListener('touchstart', e => { _tx = e.changedTouches[0].clientX; }, { passive: true });
-document.getElementById('hero').addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - _tx;
+// Touch swipe
+var _tx = 0;
+document.getElementById('hero').addEventListener('touchstart', function(e) {
+  _tx = e.changedTouches[0].clientX;
+}, { passive: true });
+document.getElementById('hero').addEventListener('touchend', function(e) {
+  var dx = e.changedTouches[0].clientX - _tx;
   if (Math.abs(dx) > 44) { clearInterval(heroAuto); dx < 0 ? heroNext() : heroPrev(); startHeroAuto(); }
 }, { passive: true });
 
 function startHeroAuto() { heroAuto = setInterval(heroNext, 5000); }
 
 buildHero();
-heroMove(1, false); // posición inicial sin animación
+heroMove(1, false);
 startHeroAuto();
-document.getElementById('hero').addEventListener('mouseenter', () => clearInterval(heroAuto));
+document.getElementById('hero').addEventListener('mouseenter', function() { clearInterval(heroAuto); });
 document.getElementById('hero').addEventListener('mouseleave', startHeroAuto);
 
 // ─── NAVBAR SCROLL ───
