@@ -102,7 +102,7 @@
     /* ════════════════ HERO BANNER INFINITO ════════════════ */
     .hero {
       margin-top: var(--nav-h); position: relative; overflow: hidden;
-      height: min(50vw, 680px);
+      height: clamp(300px, 50vw, 780px);
     }
     .hero-track {
       display: flex; height: 100%;
@@ -144,9 +144,9 @@
     .hero-text-section { background: var(--bg); padding: 52px 44px; text-align: center; border-bottom: 1px solid var(--borde); }
     .hero-text-inner { max-width: 700px; margin: 0 auto; }
     .hero-eyebrow-txt { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 16px; }
-    .hero-title-txt { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: var(--azul); line-height: 1.2; margin-bottom: 18px; }
+    .hero-title-txt { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 300; color: var(--azul); line-height: 1.15; margin-bottom: 18px; }
     .hero-title-txt em { font-style: italic; color: var(--dorado); }
-    .hero-sub-txt { font-size: 1rem; color: var(--texto-medio); line-height: 1.65; margin-bottom: 30px; }
+    .hero-sub-txt { font-size: 1.1rem; color: var(--texto-medio); line-height: 1.65; margin-bottom: 30px; }
     .hero-ctas-txt { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
     .btn-outline-hero { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--azul); border: 1.5px solid var(--azul); border-radius: 4px; padding: 13px 28px; font-size: 0.84rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .25s, border-color .25s; }
     .btn-outline-hero:hover { background: rgba(26,46,74,.08); border-color: var(--azul); }
@@ -334,15 +334,25 @@
     .footer-contact-item svg { width: 15px; height: 15px; fill: var(--dorado); flex-shrink: 0; }
     .footer-contact-item a { color: var(--texto-medio); text-decoration: none; transition: color .2s; }
     .footer-contact-item a:hover { color: var(--azul); }
+    .footer-contact-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
     .btn-wa-footer {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: var(--whatsapp); color: #fff; border: none; border-radius: 8px;
-      padding: 13px 18px; font-size: 0.88rem; font-weight: 700;
-      cursor: pointer; text-decoration: none; width: 100%; margin-top: 6px;
-      transition: background .2s, transform .2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      background: var(--whatsapp); color: #fff; border: none; border-radius: 7px;
+      padding: 9px 14px; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s;
     }
-    .btn-wa-footer:hover { background: #1ebe5c; transform: translateY(-2px); }
-    .btn-wa-footer svg { width: 17px; height: 17px; fill: #fff; }
+    .btn-wa-footer:hover { background: #1ebe5c; }
+    .btn-wa-footer svg { width: 14px; height: 14px; fill: #fff; flex-shrink: 0; }
+    .btn-ig-footer {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      background: linear-gradient(135deg, #E1306C 0%, #833AB4 100%); color: #fff; border: none; border-radius: 7px;
+      padding: 9px 14px; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn-ig-footer:hover { opacity: .85; }
+    .btn-ig-footer svg { width: 14px; height: 14px; fill: #fff; flex-shrink: 0; }
     .footer-social { display: flex; gap: 10px; margin-top: 14px; }
     .social-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--borde); border: 1px solid var(--borde); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background .2s; }
     .social-icon:hover { background: rgba(26,46,74,.12); }
@@ -430,18 +440,56 @@
       nav { padding: 0 20px; }
       .nav-links, .btn-wa-nav { display: none; }
       .hamburger { display: flex; }
-      section { padding: 56px 20px; }
-      .pagos-wrap { padding: 48px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-      footer { padding: 48px 20px 24px; }
-      .pop-card { width: 170px; }
-      .pop-card-img { height: 170px; }
-      .about-grid { gap: 32px; }
-      .about-stats { grid-template-columns: 1fr; gap: 12px; }
-      .populares-inner { padding: 0 20px; }
-      .marcas-inner { padding: 0 20px; }
+
+      /* Espaciado general reducido */
+      section { padding: 40px 20px; }
+      .hero-text-section { padding: 32px 20px; }
+
+      /* Banner: ratio exacto 2:1 */
       .hero { height: 50vw; }
-      .hero-text-section { padding: 40px 20px; }
+
+      /* Texto hero en PC ya es más grande; en móvil ajustar a legible */
+      .hero-title-txt { font-size: clamp(1.9rem, 7.5vw, 2.8rem); }
+      .hero-sub-txt { font-size: 0.96rem; }
+
+      /* Lo más pedido */
+      .populares-wrap { padding: 44px 0; }
+      .populares-inner { padding: 0 16px; }
+      .pop-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+      .pop-card { width: 155px; }
+      .pop-card-img { height: 155px; }
+      .pop-card-body { padding: 10px 11px 12px; }
+      .pop-card-nombre { font-size: 0.9rem; }
+      .pop-card-btn { font-size: 0.68rem; padding: 7px 6px; margin-top: 7px; }
+
+      /* Métodos de pago */
+      .pagos-wrap { padding: 36px 20px; }
+      .pagos-inner { gap: 18px; }
+      .pagos-title { font-size: 1.5rem; }
+      .pagos-row { gap: 7px; }
+      .pago-chip { font-size: 0.75rem; padding: 6px 10px; }
+      .pago-warning { font-size: 0.8rem; }
+
+      /* Marcas: gap a la mitad */
+      .marcas-inner { padding: 0 20px; }
+      .marcas-track { gap: 22px; }
+      .marca-logo-img { height: 110px; }
+
+      /* Presentaciones */
+      .pres-card-img { height: 240px; }
+      .pres-card-body { padding: 20px 20px 24px; }
+
+      /* About */
+      .about-grid { gap: 32px; }
+      .about-stats { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+      .stat-card { padding: 14px 8px; }
+      .stat-num { font-size: 1.8rem; }
+
+      /* Footer: 2 columnas compactas */
+      footer { padding: 36px 20px 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .footer-grid > div:first-child { grid-column: 1 / -1; }
+      .footer-grid > div:last-child { grid-column: 1 / -1; }
     }
   </style>
 </head>
@@ -457,7 +505,7 @@
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
     <li><a href="productos.html">Catálogo</a></li>
     <li><a href="#presentaciones">Presentaciones</a></li>
     <li><a href="#pagos">Pagos</a></li>
@@ -477,7 +525,7 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#nosotros" onclick="document.getElementById('mobileMenu').classList.remove('open')">Nosotros</a>
+  <a href="nosotros.html">Nosotros</a>
   <a href="productos.html">Catálogo</a>
   <a href="#presentaciones" onclick="document.getElementById('mobileMenu').classList.remove('open')">Presentaciones</a>
   <a href="#pagos" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pagos</a>
@@ -594,45 +642,7 @@
 </section>
 
 <!-- ═══════════════ NOSOTROS ═══════════════ -->
-<section id="nosotros">
-  <div class="about-grid">
-    <div class="about-img-wrap reveal-left">
-      <div class="about-frame"></div>
-      <img src="assets/Presentación/2.png" alt="JG Distribuidora — Envases Premium">
-    </div>
-    <div class="reveal-right">
-      <p class="section-label">Quiénes somos</p>
-      <h2 class="section-title">Tu tienda de <em>fragancias</em><br>de confianza</h2>
-      <div class="section-divider"></div>
-      <p class="section-sub">Somos JG Distribuidora, una tienda virtual ubicada en <strong>Jamundí, Valle del Cauca</strong>, especializada en fragancias reembazadas de las mejores marcas del mundo.</p>
-      <br>
-      <p class="section-sub">Ofrecemos esencias inspiradas en los perfumes más icónicos, reembazadas con los mejores materiales, a precios accesibles para todos.</p>
-      <div class="about-tags" style="margin-top:24px;">
-        <span class="tag">Envíos Nacionales</span>
-        <span class="tag">Al Por Mayor</span>
-        <span class="tag">Al Detal</span>
-        <span class="tag">Jamundí, Valle</span>
-      </div>
-      <div class="about-stats" style="margin-top:28px;" id="statsContainer">
-        <div class="stat-card">
-          <span class="stat-icon">🌺</span>
-          <span class="stat-num counter" data-target="105">0</span>
-          <span class="stat-label">Referencias</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">✨</span>
-          <span class="stat-num counter" data-target="3">0</span>
-          <span class="stat-label">Géneros</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">🏆</span>
-          <span class="stat-num counter" data-target="11">0</span>
-          <span class="stat-label">Marcas</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Nosotros ahora está en nosotros.html -->
 
 <!-- ═══════════════ MÉTODOS DE PAGO ═══════════════ -->
 <div class="pagos-wrap" id="pagos">
@@ -715,7 +725,7 @@
     <div>
       <p class="footer-col-title">Navegación</p>
       <ul class="footer-links">
-        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
         <li><a href="productos.html">Catálogo</a></li>
         <li><a href="#presentaciones">Presentaciones</a></li>
         <li><a href="#pagos">Métodos de pago</a></li>
@@ -739,10 +749,16 @@
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <a href="https://wa.me/573128682456" target="_blank">+57 312 868 2456</a>
       </div>
-      <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!%20Quisiera%20hacer%20un%20pedido." target="_blank" class="btn-wa-footer">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Hacer un pedido
-      </a>
+      <div class="footer-contact-btns">
+        <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!%20Quisiera%20hacer%20un%20pedido." target="_blank" class="btn-wa-footer">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://instagram.com/jg.distribuidora" target="_blank" class="btn-ig-footer">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">
