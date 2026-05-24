@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JG Distribuidora — Fragancias que enamoran, precios que sorprenden</title>
-  <meta name="description" content="Tienda virtual de fragancias reembazadas. Envíos a nivel nacional desde Jamundí, Valle del Cauca. Al por mayor y al detal.">
+  <meta name="description" content="Tienda virtual de fragancias inspiradas en las mejores marcas. Envíos a nivel nacional desde Jamundí, Valle del Cauca. Al por mayor y al detal.">
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -445,8 +445,8 @@
       section { padding: 40px 20px; }
       .hero-text-section { padding: 32px 20px; }
 
-      /* Banner: ratio exacto 2:1 */
-      .hero { height: 50vw; }
+      /* Banner: ratio 2:1, mínimo 200px para que no se vea diminuto */
+      .hero { height: max(50vw, 200px); }
 
       /* Texto hero en PC ya es más grande; en móvil ajustar a legible */
       .hero-title-txt { font-size: clamp(1.9rem, 7.5vw, 2.8rem); }
@@ -549,7 +549,7 @@
   <div class="hero-text-inner">
     <p class="hero-eyebrow-txt">Tienda Virtual · Jamundí, Valle del Cauca</p>
     <h1 class="hero-title-txt">Fragancias que <em>enamoran</em>,<br>precios que sorprenden</h1>
-    <p class="hero-sub-txt">Más de 105 referencias reembazadas. Envíos a nivel nacional, al por mayor y al detal.</p>
+    <p class="hero-sub-txt">Más de 105 fragancias inspiradas en las mejores marcas. Envíos a nivel nacional, al por mayor y al detal.</p>
     <div class="hero-ctas-txt">
       <a href="productos.html" class="btn-primary">Ver catálogo completo</a>
       <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!" target="_blank" class="btn-outline-hero">Escribir por WhatsApp</a>
@@ -580,7 +580,7 @@
       <p class="section-label">Lo que recibes</p>
       <h2 class="section-title">Tu fragancia en un <em>envase premium</em></h2>
       <div class="section-divider"></div>
-      <p class="section-sub">Cuando haces tu pedido, seleccionas la fragancia, el tipo de envase y el volumen. Nosotros reembazamos tu esencia en un hermoso frasco de vidrio con spray y te lo enviamos a todo Colombia. Eso es lo que recibes: una fragancia increíble en un envase de calidad.</p>
+      <p class="section-sub">Cuando haces tu pedido, seleccionas la fragancia, el tipo de envase y el volumen. Nosotros envasamos tu esencia en un hermoso frasco de vidrio con spray y te lo enviamos a todo Colombia. Eso es lo que recibes: una fragancia increíble en un envase de calidad.</p>
     </div>
     <div class="pres-grid">
 
@@ -708,7 +708,7 @@
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
   <div class="footer-disclaimer">
-    <strong>Aviso legal:</strong> JG Distribuidora comercializa esencias reembazadas <em>inspiradas</em> en perfumes de marca. No somos distribuidores oficiales ni vendemos productos originales. Las marcas mencionadas son referencias de inspiración únicamente.
+    <strong>Aviso legal:</strong> JG Distribuidora comercializa esencias <em>inspiradas</em> en perfumes de marca. No somos distribuidores oficiales ni vendemos productos originales. Las marcas mencionadas son referencias de inspiración únicamente.
   </div>
   <div class="footer-grid">
     <div>
@@ -802,7 +802,9 @@
 </div>
 
 <script>
-// ─── HERO SEAMLESS INFINITO ───
+// ─── HERO SEAMLESS INFINITO (corregido para móvil) ───
+// Track layout: [clone_last | slide0 | slide1 | slide2 | clone_first]
+// Posiciones:         0          1        2        3          4
 const heroSlides = [
   { img: 'assets/Banner/Banner1.png' },
   { img: 'assets/Banner/Banner2.png' },
@@ -810,7 +812,7 @@ const heroSlides = [
 ];
 
 const N = heroSlides.length;
-let heroIdx = 0;
+let heroPos = 1; // posición actual en el track (1 = primer slide real)
 let heroAuto;
 
 function buildHero() {
@@ -821,36 +823,48 @@ function buildHero() {
     const priority = pos === 1 ? ' fetchpriority="high"' : '';
     return `<div class="hero-slide"><img src="${s.img}" alt="JG Distribuidora"${priority}></div>`;
   }).join('');
-  track.style.transform = `translateX(-100%)`;
 }
 
-function heroGoTo(realIdx, animate = true) {
+function heroW() { return document.getElementById('hero').offsetWidth; }
+
+function heroMove(pos, animate = true) {
   const track = document.getElementById('heroTrack');
-  const dots = document.querySelectorAll('.hero-dot');
-  heroIdx = ((realIdx % N) + N) % N;
-  const trackIdx = heroIdx + 1; // +1 por el clone_last al inicio
+  heroPos = pos;
   if (!animate) track.classList.add('no-transition');
-  track.style.transform = `translateX(-${trackIdx * 100}%)`;
+  track.style.transform = `translateX(${-heroPos * heroW()}px)`;
   if (!animate) { track.getBoundingClientRect(); track.classList.remove('no-transition'); }
-  dots.forEach((d, i) => d.classList.toggle('active', i === heroIdx));
+  const realIdx = ((heroPos - 1) % N + N) % N;
+  document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === realIdx));
 }
 
-function heroNext() { heroGoTo(heroIdx + 1); }
+function heroNext() { heroMove(heroPos + 1); }
+function heroPrev() { heroMove(heroPos - 1); }
 
-// Al final de la transición, reposicionar silenciosamente si está en clone
+// Salto silencioso al llegar a un clon
 document.getElementById('heroTrack').addEventListener('transitionend', () => {
-  const track = document.getElementById('heroTrack');
-  const slideCount = N + 2; // clones incluidos
-  const current = heroIdx + 1;
-  if (current === 0) { heroGoTo(N - 1, false); }
-  else if (current === slideCount - 1) { heroGoTo(0, false); }
+  if (heroPos <= 0) heroMove(N, false);
+  else if (heroPos >= N + 1) heroMove(1, false);
 });
 
-document.querySelectorAll('.hero-dot').forEach((d, i) => d.addEventListener('click', () => { clearInterval(heroAuto); heroGoTo(i); startHeroAuto(); }));
+document.querySelectorAll('.hero-dot').forEach((d, i) =>
+  d.addEventListener('click', () => { clearInterval(heroAuto); heroMove(i + 1); startHeroAuto(); })
+);
+
+// Reposicionar en resize sin animación
+window.addEventListener('resize', () => heroMove(heroPos, false));
+
+// Touch swipe en móvil
+let _tx = 0;
+document.getElementById('hero').addEventListener('touchstart', e => { _tx = e.changedTouches[0].clientX; }, { passive: true });
+document.getElementById('hero').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - _tx;
+  if (Math.abs(dx) > 44) { clearInterval(heroAuto); dx < 0 ? heroNext() : heroPrev(); startHeroAuto(); }
+}, { passive: true });
 
 function startHeroAuto() { heroAuto = setInterval(heroNext, 5000); }
 
 buildHero();
+heroMove(1, false); // posición inicial sin animación
 startHeroAuto();
 document.getElementById('hero').addEventListener('mouseenter', () => clearInterval(heroAuto));
 document.getElementById('hero').addEventListener('mouseleave', startHeroAuto);
