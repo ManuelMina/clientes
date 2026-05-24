@@ -248,11 +248,11 @@
     .prod-modal-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--texto); line-height: 1.2; margin-bottom: 18px; }
     .prod-modal-precio { font-size: 0.88rem; color: var(--texto-medio); padding: 12px 16px; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--dorado); margin-bottom: 24px; line-height: 1.6; }
     .prod-modal-actions { display: flex; flex-direction: column; gap: 10px; }
-    .prod-modal-nav { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--borde); }
-    .prod-modal-nav-btn { background: none; border: 1.5px solid var(--borde); border-radius: 8px; padding: 8px 16px; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: border-color .2s, color .2s; color: var(--texto-medio); font-family: inherit; }
-    .prod-modal-nav-btn:hover:not(:disabled) { border-color: var(--azul); color: var(--azul); }
+    .prod-modal-nav { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--borde); gap: 10px; }
+    .prod-modal-nav-btn { background: var(--azul); border: none; border-radius: 8px; padding: 11px 22px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; color: #fff; font-family: inherit; transition: background .2s, opacity .2s; white-space: nowrap; }
+    .prod-modal-nav-btn:hover:not(:disabled) { background: #243d61; }
     .prod-modal-nav-btn:disabled { opacity: .3; cursor: not-allowed; }
-    .prod-modal-counter { font-size: 0.75rem; color: var(--texto-medio); }
+    .prod-modal-counter { font-size: 0.95rem; font-weight: 700; color: var(--azul); background: rgba(196,152,58,.15); border: 1px solid rgba(196,152,58,.35); padding: 6px 14px; border-radius: 20px; white-space: nowrap; }
     .prod-modal-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.92); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; z-index: 10; box-shadow: 0 2px 8px rgba(15,21,32,.15); }
     .prod-modal-close:hover { background: #fff; }
     .prod-modal-close svg { width: 15px; height: 15px; stroke: var(--texto); }

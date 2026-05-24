@@ -167,7 +167,7 @@
     .pop-header .section-title { color: var(--texto); }
     .pop-header .section-title em { color: var(--azul); }
     .pop-track-wrap { overflow: hidden; }
-    .pop-track { display: flex; gap: 22px; width: max-content; animation: popSlide 42s linear infinite; will-change: transform; }
+    .pop-track { display: flex; gap: 22px; width: max-content; animation: popSlide 72s linear infinite; will-change: transform; }
     .pop-track:hover { animation-play-state: paused; }
     @keyframes popSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -248,26 +248,25 @@
 
     .pres-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
     .pres-card {
-      background: var(--blanco); border-radius: 10px; overflow: hidden;
+      background: var(--blanco); border-radius: 12px; overflow: hidden;
       border: 1px solid var(--borde);
       box-shadow: 0 4px 20px rgba(26,46,74,.06);
       transition: transform .35s, box-shadow .35s;
     }
     .pres-card:hover { transform: translateY(-6px); box-shadow: 0 18px 52px rgba(26,46,74,.13); }
-    .pres-card-img { height: 300px; overflow: hidden; }
-    .pres-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .pres-card-img { height: 340px; overflow: hidden; background: #F5F1EB; display: flex; align-items: center; justify-content: center; }
+    .pres-card-img img { width: 100%; height: 100%; object-fit: contain; padding: 20px; transition: transform .5s; }
     .pres-card:hover .pres-card-img img { transform: scale(1.04); }
     .pres-card-body { padding: 28px 32px 32px; }
-    .pres-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .pres-card-ico {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--azul); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .pres-card-ico svg { width: 18px; height: 18px; fill: var(--dorado); }
-    .pres-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; color: var(--texto); }
-    .pres-card-desc { font-size: 0.9rem; color: var(--texto-medio); line-height: 1.65; margin-bottom: 18px; }
+    .pres-card-tipo { font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dorado); margin-bottom: 6px; }
+    .pres-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--texto); margin-bottom: 12px; }
+    .pres-card-desc { font-size: 0.9rem; color: var(--texto-medio); line-height: 1.65; margin-bottom: 20px; }
     .pres-sizes { display: flex; gap: 10px; flex-wrap: wrap; }
     .pres-size { background: var(--dorado-soft); border: 1.5px solid var(--dorado); color: var(--azul); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+    .pres-gallery { border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); background: #F5F1EB; display: grid; grid-template-columns: 1fr 1fr; align-items: center; margin-top: 36px; }
+    .pres-gallery-txt { padding: 40px 48px; }
+    .pres-gallery-img { height: 320px; overflow: hidden; }
+    .pres-gallery-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
     .pres-note {
       background: var(--dorado-soft); border-left: 3px solid var(--dorado);
       padding: 18px 22px; border-radius: 0 8px 8px 0; margin-top: 32px;
@@ -298,8 +297,8 @@
     .pago-warning strong { color: var(--azul); }
 
     /* ════════════════ MARCAS MÁS RECONOCIDAS (abajo) ════════════════ */
-    .marcas-wrap { background: var(--blanco); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 32px 0; overflow: hidden; }
-    .marcas-inner { max-width: 1280px; margin: 0 auto; padding: 0 44px; text-align: center; margin-bottom: 20px; }
+    .marcas-wrap { background: var(--blanco); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 20px 0; overflow: hidden; }
+    .marcas-inner { max-width: 1280px; margin: 0 auto; padding: 0 44px; text-align: center; margin-bottom: 12px; }
     .marcas-belt-wrap { overflow: hidden; }
     .marcas-track { display: flex; gap: 40px; width: max-content; animation: beltSlide 32s linear infinite; align-items: center; will-change: transform; }
     @keyframes beltSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -422,6 +421,9 @@
       .about-img-wrap { max-width: 500px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .pres-grid { grid-template-columns: 1fr; }
+      .pres-gallery { grid-template-columns: 1fr; }
+      .pres-gallery-txt { padding: 28px 24px; }
+      .pres-gallery-img { height: 240px; }
       .pagos-inner { flex-direction: column; gap: 28px; }
     }
     @media (max-width: 768px) {
@@ -527,22 +529,22 @@
 <section id="presentaciones" style="background: var(--blanco); max-width:100%; padding: 84px 44px;">
   <div style="max-width:1280px; margin:0 auto;">
     <div class="pres-intro reveal">
-      <p class="section-label">Presentaciones disponibles</p>
-      <h2 class="section-title">¿Cómo te llega tu <em>fragancia</em>?</h2>
+      <p class="section-label">Lo que recibes</p>
+      <h2 class="section-title">Tu fragancia en un <em>envase premium</em></h2>
       <div class="section-divider"></div>
-      <p class="section-sub">Trabajamos con envases de vidrio de alta calidad, solo debes elegir el tamaño y la presentación que más te convenga.</p>
+      <p class="section-sub">Cuando haces tu pedido, seleccionas la fragancia, el tipo de envase y el volumen. Nosotros reembazamos tu esencia en un hermoso frasco de vidrio con spray y te lo enviamos a todo Colombia. Eso es lo que recibes: una fragancia increíble en un envase de calidad.</p>
     </div>
     <div class="pres-grid">
+
+      <!-- Envase Tubular — frasco cilíndrico -->
       <div class="pres-card reveal-left">
-        <div class="pres-card-img"><img src="assets/Presentación/4.jpeg" alt="Presentación Tubular"></div>
+        <div class="pres-card-img">
+          <img src="assets/Presentación/2.png" alt="Envase Tubular cilíndrico — JG Distribuidora">
+        </div>
         <div class="pres-card-body">
-          <div class="pres-card-header">
-            <div class="pres-card-ico">
-              <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="3"/></svg>
-            </div>
-            <h3 class="pres-card-title">Presentación Tubular</h3>
-          </div>
-          <p class="pres-card-desc">Envase cilíndrico transparente con válvula spray de alta calidad. Ideal para llevar en bolso o bolsillo. Disponible en varios colores de tapa.</p>
+          <p class="pres-card-tipo">Presentación 1</p>
+          <h3 class="pres-card-title">Envase Tubular</h3>
+          <p class="pres-card-desc">Frasco cilíndrico de vidrio transparente con atomizador spray de alta precisión. Compacto, elegante y fácil de transportar. Disponible en varios colores de tapa metálica — plateado, dorado, azul, rosa y más.</p>
           <div class="pres-sizes">
             <span class="pres-size">30 ml</span>
             <span class="pres-size">60 ml</span>
@@ -550,25 +552,43 @@
           </div>
         </div>
       </div>
+
+      <!-- Envase Cuadrado — frasco corrugado cuadrado -->
       <div class="pres-card reveal-right">
-        <div class="pres-card-img"><img src="assets/Presentación/1.jpeg" alt="Presentación Cuadrada"></div>
+        <div class="pres-card-img">
+          <img src="assets/Presentación/1.png" alt="Envase Cuadrado corrugado — JG Distribuidora">
+        </div>
         <div class="pres-card-body">
-          <div class="pres-card-header">
-            <div class="pres-card-ico">
-              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
-            </div>
-            <h3 class="pres-card-title">Presentación Cuadrada</h3>
-          </div>
-          <p class="pres-card-desc">Envase corrugado cuadrado con válvula rosca tipo atomizador. Diseño elegante y sofisticado, perfecto para el hogar o como regalo.</p>
+          <p class="pres-card-tipo">Presentación 2</p>
+          <h3 class="pres-card-title">Envase Cuadrado</h3>
+          <p class="pres-card-desc">Frasco cuadrado corrugado de vidrio con atomizador spray de alta calidad. Diseño moderno y sofisticado, perfecto para el hogar, la oficina o para dar como regalo especial.</p>
           <div class="pres-sizes">
             <span class="pres-size">60 ml</span>
             <span class="pres-size">100 ml</span>
           </div>
         </div>
       </div>
+
     </div>
-    <div class="pres-note reveal" style="margin-top:36px;">
-      <strong>Aviso:</strong> Todos nuestros productos son <strong>esencias reembazadas inspiradas</strong> en perfumes originales de grandes marcas. No vendemos productos originales. Al pedir por WhatsApp, indícanos la presentación y volumen que deseas.
+
+    <!-- Galería: variedad de colores de tapa -->
+    <div class="pres-gallery reveal">
+      <div class="pres-gallery-txt">
+        <p class="pres-card-tipo">Elige tu estilo</p>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.65rem; font-weight:400; color:var(--texto); margin-bottom:14px; line-height:1.25;">Tapa a tu color favorito</h3>
+        <p style="font-size:0.9rem; color:var(--texto-medio); line-height:1.65; margin-bottom:24px;">Cada fragancia viene en un frasco de vidrio transparente con tapa metálica de tu elección — plateado, dorado, azul, rosa, rojo y más. Una fragancia increíble en un envase que te representa.</p>
+        <a href="https://wa.me/573128682456" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--whatsapp); color:#fff; border:none; border-radius:8px; padding:11px 22px; font-size:0.85rem; font-weight:700; text-decoration:none; transition:background .2s;">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+      <div class="pres-gallery-img">
+        <img src="assets/Presentación/3.png" alt="Variedad de colores en envases tubulares — JG Distribuidora">
+      </div>
+    </div>
+
+    <div class="pres-note reveal">
+      💡 <strong>¿Cómo pedir?</strong> Escríbenos por WhatsApp, cuéntanos qué fragancia te gustó, el tipo de envase (tubular o cuadrado) y el volumen. ¡Nosotros nos encargamos del resto! — <em>Recuerda: sin pago previo no hacemos envíos.</em>
     </div>
   </div>
 </section>
@@ -578,7 +598,7 @@
   <div class="about-grid">
     <div class="about-img-wrap reveal-left">
       <div class="about-frame"></div>
-      <img src="assets/Presentación/1.jpeg" alt="JG Distribuidora — Envases Premium">
+      <img src="assets/Presentación/2.png" alt="JG Distribuidora — Envases Premium">
     </div>
     <div class="reveal-right">
       <p class="section-label">Quiénes somos</p>
@@ -646,7 +666,7 @@
     <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
     <p class="section-sub" style="margin:0 auto; text-align:center;">Nuestras esencias están inspiradas en las casas de perfumería más icónicas del mundo. Los logos se muestran como <strong>referencia de inspiración</strong> únicamente — no somos distribuidores oficiales.</p>
   </div>
-  <div class="marcas-belt-wrap" style="margin-top:16px;">
+  <div class="marcas-belt-wrap" style="margin-top:8px;">
     <div class="marcas-track">
       <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/chanel_245x.svg" alt="Inspirado en Chanel"></div>
       <div class="marca-item"><img class="marca-logo-img" src="assets/Marcas/dior_245x.svg" alt="Inspirado en Dior"></div>
