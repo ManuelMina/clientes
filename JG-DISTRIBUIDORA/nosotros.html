@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiénes Somos — JG Distribuidora</title>
+  <meta name="description" content="Conoce a JG Distribuidora, tu tienda virtual de fragancias inspiradas en las mejores marcas del mundo. Envíos a todo Colombia desde Jamundí, Valle del Cauca.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --azul: #1A2E4A; --azul-light: #243d61; --dorado: #C4983A;
+      --dorado-soft: rgba(196,152,58,.1); --bg: #F8F8F5; --blanco: #fff;
+      --texto: #1F2937; --texto-medio: #4A5468; --borde: #E5E0D8;
+      --whatsapp: #25D366; --nav-h: 70px;
+    }
+    body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--texto); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--nav-h); background: rgba(248,248,245,.96);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--borde);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 44px; transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(26,46,74,.08); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 40px; width: 40px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--dorado); }
+    .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--azul); line-height: 1.1; }
+    .nav-logo-sub { font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--texto-medio); }
+    .nav-links { list-style: none; display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 0.82rem; letter-spacing: 0.5px; color: var(--texto-medio); transition: color .2s; font-weight: 400; }
+    .nav-links a:hover, .nav-links a.active { color: var(--azul); }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .btn-wa-nav {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--whatsapp); color: #fff; border: none; border-radius: 6px;
+      padding: 8px 16px; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: background .2s;
+    }
+    .btn-wa-nav:hover { background: #1ebe5c; }
+    .btn-wa-nav svg { width: 14px; height: 14px; fill: #fff; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--azul); border-radius: 2px; transition: .3s; }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 999;
+      background: rgba(248,248,245,.98); backdrop-filter: blur(12px);
+      padding: 20px 24px; display: flex; flex-direction: column; gap: 4px;
+      border-bottom: 1px solid var(--borde);
+      transform: translateY(-110%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu a { padding: 12px 8px; font-size: 1rem; color: var(--texto); border-bottom: 1px solid var(--borde); }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      margin-top: var(--nav-h); background: var(--bg);
+      padding: 60px 44px 52px; border-bottom: 1px solid var(--borde);
+      text-align: center;
+    }
+    .page-hero-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 14px; }
+    .page-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; color: var(--azul); line-height: 1.2; margin-bottom: 16px; }
+    .page-hero-title em { font-style: italic; color: var(--dorado); }
+    .page-hero-sub { font-size: 1rem; color: var(--texto-medio); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .page-hero-divider { width: 44px; height: 2px; background: var(--dorado); margin: 18px auto 22px; }
+
+    /* ── SHARED ── */
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 10px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.2; color: var(--texto); }
+    .section-title em { font-style: italic; color: var(--azul); }
+    .section-divider { width: 44px; height: 2px; background: var(--dorado); margin: 18px 0 28px; }
+    .section-sub { font-size: 1rem; color: var(--texto-medio); line-height: 1.7; max-width: 560px; }
+    .tag { background: var(--dorado-soft); color: var(--azul); border: 1px solid rgba(196,152,58,.3); padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px; }
+
+    /* ── ABOUT SECTION ── */
+    .about-section { padding: 80px 44px; max-width: 1280px; margin: 0 auto; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img { width: 100%; height: 480px; object-fit: cover; border-radius: 6px; box-shadow: 20px 24px 60px rgba(26,46,74,.15); }
+    .about-frame { position: absolute; inset: -16px 16px 16px -16px; border: 2px solid var(--dorado); border-radius: 6px; z-index: -1; opacity: .4; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .stat-card {
+      background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px;
+      padding: 20px 16px; text-align: center;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--azul), var(--dorado));
+      transform: scaleX(0); transform-origin: left; transition: transform .6s ease;
+    }
+    .stat-card.animated::before { transform: scaleX(1); }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,46,74,.12); border-color: var(--dorado); }
+    .stat-icon { font-size: 1.6rem; margin-bottom: 8px; display: block; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--azul); line-height: 1; display: block; }
+    .stat-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); margin-top: 6px; display: block; }
+
+    /* ── VALUES SECTION ── */
+    .values-section { background: var(--blanco); padding: 80px 44px; border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); }
+    .values-inner { max-width: 1280px; margin: 0 auto; }
+    .values-header { text-align: center; margin-bottom: 52px; }
+    .values-header .section-divider { margin: 18px auto 0; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .value-card { background: var(--bg); border: 1px solid var(--borde); border-radius: 12px; padding: 32px 28px; text-align: center; transition: transform .3s, box-shadow .3s; }
+    .value-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(26,46,74,.1); }
+    .value-icon { font-size: 2.4rem; margin-bottom: 18px; display: block; }
+    .value-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--azul); margin-bottom: 10px; }
+    .value-desc { font-size: 0.88rem; color: var(--texto-medio); line-height: 1.65; }
+
+    /* ── CTA SECTION ── */
+    .cta-section { padding: 72px 44px; text-align: center; }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-section .section-divider { margin: 18px auto 24px; }
+    .cta-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--dorado); color: #fff; border: none; border-radius: 4px;
+      padding: 14px 28px; font-size: 0.84rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none; transition: background .25s;
+    }
+    .btn-primary:hover { background: #b5882e; }
+    .btn-primary svg { width: 16px; height: 16px; fill: #fff; }
+    .btn-outline-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--azul); border: 1.5px solid var(--azul);
+      border-radius: 4px; padding: 13px 28px; font-size: 0.84rem; font-weight: 400;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none; transition: background .25s;
+    }
+    .btn-outline-dark:hover { background: rgba(26,46,74,.07); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg); color: var(--texto-medio); padding: 64px 44px 28px; border-top: 2px solid var(--borde); }
+    .footer-disclaimer { max-width: 1280px; margin: 0 auto 28px; background: var(--dorado-soft); border-left: 3px solid var(--dorado); padding: 12px 18px; border-radius: 0 6px 6px 0; font-size: 0.78rem; color: var(--texto-medio); line-height: 1.6; }
+    .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 44px; }
+    .footer-brand-img { height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--dorado); margin-bottom: 14px; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--azul); margin-bottom: 4px; }
+    .footer-brand-slogan { font-size: 0.78rem; color: var(--dorado); font-style: italic; margin-bottom: 10px; }
+    .footer-brand-desc { font-size: 0.82rem; line-height: 1.6; }
+    .footer-col-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--azul); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.84rem; color: var(--texto-medio); transition: color .2s; }
+    .footer-links a:hover { color: var(--azul); }
+    .footer-contact-item { display: flex; align-items: center; gap: 8px; font-size: 0.84rem; margin-bottom: 10px; }
+    .footer-contact-item svg { width: 16px; height: 16px; fill: var(--dorado); flex-shrink: 0; }
+    .footer-contact-item a { transition: color .2s; }
+    .footer-contact-item a:hover { color: var(--azul); }
+    .footer-contact-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .btn-wa-footer { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--whatsapp); color: #fff; border: none; border-radius: 7px; padding: 9px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .btn-wa-footer:hover { background: #1ebe5c; }
+    .btn-wa-footer svg { width: 14px; height: 14px; fill: #fff; flex-shrink: 0; }
+    .btn-ig-footer { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #E1306C 0%, #833AB4 100%); color: #fff; border: none; border-radius: 7px; padding: 9px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity .2s; }
+    .btn-ig-footer:hover { opacity: .85; }
+    .btn-ig-footer svg { width: 14px; height: 14px; fill: #fff; flex-shrink: 0; }
+    .footer-social { display: flex; gap: 10px; margin-top: 14px; }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--borde); border: 1px solid var(--borde); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background .2s; }
+    .social-icon:hover { background: rgba(26,46,74,.12); }
+    .social-icon svg { width: 15px; height: 15px; fill: var(--azul); }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 20px; border-top: 1px solid var(--borde); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { font-size: 0.78rem; }
+    .footer-bottom a { font-size: 0.78rem; color: var(--dorado); }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(36px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-wrap { max-width: 500px; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links, .btn-wa-nav { display: none; }
+      .hamburger { display: flex; }
+      .page-hero { padding: 40px 20px 36px; }
+      .about-section { padding: 44px 20px; }
+      .about-img-wrap img { height: 300px; }
+      .about-stats { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+      .stat-card { padding: 14px 8px; }
+      .stat-num { font-size: 1.8rem; }
+      .values-section { padding: 44px 20px; }
+      .values-grid { grid-template-columns: 1fr; gap: 18px; }
+      .cta-section { padding: 44px 20px; }
+      footer { padding: 36px 20px 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .footer-grid > div:first-child { grid-column: 1 / -1; }
+      .footer-grid > div:last-child { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="JG Distribuidora">
+    <div>
+      <div class="nav-logo-text">JG Distribuidora</div>
+      <div class="nav-logo-sub">Fragancias Reembazadas</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+    <li><a href="productos.html">Catálogo</a></li>
+    <li><a href="index.html#presentaciones">Presentaciones</a></li>
+    <li><a href="index.html#pagos">Pagos</a></li>
+    <li><a href="politicas.html">Políticas</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!" target="_blank" class="btn-wa-nav">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="nosotros.html">Nosotros</a>
+  <a href="productos.html">Catálogo</a>
+  <a href="index.html#presentaciones">Presentaciones</a>
+  <a href="index.html#pagos">Pagos</a>
+  <a href="politicas.html">Políticas</a>
+</div>
+
+<!-- ═══════════════ PAGE HERO ═══════════════ -->
+<div class="page-hero">
+  <p class="page-hero-label">Nuestra historia</p>
+  <h1 class="page-hero-title">Quiénes <em>somos</em></h1>
+  <div class="page-hero-divider"></div>
+  <p class="page-hero-sub">Una tienda virtual con corazón, fundada por una mujer apasionada por las fragancias, desde Jamundí para todo Colombia.</p>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<div class="about-section">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal-left">
+      <div class="about-frame"></div>
+      <img src="assets/Presentación/2.png" alt="JG Distribuidora — Envases Premium">
+    </div>
+    <div class="reveal-right">
+      <p class="section-label">Quiénes somos</p>
+      <h2 class="section-title">Tu tienda de <em>fragancias</em><br>de confianza</h2>
+      <div class="section-divider"></div>
+      <p class="section-sub">Somos JG Distribuidora, una tienda virtual ubicada en <strong>Jamundí, Valle del Cauca</strong>, especializada en fragancias inspiradas en las mejores marcas del mundo.</p>
+      <br>
+      <p class="section-sub">Ofrecemos esencias inspiradas en los perfumes más icónicos, elaboradas con los mejores materiales — en hermosos frascos de vidrio con spray — a precios accesibles para todos.</p>
+      <div class="about-tags" style="margin-top:24px;">
+        <span class="tag">Envíos Nacionales</span>
+        <span class="tag">Al Por Mayor</span>
+        <span class="tag">Al Detal</span>
+        <span class="tag">Jamundí, Valle</span>
+      </div>
+      <div class="about-stats" style="margin-top:28px;" id="statsContainer">
+        <div class="stat-card">
+          <span class="stat-icon">🌺</span>
+          <span class="stat-num counter" data-target="105">0</span>
+          <span class="stat-label">Referencias</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">✨</span>
+          <span class="stat-num counter" data-target="3">0</span>
+          <span class="stat-label">Géneros</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🏆</span>
+          <span class="stat-num counter" data-target="11">0</span>
+          <span class="stat-label">Marcas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ VALORES ═══════════════ -->
+<div class="values-section">
+  <div class="values-inner">
+    <div class="values-header reveal">
+      <p class="section-label">Lo que nos define</p>
+      <h2 class="section-title">Nuestros <em>valores</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="value-icon">💎</span>
+        <h3 class="value-title">Calidad garantizada</h3>
+        <p class="value-desc">Usamos frascos de vidrio de alta calidad con atomizadores spray precisos. Cada fragancia se embaza con cuidado y se entrega lista para usar.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🌺</span>
+        <h3 class="value-title">Esencias auténticas</h3>
+        <p class="value-desc">Nuestras esencias están inspiradas en los perfumes más icónicos del mundo. Olores potentes y duraderos a una fracción del precio original.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🚚</span>
+        <h3 class="value-title">Envíos a todo Colombia</h3>
+        <p class="value-desc">Despachamos tu pedido a cualquier ciudad de Colombia, empacado con amor y cuidado. Sin pago previo no hacemos envíos — tu seguridad primero.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<div class="cta-section">
+  <div class="cta-inner reveal">
+    <p class="section-label">¿Lista para pedir?</p>
+    <h2 class="section-title" style="text-align:center;">Encuentra tu <em>fragancia</em> ideal</h2>
+    <div class="section-divider" style="margin:18px auto 0;"></div>
+    <p style="font-size:0.95rem; color:var(--texto-medio); line-height:1.7; margin-top:20px;">Navega nuestro catálogo con las 105 referencias disponibles o escríbenos por WhatsApp y te asesoramos con gusto.</p>
+    <div class="cta-btns">
+      <a href="productos.html" class="btn-primary">Ver catálogo completo</a>
+      <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!%20Necesito%20asesor%C3%ADa." target="_blank" class="btn-outline-dark">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:var(--azul);"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Asesoría por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-disclaimer">
+    <strong>Aviso legal:</strong> JG Distribuidora comercializa esencias <em>inspiradas</em> en perfumes de marca. No somos distribuidores oficiales ni vendemos productos originales. Las marcas mencionadas son referencias de inspiración únicamente.
+  </div>
+  <div class="footer-grid">
+    <div>
+      <img class="footer-brand-img" src="assets/logo.png" alt="JG Distribuidora">
+      <div class="footer-brand-name">JG Distribuidora</div>
+      <div class="footer-brand-slogan">"Fragancias que enamoran, precios que sorprenden"</div>
+      <p class="footer-brand-desc">Tienda virtual de fragancias, desde Jamundí para todo Colombia, al por mayor y al detal.</p>
+      <div class="footer-social" style="margin-top:18px;">
+        <a href="https://instagram.com/jg.distribuidora" class="social-icon" title="Instagram JG Distribuidora" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Navegación</p>
+      <ul class="footer-links">
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="productos.html">Catálogo</a></li>
+        <li><a href="index.html#presentaciones">Presentaciones</a></li>
+        <li><a href="index.html#pagos">Métodos de pago</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Legal</p>
+      <ul class="footer-links">
+        <li><a href="politicas.html#envios">Política de envíos</a></li>
+        <li><a href="politicas.html#devoluciones">Devoluciones</a></li>
+        <li><a href="politicas.html#datos">Datos personales</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contacto</p>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span>Jamundí, Valle del Cauca</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <a href="https://wa.me/573128682456" target="_blank">+57 312 868 2456</a>
+      </div>
+      <div class="footer-contact-btns">
+        <a href="https://wa.me/573128682456?text=Hola%20JG%20Distribuidora!%20Quisiera%20hacer%20un%20pedido." target="_blank" class="btn-wa-footer">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://instagram.com/jg.distribuidora" target="_blank" class="btn-ig-footer">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 JG Distribuidora. Todos los derechos reservados.</p>
+    <p><a href="politicas.html">Políticas y Términos</a></p>
+  </div>
+</footer>
+
+<script>
+// ── NAV scroll shadow
+document.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── Hamburger
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+// ── Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ── Animated counters
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = +el.dataset.target;
+      const parent = el.closest('.stat-card');
+      if (parent) parent.classList.add('animated');
+      let start = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { el.textContent = target; clearInterval(timer); }
+        else { el.textContent = Math.floor(start); }
+      }, 16);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.3 });
+counters.forEach(c => counterObserver.observe(c));
+</script>
+</body>
+</html>

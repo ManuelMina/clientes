@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Políticas — JG Distribuidora</title>
+  <meta name="description" content="Políticas de envíos, devoluciones y tratamiento de datos personales de JG Distribuidora.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --azul: #1A2E4A; --azul-light: #2A4268; --azul-dark: #0F1D30;
+      --dorado: #C4983A; --bg: #F8F8F5; --texto: #1A2E4A; --texto-medio: #5A6A7A;
+      --borde: #E2E8EF; --blanco: #FFFFFF; --whatsapp: #25D366; --nav-h: 80px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--texto); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: var(--azul); border-radius: 3px; }
+
+    /* NAVBAR */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(248,248,245,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--borde); box-shadow: 0 2px 20px rgba(26,46,74,.08); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 54px; width: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--dorado); }
+    .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--azul); line-height: 1.2; }
+    .nav-logo-sub { font-size: 0.65rem; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-medio); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--texto-medio); font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--azul); }
+    .btn-wa-nav { display: flex; align-items: center; gap: 8px; background: var(--azul); color: #fff; border: none; border-radius: 24px; padding: 8px 18px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .btn-wa-nav:hover { background: var(--azul-light); }
+    .btn-wa-nav svg { width: 16px; height: 16px; fill: #fff; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--texto); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--blanco); z-index: 999; padding: 24px; flex-direction: column; gap: 8px; box-shadow: 0 8px 32px rgba(26,46,74,.1); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { text-decoration: none; color: var(--texto-medio); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; padding: 12px 0; border-bottom: 1px solid var(--borde); }
+
+    /* HERO */
+    .page-hero { margin-top: var(--nav-h); background: var(--bg); padding: 48px 40px; text-align: center; border-bottom: 1px solid var(--borde); }
+    .page-hero-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); margin-bottom: 12px; }
+    .page-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--azul); }
+
+    /* DISCLAIMER */
+    .disclaimer-box {
+      max-width: 860px; margin: 40px auto; padding: 0 40px;
+    }
+    .disclaimer {
+      background: rgba(123,45,66,.07); border: 1.5px solid var(--azul);
+      border-radius: 8px; padding: 20px 24px;
+      font-size: 1rem; line-height: 1.8; color: var(--texto);
+    }
+    .disclaimer strong { color: var(--azul); }
+
+    /* TABS */
+    .policy-tabs { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+    .tab-nav { display: flex; border-bottom: 2px solid var(--borde); margin-bottom: 40px; gap: 0; }
+    .tab-btn {
+      padding: 14px 24px; background: none; border: none; border-bottom: 3px solid transparent;
+      font-family: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--texto-medio); cursor: pointer; transition: color .2s, border-color .2s;
+      margin-bottom: -2px;
+    }
+    .tab-btn.active { color: var(--azul); border-bottom-color: var(--azul); }
+    .tab-btn:hover { color: var(--azul); }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* POLICY CONTENT */
+    .policy-content { padding-bottom: 80px; }
+    .policy-section { margin-bottom: 36px; }
+    .policy-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--texto); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--borde); }
+    .policy-section h3 { font-size: 1.08rem; font-weight: 700; color: var(--azul); margin: 20px 0 10px; }
+    .policy-section p { font-size: 1rem; line-height: 1.85; color: var(--texto-medio); margin-bottom: 12px; }
+    .policy-section ul, .policy-section ol { padding-left: 20px; margin-bottom: 12px; }
+    .policy-section li { font-size: 1rem; line-height: 1.85; color: var(--texto-medio); margin-bottom: 6px; }
+    .policy-section strong { color: var(--texto); font-weight: 700; }
+
+    .policy-highlight {
+      background: var(--blanco); border-left: 4px solid var(--azul);
+      padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0;
+      font-size: 0.98rem; line-height: 1.8; color: var(--texto-medio);
+    }
+    .policy-highlight strong { color: var(--azul); }
+
+    .policy-warn {
+      background: rgba(231,76,60,.07); border: 1px solid rgba(231,76,60,.3);
+      border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+      font-size: 0.98rem; line-height: 1.8; color: #c0392b;
+    }
+
+    .policy-date { font-size: 0.78rem; color: var(--texto-medio); margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--borde); }
+
+    /* CONTACT CTA */
+    .policy-cta { background: #F0F5FB; border: 1px solid var(--borde); border-radius: 8px; padding: 28px; text-align: center; margin-top: 40px; }
+    .policy-cta p { color: var(--texto-medio); font-size: 0.9rem; margin-bottom: 16px; }
+    .btn-wa-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--whatsapp); color: #fff; border: none; border-radius: 24px; padding: 12px 24px; font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: background .2s; }
+    .btn-wa-cta:hover { background: #1ebe5c; }
+    .btn-wa-cta svg { width: 18px; height: 18px; fill: #fff; }
+
+    /* float-wa eliminado */
+
+    /* FOOTER */
+    footer { background: var(--bg); color: var(--texto-medio); padding: 32px 40px; text-align: center; border-top: 2px solid var(--borde); }
+    footer a { color: var(--texto-medio); text-decoration: none; margin: 0 12px; font-size: 0.85rem; }
+    footer a:hover { color: var(--azul); }
+    footer p { font-size: 0.8rem; margin-top: 12px; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links, .btn-wa-nav { display: none; }
+      .hamburger { display: flex; }
+      .policy-tabs, .disclaimer-box { padding: 0 20px; }
+      .tab-nav { overflow-x: auto; }
+      .tab-btn { padding: 12px 16px; font-size: 0.75rem; white-space: nowrap; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="JG Distribuidora">
+    <div>
+      <div class="nav-logo-text">JG Distribuidora</div>
+      <div class="nav-logo-sub">Fragancias Reembazadas</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="productos.html">Catálogo</a></li>
+    <li><a href="index.html#presentaciones">Presentaciones</a></li>
+    <li><a href="index.html#pagos">Pagos</a></li>
+    <li><a href="politicas.html">Políticas</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="https://wa.me/573128682456" target="_blank" class="btn-wa-nav">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="nosotros.html">Nosotros</a>
+  <a href="productos.html">Catálogo</a>
+  <a href="index.html#presentaciones">Presentaciones</a>
+  <a href="index.html#pagos">Pagos</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="page-hero-label">Transparencia y confianza</p>
+  <h1 class="page-hero-title">Políticas de JG Distribuidora</h1>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer-box">
+  <div class="disclaimer">
+    <strong>⚠ Aviso importante:</strong> JG Distribuidora comercializa exclusivamente <strong>esencias inspiradas</strong> en los perfumes de las grandes marcas. <strong>No somos distribuidores oficiales ni vendemos productos originales</strong> de ninguna casa de perfumería. Las marcas mencionadas son referencias únicamente para identificar la fragancia de inspiración. Nuestros productos son elaborados con materias primas de calidad y envasados en frascos de vidrio premium.
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="policy-tabs">
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="envios" id="tab-envios">📦 Política de Envíos</button>
+    <button class="tab-btn" data-tab="devoluciones" id="tab-devoluciones">↩ Devoluciones</button>
+    <button class="tab-btn" data-tab="datos" id="tab-datos">🔒 Datos Personales</button>
+  </div>
+
+  <!-- ═══ POLÍTICA DE ENVÍOS ═══ -->
+  <div class="tab-pane active" id="pane-envios">
+    <div class="policy-content">
+
+      <div class="policy-section">
+        <h2>Política de Envíos</h2>
+        <p>En JG Distribuidora nos comprometemos a entregar tus fragancias de manera segura, rápida y en las mejores condiciones. A continuación encontrarás toda la información sobre nuestro proceso de envío.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>1. Cobertura de envíos</h3>
+        <p>Realizamos envíos a <strong>todo el territorio nacional colombiano</strong>. Desde Jamundí, Valle del Cauca, despachamos hacia cualquier municipio del país que cuente con cobertura de empresas de mensajería.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>2. Condición de pago previo</h3>
+        <div class="policy-warn">
+          ⚠ <strong>No realizamos envíos sin pago previo confirmado.</strong> Una vez recibido y verificado el pago en su totalidad, procedemos a preparar y despachar el pedido.
+        </div>
+        <p>Esta medida protege tanto al cliente como a nuestra tienda y garantiza un proceso de compra seguro para ambas partes.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>3. Métodos de pago aceptados</h3>
+        <ul>
+          <li>Transferencia bancaria</li>
+          <li>Nequi</li>
+          <li>Daviplata</li>
+          <li>Dale</li>
+          <li>Llave</li>
+          <li>NU Bank</li>
+          <li>Efectivo (únicamente para retiro en punto de entrega en Jamundí)</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>4. Proceso de envío</h3>
+        <ol>
+          <li>El cliente realiza su pedido por WhatsApp o a través del carrito web.</li>
+          <li>JG Distribuidora confirma disponibilidad e informa el precio total incluyendo flete.</li>
+          <li>El cliente realiza el pago y envía el comprobante por WhatsApp.</li>
+          <li>Una vez verificado el pago, preparamos el pedido en máximo <strong>24 horas hábiles</strong>.</li>
+          <li>El pedido es despachado con la empresa de mensajería y se envía el número de guía al cliente.</li>
+        </ol>
+      </div>
+
+      <div class="policy-section">
+        <h3>5. Tiempos de entrega estimados</h3>
+        <ul>
+          <li><strong>Ciudades principales</strong> (Cali, Bogotá, Medellín, Barranquilla, Bucaramanga): 1–3 días hábiles</li>
+          <li><strong>Ciudades intermedias:</strong> 2–4 días hábiles</li>
+          <li><strong>Municipios y zonas rurales:</strong> 4–7 días hábiles</li>
+        </ul>
+        <p>Los tiempos son aproximados y pueden variar según la empresa de mensajería y la temporada.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>6. Costo de envío</h3>
+        <p>El valor del flete varía según el destino, el peso y el volumen del pedido. El costo exacto se informa al cliente al momento de confirmar el pedido por WhatsApp.</p>
+        <div class="policy-highlight">
+          <strong>Tip:</strong> Los pedidos al por mayor suelen tener condiciones especiales de flete. Consulta con nosotros para obtener la mejor tarifa según tu pedido.
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h3>7. Embalaje</h3>
+        <p>Todos nuestros productos son empacados con materiales de protección (burbuja, espuma y cartón reforzado) para garantizar que lleguen en perfectas condiciones. Cada envase va sellado y protegido para evitar derrames o roturas durante el transporte.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>8. Seguimiento del pedido</h3>
+        <p>Una vez despachado el pedido, te enviaremos el número de guía por WhatsApp para que puedas rastrear tu paquete directamente en el sitio web de la empresa de mensajería.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>9. Pedidos no entregados</h3>
+        <p>Si el pedido no puede ser entregado por razones imputables al cliente (dirección incorrecta, nadie en casa, no reclamar en el punto de la empresa de mensajería), el costo del reenvío correrá por cuenta del cliente.</p>
+      </div>
+
+      <div class="policy-cta">
+        <p>¿Tienes preguntas sobre tu envío o quieres cotizar el flete para tu ciudad?</p>
+        <a href="https://wa.me/573128682456?text=Hola!%20Quisiera%20información%20sobre%20envíos." target="_blank" class="btn-wa-cta">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+      <p class="policy-date">Última actualización: Mayo 2026 · JG Distribuidora</p>
+    </div>
+  </div>
+
+  <!-- ═══ POLÍTICA DE DEVOLUCIONES ═══ -->
+  <div class="tab-pane" id="pane-devoluciones">
+    <div class="policy-content">
+
+      <div class="policy-section">
+        <h2>Política de Devoluciones y Cambios</h2>
+        <p>En JG Distribuidora queremos que estés completamente satisfecho con tu compra. Por eso contamos con una política clara y justa para devoluciones y cambios.</p>
+        <div class="policy-highlight">
+          <strong>Importante:</strong> Recuerda que nuestros productos son <strong>esencias inspiradas</strong>, no perfumes originales. Las características organolépticas (olor, duración, proyección) son propias de nuestras esencias y pueden diferir del perfume original que las inspira.
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h3>1. Casos en que aceptamos devolución o cambio</h3>
+        <ul>
+          <li><strong>Producto llegó roto o dañado:</strong> Si el envase llegó quebrado, con derrame o con defecto físico imputable al transporte o embalaje.</li>
+          <li><strong>Producto incorrecto:</strong> Si recibiste una fragancia diferente a la que pediste.</li>
+          <li><strong>Envase con fuga:</strong> Si el atomizador o la válvula presentan fuga sin haber sido manipulados.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>2. Condiciones para la devolución</h3>
+        <ul>
+          <li>El reclamo debe hacerse dentro de las <strong>48 horas siguientes</strong> a la recepción del producto.</li>
+          <li>El cliente debe enviar <strong>fotografías o video</strong> del producto y del embalaje al momento de abrirlo, evidenciando el daño.</li>
+          <li>El producto no debe haber sido usado, adulterado ni rellenado.</li>
+          <li>El reclamo debe realizarse por <strong>WhatsApp al número +57 312 868 2456</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>3. Casos en que NO aplica devolución</h3>
+        <div class="policy-warn">
+          No aceptamos devoluciones ni cambios en los siguientes casos:
+        </div>
+        <ul>
+          <li>El cliente no le gustó el aroma después de recibirlo (las fragancias son personales — recomendamos consultar antes de comprar).</li>
+          <li>El producto fue abierto, usado o manipulado más allá de una prueba mínima.</li>
+          <li>El reclamo se realizó después de 48 horas de recibido el producto.</li>
+          <li>El daño fue causado por mal uso o almacenamiento inadecuado (luz solar directa, calor extremo).</li>
+          <li>Daños causados durante un transporte contratado por el cliente fuera de nuestra red de mensajería.</li>
+          <li>El cliente cambió de opinión sin que exista defecto en el producto.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>4. Proceso de devolución</h3>
+        <ol>
+          <li>Contáctanos por WhatsApp dentro de las 48 horas con fotos o video del problema.</li>
+          <li>Nuestro equipo evaluará el caso en máximo <strong>24 horas hábiles</strong>.</li>
+          <li>Si el reclamo es aprobado, acordaremos el método de compensación: reenvío del producto, cambio por otro disponible, o nota de crédito para futuras compras.</li>
+          <li>El costo de devolución del producto dañado corre por cuenta de JG Distribuidora cuando el daño es atribuible a nosotros.</li>
+        </ol>
+      </div>
+
+      <div class="policy-section">
+        <h3>5. Recomendaciones antes de comprar</h3>
+        <p>Para evitar insatisfacciones con el aroma, te recomendamos:</p>
+        <ul>
+          <li>Consultar por WhatsApp sobre las características de la fragancia antes de comprar.</li>
+          <li>Pedir referencias de clientes que hayan comprado el mismo producto.</li>
+          <li>Considerar probar primero una presentación en menor volumen (30 ml tubular) antes de adquirir el formato de 100 ml.</li>
+        </ul>
+      </div>
+
+      <div class="policy-cta">
+        <p>¿Tuviste un problema con tu pedido? Contáctanos de inmediato.</p>
+        <a href="https://wa.me/573128682456?text=Hola!%20Necesito%20reportar%20un%20problema%20con%20mi%20pedido." target="_blank" class="btn-wa-cta">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reportar problema
+        </a>
+      </div>
+
+      <p class="policy-date">Última actualización: Mayo 2026 · JG Distribuidora</p>
+    </div>
+  </div>
+
+  <!-- ═══ POLÍTICA DE DATOS ═══ -->
+  <div class="tab-pane" id="pane-datos">
+    <div class="policy-content">
+
+      <div class="policy-section">
+        <h2>Política de Tratamiento de Datos Personales</h2>
+        <p>JG Distribuidora, en cumplimiento de la <strong>Ley 1581 de 2012</strong> (Ley de Protección de Datos Personales de Colombia) y sus decretos reglamentarios, establece la presente política para el tratamiento de los datos personales de sus clientes y usuarios.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>1. Responsable del tratamiento</h3>
+        <ul>
+          <li><strong>Nombre:</strong> JG Distribuidora</li>
+          <li><strong>Actividad:</strong> Tienda virtual de fragancias inspiradas</li>
+          <li><strong>Ubicación:</strong> Jamundí, Valle del Cauca, Colombia</li>
+          <li><strong>Contacto:</strong> +57 312 868 2456 (WhatsApp)</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>2. Datos que recopilamos</h3>
+        <p>Al interactuar con nuestra tienda (web o WhatsApp), podemos recopilar los siguientes datos:</p>
+        <ul>
+          <li><strong>Nombre completo:</strong> Para identificar el pedido y personalizar la atención.</li>
+          <li><strong>Número de teléfono / WhatsApp:</strong> Para comunicarnos sobre el pedido.</li>
+          <li><strong>Dirección de entrega:</strong> Para el despacho del pedido.</li>
+          <li><strong>Ciudad y municipio:</strong> Para calcular el flete y determinar tiempos de entrega.</li>
+          <li><strong>Comprobante de pago:</strong> Para verificar la transacción.</li>
+        </ul>
+        <p><strong>No recopilamos</strong> datos financieros como números de cuenta, contraseñas ni información sensible más allá de lo necesario para procesar el pedido.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>3. Finalidad del tratamiento</h3>
+        <p>Los datos personales recopilados son utilizados exclusivamente para:</p>
+        <ul>
+          <li>Procesar y gestionar los pedidos realizados.</li>
+          <li>Coordinar el envío y entrega de los productos.</li>
+          <li>Comunicarnos con el cliente sobre el estado de su pedido.</li>
+          <li>Resolver reclamaciones o preguntas posventa.</li>
+          <li>Mejorar nuestro servicio al cliente.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>4. No compartimos tus datos</h3>
+        <div class="policy-highlight">
+          <strong>JG Distribuidora no vende, alquila ni cede los datos personales de sus clientes a terceros</strong> con fines comerciales o publicitarios. Los datos solo podrán ser compartidos con empresas de mensajería para efectos exclusivos de la entrega del pedido.
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h3>5. Derechos del titular de los datos</h3>
+        <p>Como titular de tus datos personales, tienes derecho a:</p>
+        <ul>
+          <li><strong>Conocer</strong> qué datos tenemos sobre ti.</li>
+          <li><strong>Actualizar</strong> tus datos en caso de ser incorrectos o incompletos.</li>
+          <li><strong>Solicitar la eliminación</strong> de tus datos cuando no exista obligación legal de conservarlos.</li>
+          <li><strong>Revocar</strong> la autorización otorgada para el tratamiento de tus datos.</li>
+          <li><strong>Presentar quejas</strong> ante la Superintendencia de Industria y Comercio (SIC) si consideras que tus derechos han sido vulnerados.</li>
+        </ul>
+        <p>Para ejercer cualquiera de estos derechos, contáctanos por WhatsApp al +57 312 868 2456.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>6. Autorización para el tratamiento</h3>
+        <p>Al realizar un pedido a través de nuestra plataforma web o WhatsApp, el cliente otorga su consentimiento expreso para el tratamiento de sus datos personales conforme a lo establecido en esta política, en los términos de la Ley 1581 de 2012.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>7. Seguridad de los datos</h3>
+        <p>JG Distribuidora implementa medidas razonables de seguridad para proteger la información personal de sus clientes contra acceso no autorizado, pérdida o destrucción. La comunicación con nuestros clientes se realiza a través de canales cifrados como WhatsApp.</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>8. Vigencia de la política</h3>
+        <p>Esta política entra en vigencia a partir de mayo de 2026. JG Distribuidora se reserva el derecho de modificarla cuando sea necesario, notificando los cambios a través de nuestros canales de comunicación.</p>
+      </div>
+
+      <div class="policy-cta">
+        <p>¿Tienes preguntas sobre el manejo de tus datos personales?</p>
+        <a href="https://wa.me/573128682456?text=Hola!%20Tengo%20una%20pregunta%20sobre%20mis%20datos%20personales." target="_blank" class="btn-wa-cta">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Contáctanos
+        </a>
+      </div>
+
+      <p class="policy-date">Última actualización: Mayo 2026 · JG Distribuidora — Ley 1581 de 2012, Colombia</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html">Inicio</a>
+  <a href="productos.html">Catálogo</a>
+  <a href="politicas.html">Políticas</a>
+  <p>© 2026 JG Distribuidora · Jamundí, Valle del Cauca · Todos los derechos reservados</p>
+</footer>
+
+<script>
+// TABS
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('pane-' + btn.dataset.tab).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.policy-tabs').offsetTop - 90, behavior: 'smooth' });
+  });
+});
+
+// URL HASH
+const hash = window.location.hash.replace('#', '');
+if (['envios','devoluciones','datos'].includes(hash)) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + hash)?.classList.add('active');
+  document.getElementById('pane-' + hash)?.classList.add('active');
+}
+
+// MOBILE MENU
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+</script>
+</body>
+</html>
